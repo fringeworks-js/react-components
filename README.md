@@ -1,2 +1,3 @@
-# niche-works-react-components
+# @niche-works/react-components
+
 A niche components for react.
