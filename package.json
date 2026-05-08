@@ -1,6 +1,6 @@
 {
   "name": "@niche-works/react-components",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "keywords": [
     "react"
@@ -25,11 +25,11 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@niche-works/react": "^0.1.0",
-    "@niche-works/react-defer-rendering": "^0.1.0",
-    "@niche-works/react-layout": "^0.2.3",
+    "@niche-works/react-defer-rendering": "^0.3.0",
+    "@niche-works/react-layout": "^0.3.1",
     "@niche-works/react-merge": "^0.1.0",
     "@niche-works/react-parts-props": "^0.1.0",
-    "@niche-works/react-style-props": "^0.1.2",
+    "@niche-works/react-style-props": "^0.2.1",
     "@niche-works/types": "^0.1.0",
     "re-resizable": "^6.11.2"
   },

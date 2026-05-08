@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Decorator } from '@storybook/react-vite';
 import chroma from 'chroma-js';
 import { useMemo } from 'react';
@@ -43,13 +44,13 @@ export default function _createContainerDecorator(
     const { layout = defaultLayout, childCount = 12, ...rest } = args;
     const colors = chroma.scale(['d9ed92', '184e77']).colors(childCount);
     const {
-      sizeHorizontal,
-      sizeVertical,
-      spacingAll,
-      spacingHorizontal,
-      spacingVertical,
-      countHorizontal,
-      countVertical,
+      childSizeX,
+      childSizeY,
+      spacing,
+      spacingX,
+      spacingY,
+      childCountX,
+      childCountY,
       xHeight,
       xWidth,
       xPadding,
@@ -92,13 +93,13 @@ export default function _createContainerDecorator(
           defaultSize,
           ...restProps,
           ..._fromNumericStrings({
-            sizeHorizontal,
-            sizeVertical,
-            spacingAll,
-            spacingHorizontal,
-            spacingVertical,
-            countHorizontal,
-            countVertical,
+            childSizeX,
+            childSizeY,
+            spacing,
+            spacingX,
+            spacingY,
+            childCountX,
+            childCountY,
             xHeight,
             xWidth,
             xPadding,

@@ -9,11 +9,11 @@ export default function withLayout<P extends object = LooseRecord, T = unknown>(
   Component: ElementType<P>,
   options: WidthLayoutOptions = {},
 ) {
-  const { styleProp = 'css', styleApplyMode = 'append', ...rest } = options;
+  const { styleProp = 'css', styleMergeMode = 'append', ...rest } = options;
 
   return wl<P, T>(Component, {
     styleProp,
-    styleApplyMode,
+    styleMergeMode,
     ...rest,
   });
 }

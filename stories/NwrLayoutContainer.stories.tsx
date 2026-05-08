@@ -1,16 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /** @jsxImportSource @emotion/react */
 import {
-  AlignHorizontal,
-  AlignVertical,
+  AlignX,
+  AlignY,
+  Direction,
   LayoutAdjust,
   LayoutType,
-  Orientation,
 } from '@niche-works/react-layout';
 import type {
   AdjustProps,
   AlignProps,
   ChildSizeProps,
-  OrientationProps,
+  DirectionProps,
   SpacingProps,
 } from '@niche-works/react-layout/layouts';
 import type { StyleProps } from '@niche-works/react-style-props';
@@ -23,11 +24,11 @@ import _createContainerDecorator from './_createContainerDecorator';
 
 const LAYOUT_OPTIONS = Object.values(LayoutType);
 
-const ORIENTATION_OPTIONS = Object.values(Orientation);
+const ORIENTATION_OPTIONS = Object.values(Direction);
 
-const ALAGN_HORIZONTAL_OPTIONS = Object.values(AlignHorizontal);
+const ALAGN_HORIZONTAL_OPTIONS = Object.values(AlignX);
 
-const ALAGN_VERTICAL_OPTIONS = Object.values(AlignVertical);
+const ALAGN_VERTICAL_OPTIONS = Object.values(AlignY);
 
 const LAYOUT_ADJUST_OPTIONS = Object.values(LayoutAdjust);
 
@@ -40,69 +41,69 @@ const LAYOUT_ARG_TYPES: ArgTypes = {
 };
 
 const ORIENTATION_ARG_TYPES: ArgTypes = {
-  orientation: {
+  direction: {
     control: { type: 'select' },
     options: ORIENTATION_OPTIONS,
   },
 };
 
 const ALIGN_ARG_TYPES: ArgTypes = {
-  alignHorizontal: {
+  alignX: {
     control: { type: 'select' },
     options: ALAGN_HORIZONTAL_OPTIONS,
   },
-  alignVertical: {
+  alignY: {
     control: { type: 'select' },
     options: ALAGN_VERTICAL_OPTIONS,
   },
 };
 
 const ADJUST_ARG_TYPES: ArgTypes = {
-  adjustHorizontal: {
+  adjustX: {
     control: { type: 'select' },
     options: LAYOUT_ADJUST_OPTIONS,
   },
-  adjustVertical: {
+  adjustY: {
     control: { type: 'select' },
     options: LAYOUT_ADJUST_OPTIONS,
   },
 };
 
 const CHILD_SIZE_ARG_TYPES: ArgTypes = {
-  sizeHorizontal: {
+  childSizeX: {
     type: 'string',
   },
-  sizeVertical: {
+  childSizeY: {
     type: 'string',
   },
 };
 
 const SPACING_ARG_TYPES: ArgTypes = {
-  spacingAll: {
+  spacing: {
     type: 'string',
   },
-  spacingHorizontal: {
+  spacingX: {
     type: 'string',
   },
-  spacingVertical: {
+  spacingY: {
     type: 'string',
   },
 };
 
 const CHILD_COUNT_ARG_TYPES: ArgTypes = {
-  countHorizontal: {
+  childCountX: {
     type: 'string',
   },
-  countVertical: {
+  childCountY: {
     type: 'string',
   },
 };
 
 const GRID_TEMPLATE_ARG_TYPES: ArgTypes = {
-  templateHorizontal: {
+  templateX: {
     type: 'string',
   },
-  templateVertical: {
+  templateY: {
     type: 'string',
   },
 };
@@ -171,39 +172,39 @@ const LAYOUT_PROPS = {
   childStyle: undefined,
 };
 
-const ORIENTATION_PROPS: OrientationProps = {
-  orientation: 'horizontal',
+const ORIENTATION_PROPS: DirectionProps = {
+  direction: 'x',
 };
 
 const ALIGN_PROPS: AlignProps = {
-  alignHorizontal: 'left',
-  alignVertical: 'top',
+  alignX: 'left',
+  alignY: 'top',
 };
 
 const CHILD_SIZE_PROPS: ChildSizeProps = {
-  sizeHorizontal: '160',
-  sizeVertical: '80',
+  childSizeX: '160',
+  childSizeY: '80',
 };
 
 const ADJUST_PROPS: AdjustProps = {
-  adjustHorizontal: 'none',
-  adjustVertical: 'none',
+  adjustX: 'none',
+  adjustY: 'none',
 };
 
 const SPACING_PROPS: SpacingProps = {
-  spacingAll: '8',
-  spacingHorizontal: undefined,
-  spacingVertical: undefined,
+  spacing: '8',
+  spacingX: undefined,
+  spacingY: undefined,
 };
 
 const CHILD_COUNT_PROPS: any = {
-  countHorizontal: '4',
-  countVertical: '3',
+  childCountX: '4',
+  childCountY: '3',
 };
 
 const GRID_TEMPLATE_PROPS = {
-  templateHorizontal: undefined,
-  templateVertical: undefined,
+  templateX: undefined,
+  templateY: undefined,
 };
 
 const CONTAINER_PROPS: StyleProps = {
@@ -290,7 +291,7 @@ for (const layout in ARGS) {
   }
 }
 
-var RESIZABLE_PROPS = [
+const RESIZABLE_PROPS = [
   'as',
   'ref',
   'style',
@@ -331,11 +332,9 @@ const CzResizableLayoutContainer = (
   const containerProps: NwrLayoutContainerProps = {};
   for (const prop in rest) {
     if (RESIZABLE_PROPS.includes(prop)) {
-      // @ts-ignore
-      resizableProps[prop] = rest[prop];
+      (resizableProps as any)[prop] = (rest as any)[prop];
     } else {
-      // @ts-ignore
-      containerProps[prop] = rest[prop];
+      (containerProps as any)[prop] = (rest as any)[prop];
     }
   }
 

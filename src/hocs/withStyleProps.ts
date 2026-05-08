@@ -8,10 +8,10 @@ export default function withStyleProps<
   P extends Record<string, any>,
   T = unknown,
 >(Component: ElementType<P>, options: StylePropsOptions = {}) {
-  const { styleProp = 'css', styleApplyMode = 'append', ...rest } = options;
+  const { styleProp = 'css', styleMergeMode = 'append', ...rest } = options;
   return wsp<P, T>(Component, {
     styleProp,
-    styleApplyMode,
+    styleMergeMode,
     ...rest,
   });
 }
