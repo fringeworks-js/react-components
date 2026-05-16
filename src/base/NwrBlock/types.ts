@@ -5,13 +5,8 @@ import type { NwrDivProps } from '../../primitives/NwrDiv';
 /**
  * プロパティ
  */
-export type NwrBoxProps = NwrBoxOwnProps &
-  StyleProps &
+export type NwrBlockProps = StyleProps &
   WithPartsProps<{
     root: NwrDivProps;
-  }>;
-
-/**
- * 固有のプロパティ
- */
-export type NwrBoxOwnProps = {};
+  }> &
+  Pick<NwrDivProps, 'className' | 'style' | 'children'>;

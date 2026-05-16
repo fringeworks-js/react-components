@@ -1,4 +1,4 @@
 import type { WithLayoutProps } from '@niche-works/react-layout/hocs/withLayout';
-import type { NwrBoxProps } from '../../base/NwrBox';
+import type { NwrBlockProps } from '../../base/NwrBlock';
 
-export type NwrLayoutContainerProps = NwrBoxProps & WithLayoutProps;
+export type NwrLayoutContainerProps = NwrBlockProps & WithLayoutProps;

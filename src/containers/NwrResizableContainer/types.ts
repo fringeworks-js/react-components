@@ -1,10 +1,10 @@
-import type { NwrBoxProps } from '../../base/NwrBox';
-import type { WidthResizableProps } from '../../hocs/withResizable';
+import type { NwrBlockProps } from '../../base/NwrBlock';
+import type { WithResizableProps } from '../../hocs/withResizable';
 
 /**
  * プロパティ
  */
 export type NwrResizableContainerProps = NwrResizableContainerDivOwnProps &
-  WidthResizableProps;
+  WithResizableProps;
 
-export type NwrResizableContainerDivOwnProps = NwrBoxProps;
+export type NwrResizableContainerDivOwnProps = NwrBlockProps;

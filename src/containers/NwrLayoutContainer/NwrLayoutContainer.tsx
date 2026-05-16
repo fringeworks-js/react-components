@@ -1,11 +1,12 @@
-import NwrBox from '../../base/NwrBox';
+import NwrBlock from '../../base/NwrBlock';
 import withLayout from '../../hocs/withLayout';
 import type { NwrLayoutContainerProps } from './types';
 
 const NwrLayoutContainer = withLayout<NwrLayoutContainerProps, HTMLDivElement>(
-  NwrBox,
+  NwrBlock,
   {
     displayName: 'NwrLayoutContainer',
+    className: 'nwr-layoutcontainer',
   },
 );
 export default NwrLayoutContainer;

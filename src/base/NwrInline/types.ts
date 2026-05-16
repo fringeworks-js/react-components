@@ -5,13 +5,8 @@ import type { NwrSpanProps } from '../../primitives/NwrSpan';
 /**
  * プロパティ
  */
-export type NwrTextProps = NwrTextOwnProps &
-  StyleProps &
+export type NwrInlineProps = StyleProps &
   WithPartsProps<{
     root: NwrSpanProps;
-  }>;
-
-/**
- * 固有のプロパティ
- */
-export type NwrTextOwnProps = {};
+  }> &
+  Pick<NwrSpanProps, 'className' | 'style' | 'children'>;
