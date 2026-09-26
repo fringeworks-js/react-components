@@ -1,4 +1,4 @@
-import { useDeferUntilReady } from '@niche-works/react-defer-rendering';
+import useDeferUntilReady from '@niche-works/react-defer-rendering/useDeferUntilReady';
 import type { FC } from 'react';
 import type { NwrReadyBoundaryProps } from './types';
 

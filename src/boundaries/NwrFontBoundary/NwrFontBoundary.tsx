@@ -1,4 +1,4 @@
-import { useDeferUntilFontReady } from '@niche-works/react-defer-rendering';
+import useDeferUntilFontReady from '@niche-works/react-defer-rendering/useDeferUntilFontReady';
 import type { FC } from 'react';
 import type { NwrFontBoundaryProps } from './types';
 

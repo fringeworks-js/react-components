@@ -41,16 +41,16 @@ export default function _createContainerDecorator(
   return (Story, configs: any) => {
     const { args, parameters } = configs;
     const { randSize, randPos, defaultLayout, defaultSize } = parameters;
-    const { layout = defaultLayout, childCount = 12, ...rest } = args;
-    const colors = chroma.scale(['d9ed92', '184e77']).colors(childCount);
+    const { layout = defaultLayout, itemCount = 12, ...rest } = args;
+    const colors = chroma.scale(['d9ed92', '184e77']).colors(itemCount);
     const {
-      childSizeX,
-      childSizeY,
+      itemSizeX,
+      itemSizeY,
       spacing,
       spacingX,
       spacingY,
-      childCountX,
-      childCountY,
+      itemCountX,
+      itemCountY,
       xHeight,
       xWidth,
       xPadding,
@@ -61,30 +61,30 @@ export default function _createContainerDecorator(
     };
     const sizeProps = useMemo(() => {
       if (randSize) {
-        return Array.from({ length: childCount }).map(() => ({
+        return Array.from({ length: itemCount }).map(() => ({
           xHeight: _random(100),
           xWidth: _random(200),
         }));
       } else {
-        return Array.from({ length: childCount }).map(() => ({
+        return Array.from({ length: itemCount }).map(() => ({
           xHeight: 80,
           xWidth: 160,
         }));
       }
-    }, [randSize, childCount]);
+    }, [randSize, itemCount]);
     const positionProps = useMemo(() => {
       if (randPos) {
-        return Array.from({ length: childCount }).map(() => ({
+        return Array.from({ length: itemCount }).map(() => ({
           top: _random(defaultSize.height ?? 40),
           left: _random(defaultSize.width ?? 40),
         }));
       } else {
-        return Array.from({ length: childCount }).map((item, index) => ({
+        return Array.from({ length: itemCount }).map((item, index) => ({
           top: 40 * index,
           left: 40 * index,
         }));
       }
-    }, [randPos, childCount, defaultSize]);
+    }, [randPos, itemCount, defaultSize]);
 
     return (
       <Story
@@ -93,13 +93,13 @@ export default function _createContainerDecorator(
           defaultSize,
           ...restProps,
           ..._fromNumericStrings({
-            childSizeX,
-            childSizeY,
+            itemSizeX,
+            itemSizeY,
             spacing,
             spacingX,
             spacingY,
-            childCountX,
-            childCountY,
+            itemCountX,
+            itemCountY,
             xHeight,
             xWidth,
             xPadding,

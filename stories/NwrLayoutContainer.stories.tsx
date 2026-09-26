@@ -1,19 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /** @jsxImportSource @emotion/react */
 import {
+  Adjust,
   AlignX,
   AlignY,
   Direction,
-  LayoutAdjust,
   LayoutType,
 } from '@niche-works/react-layout';
-import type {
-  AdjustProps,
-  AlignProps,
-  ChildSizeProps,
-  DirectionProps,
-  SpacingProps,
-} from '@niche-works/react-layout/layouts';
 import type { StyleProps } from '@niche-works/react-style-props';
 import type { ArgTypes, Meta, StoryObj } from '@storybook/react-vite';
 import type { ResizableProps } from 're-resizable';
@@ -30,7 +23,7 @@ const ALAGN_HORIZONTAL_OPTIONS = Object.values(AlignX);
 
 const ALAGN_VERTICAL_OPTIONS = Object.values(AlignY);
 
-const LAYOUT_ADJUST_OPTIONS = Object.values(LayoutAdjust);
+const LAYOUT_ADJUST_OPTIONS = Object.values(Adjust);
 
 const LAYOUT_ARG_TYPES: ArgTypes = {
   layout: {
@@ -70,10 +63,10 @@ const ADJUST_ARG_TYPES: ArgTypes = {
 };
 
 const CHILD_SIZE_ARG_TYPES: ArgTypes = {
-  childSizeX: {
+  itemSizeX: {
     type: 'string',
   },
-  childSizeY: {
+  itemSizeY: {
     type: 'string',
   },
 };
@@ -91,10 +84,10 @@ const SPACING_ARG_TYPES: ArgTypes = {
 };
 
 const CHILD_COUNT_ARG_TYPES: ArgTypes = {
-  childCountX: {
+  itemCountX: {
     type: 'string',
   },
-  childCountY: {
+  itemCountY: {
     type: 'string',
   },
 };
@@ -172,39 +165,39 @@ const LAYOUT_PROPS = {
   childStyle: undefined,
 };
 
-const ORIENTATION_PROPS: DirectionProps = {
+const ORIENTATION_PROPS = {
   direction: 'x',
 };
 
-const ALIGN_PROPS: AlignProps = {
+const ALIGN_PROPS = {
   alignX: 'left',
   alignY: 'top',
 };
 
-const CHILD_SIZE_PROPS: ChildSizeProps = {
-  childSizeX: '160',
-  childSizeY: '80',
+const ITEM_SIZE_PROPS = {
+  itemSizeX: 160,
+  itemSizeY: 80,
 };
 
-const ADJUST_PROPS: AdjustProps = {
+const ADJUST_PROPS = {
   adjustX: 'none',
   adjustY: 'none',
 };
 
-const SPACING_PROPS: SpacingProps = {
-  spacing: '8',
-  spacingX: undefined,
-  spacingY: undefined,
+const GAP_PROPS = {
+  gap: 8,
+  gapX: undefined,
+  gapY: undefined,
 };
 
-const CHILD_COUNT_PROPS: any = {
-  childCountX: '4',
-  childCountY: '3',
+const ITEM_COUNT_PROPS = {
+  itemCountX: 4,
+  itemCountY: 3,
 };
 
-const GRID_TEMPLATE_PROPS = {
-  templateX: undefined,
-  templateY: undefined,
+const TRACKS_PROPS = {
+  tracksX: undefined,
+  tracksY: undefined,
 };
 
 const CONTAINER_PROPS: StyleProps = {
@@ -224,10 +217,10 @@ const ARGS: Record<string, Record<string, any>> = {
     ...ORIENTATION_PROPS,
     ...ALIGN_PROPS,
     ...ADJUST_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...GRID_TEMPLATE_PROPS,
-    ...SPACING_PROPS,
-    ...CHILD_COUNT_PROPS,
+    ...ITEM_SIZE_PROPS,
+    ...TRACKS_PROPS,
+    ...GAP_PROPS,
+    ...ITEM_COUNT_PROPS,
     ...CONTAINER_PROPS,
   },
   nosize: {
@@ -235,50 +228,50 @@ const ARGS: Record<string, Record<string, any>> = {
     ...ORIENTATION_PROPS,
     ...ALIGN_PROPS,
     ...ADJUST_PROPS,
-    ...GRID_TEMPLATE_PROPS,
-    ...SPACING_PROPS,
-    ...CHILD_COUNT_PROPS,
+    ...TRACKS_PROPS,
+    ...GAP_PROPS,
+    ...ITEM_COUNT_PROPS,
     ...CONTAINER_PROPS,
   },
   balance: {
     ...ORIENTATION_PROPS,
     ...ALIGN_PROPS,
     ...ADJUST_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...SPACING_PROPS,
+    ...ITEM_SIZE_PROPS,
+    ...GAP_PROPS,
     ...CONTAINER_PROPS,
   },
   matrix: {
     ...ORIENTATION_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...CHILD_COUNT_PROPS,
-    ...GRID_TEMPLATE_PROPS,
-    ...SPACING_PROPS,
+    ...ITEM_SIZE_PROPS,
+    ...ITEM_COUNT_PROPS,
+    ...TRACKS_PROPS,
+    ...GAP_PROPS,
     ...CONTAINER_PROPS,
   },
   pin: {
-    ...CHILD_SIZE_PROPS,
+    ...ITEM_SIZE_PROPS,
     ...CONTAINER_PROPS,
   },
   pack: {
     ...ORIENTATION_PROPS,
-    ...SPACING_PROPS,
+    ...GAP_PROPS,
     ...CONTAINER_PROPS,
   },
   stack: {
     ...ORIENTATION_PROPS,
     ...ALIGN_PROPS,
     ...ADJUST_PROPS,
-    ...SPACING_PROPS,
-    ...CHILD_SIZE_PROPS,
+    ...GAP_PROPS,
+    ...ITEM_SIZE_PROPS,
     ...CONTAINER_PROPS,
   },
   tile: {
     ...ORIENTATION_PROPS,
     ...ALIGN_PROPS,
     ...ADJUST_PROPS,
-    ...CHILD_SIZE_PROPS,
-    ...SPACING_PROPS,
+    ...ITEM_SIZE_PROPS,
+    ...GAP_PROPS,
     ...CONTAINER_PROPS,
   },
 };
@@ -325,11 +318,11 @@ const RESIZABLE_PROPS = [
 ];
 
 const CzResizableLayoutContainer = (
-  props: NwrLayoutContainerProps & ResizableProps & { childCount: number },
+  props: NwrLayoutContainerProps & ResizableProps & { itemCount: number },
 ) => {
   const { children, ...rest } = props;
   const resizableProps: ResizableProps = {};
-  const containerProps: NwrLayoutContainerProps = {};
+  const containerProps = {} as NwrLayoutContainerProps;
   for (const prop in rest) {
     if (RESIZABLE_PROPS.includes(prop)) {
       (resizableProps as any)[prop] = (rest as any)[prop];
@@ -370,7 +363,7 @@ export const Default: Story = {
   args: {
     layout: 'stack',
     ...ARGS.all,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
     randSize: true,
@@ -383,7 +376,7 @@ export const NoSize: Story = {
   args: {
     layout: 'stack',
     ...ARGS.nosize,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
     randSize: true,
@@ -395,11 +388,11 @@ export const NoSize: Story = {
 export const Balance: Story = {
   argTypes: ARG_TYPES.balance,
   args: {
+    layout: 'balance',
     ...ARGS.balance,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
-    defaultLayout: 'balance',
     ...CONTAINER_PARAMS,
   },
 };
@@ -407,11 +400,11 @@ export const Balance: Story = {
 export const Pack: Story = {
   argTypes: ARG_TYPES.pack,
   args: {
+    layout: 'pack',
     ...ARGS.pack,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
-    defaultLayout: 'pack',
     ...CONTAINER_PARAMS,
   },
 };
@@ -419,11 +412,11 @@ export const Pack: Story = {
 export const Matrix: Story = {
   argTypes: ARG_TYPES.matrix,
   args: {
+    layout: 'matrix',
     ...ARGS.matrix,
-    childCount: 12,
-  },
+    itemCount: 12,
+  } as any,
   parameters: {
-    defaultLayout: 'matrix',
     ...CONTAINER_PARAMS,
   },
 };
@@ -431,11 +424,11 @@ export const Matrix: Story = {
 export const Pin: Story = {
   argTypes: ARG_TYPES.pin,
   args: {
+    layout: 'pin',
     ...ARGS.pin,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
-    defaultLayout: 'pin',
     ...CONTAINER_PARAMS,
   },
 };
@@ -443,11 +436,11 @@ export const Pin: Story = {
 export const Stack: Story = {
   argTypes: ARG_TYPES.stack,
   args: {
+    layout: 'stack',
     ...ARGS.stack,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
-    defaultLayout: 'stack',
     ...CONTAINER_PARAMS,
   },
 };
@@ -455,11 +448,11 @@ export const Stack: Story = {
 export const Tile: Story = {
   argTypes: ARG_TYPES.tile,
   args: {
+    layout: 'tile',
     ...ARGS.tile,
-    childCount: 12,
+    itemCount: 12,
   },
   parameters: {
-    defaultLayout: 'tile',
     ...CONTAINER_PARAMS,
   },
 };
