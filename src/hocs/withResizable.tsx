@@ -15,7 +15,7 @@ import { forwardRef } from 'react';
 export type WithResizableProps<P extends object = LooseDictionary> =
   ResizableProps & Omit<P, keyof ResizableProps>;
 
-type NwrResizableProps<C extends ElementType> = ComponentProps<C> & {
+type LxResizableProps<C extends ElementType> = ComponentProps<C> & {
   domRef?: ForwardedRef<ComponentRef<C>>;
 };
 
@@ -27,7 +27,7 @@ type NwrResizableProps<C extends ElementType> = ComponentProps<C> & {
 export default function withResizable<C extends ElementType>(
   Component: C,
 ): ComponentType<ComponentPropsWithRef<C>> {
-  const NwrResizable = (props: NwrResizableProps<C>) => {
+  const LxResizable = (props: LxResizableProps<C>) => {
     const { domRef, ...rest } = props;
     return <Component ref={domRef} {...unsafeCast(rest)} />;
   };
@@ -38,6 +38,6 @@ export default function withResizable<C extends ElementType>(
       ...props,
     });
 
-    return <Resizable as={NwrResizable} {...resizableProps} />;
+    return <Resizable as={LxResizable} {...resizableProps} />;
   });
 }
