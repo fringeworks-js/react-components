@@ -1,51 +1,28 @@
 import distribute from '@niche-works/utils/object/distribute';
 import { forwardRef } from 'react';
 import LxInline from '../../base/LxInline';
-import LxFontBoundary from '../../boundaries/LxFontBoundary';
+import LxWebFontBoundary from '../../boundaries/LxWebFontBoundary';
+import { LX_WEB_FONT_BOUNDARY_PROP_KEYS } from '../../boundaries/LxWebFontBoundary/constants';
 import type { LxTextProps } from './types';
 
-const BOUNDARY_PROPS = [
-  'fallback',
-  'fallbackDefer',
-  'loader',
-  'pending',
-  'pendingDefer',
-  'preserveOnceFallback',
-  'preserveOnceReady',
-  'readyDefer',
-  'timeout',
-] as const;
-
 /**
- * 指定のフォントが読み込み済みであることを確認した後に値を表示する
+ * 文字列を表示します
  */
-const LxFont = forwardRef<HTMLSpanElement, LxTextProps>((props, ref) => {
-  const { value, fontFamily, fontVariant, ...rest } = props;
-  const { boundaryProps, inlineProps } = distribute(rest, {
-    boundaryProps: BOUNDARY_PROPS,
+const LxText = forwardRef<HTMLSpanElement, LxTextProps>((props, ref) => {
+  const { boundaryProps, inlineProps } = distribute(props, {
+    boundaryProps: LX_WEB_FONT_BOUNDARY_PROP_KEYS,
     inlineProps: null,
   });
+  const { fonts, ...restBoundaryProps } = boundaryProps;
+  const { value, ...restInlineProps } = inlineProps;
 
   return (
-    <LxFontBoundary
-      fontFamily={fontFamily}
-      fontVariant={fontVariant}
-      fallback={<span></span>}
-      {...boundaryProps}
-    >
-      <LxInline
-        ref={ref}
-        {...inlineProps}
-        style={{
-          fontFamily,
-          fontVariant,
-          ...inlineProps.style,
-        }}
-      >
+    <LxWebFontBoundary fonts={fonts} {...restBoundaryProps}>
+      <LxInline ref={ref} {...restInlineProps}>
         {value}
       </LxInline>
-    </LxFontBoundary>
+    </LxWebFontBoundary>
   );
 });
-LxFont.displayName = 'LxFont';
-export default LxFont;
+LxText.displayName = 'LxText';
+export default LxText;

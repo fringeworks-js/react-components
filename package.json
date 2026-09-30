@@ -7,7 +7,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/mitsuhiroseino/niche-works-react-components.git"
+    "url": "git+https://github.com/mitsuhiroseino/niche-works-react-components.git"
   },
   "license": "MIT",
   "author": "Mitsuhiro Seino",
@@ -26,14 +26,14 @@
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@niche-works/react-defer-rendering": "^0.4.0",
+    "@niche-works/react-defer-rendering": "^0.6.0",
     "@niche-works/react-layout": "^0.6.1",
     "@niche-works/react-merge": "^0.1.2",
     "@niche-works/react-parts-props": "^0.2.0",
     "@niche-works/react-style-props": "^0.3.0",
     "@niche-works/react-utils": "^0.2.3",
     "@niche-works/types": "^0.3.2",
-    "@niche-works/utils": "^0.4.2",
+    "@niche-works/utils": "^0.5.3",
     "re-resizable": "^6.11.2"
   },
   "devDependencies": {

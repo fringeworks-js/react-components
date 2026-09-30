@@ -18,8 +18,8 @@ importers:
         specifier: ^11.14.0
         version: 11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.6))(@types/react@19.2.14)(react@19.2.6)
       '@niche-works/react-defer-rendering':
-        specifier: ^0.4.0
-        version: 0.4.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        specifier: ^0.6.0
+        version: 0.6.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@niche-works/react-layout':
         specifier: ^0.6.1
         version: 0.6.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -39,8 +39,8 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2
       '@niche-works/utils':
-        specifier: ^0.4.2
-        version: 0.4.2
+        specifier: ^0.5.3
+        version: 0.5.3
       re-resizable:
         specifier: ^6.11.2
         version: 6.11.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -872,8 +872,8 @@ packages:
   '@niche-works/dev@0.5.5':
     resolution: {integrity: sha512-mZEt7c07NTW/c3sNNKqr43ezIWQRAb9tXZ7eOGpa0ZDGeieg7dDyrVrXUPHHO0CNk5E+N/hyK3mh15+VFW7WHg==}
 
-  '@niche-works/react-defer-rendering@0.4.0':
-    resolution: {integrity: sha512-gJ8aDpEPdxlpbQCnask6VL6DOdc5HjxjEAytqmMgPw1oIn2ny6yLYi4MvBtqBi1KX4zBa5F4U5xPtXw4xY/jIQ==}
+  '@niche-works/react-defer-rendering@0.6.0':
+    resolution: {integrity: sha512-Y1YVum1xwKgGKh2cu9KsAhZin5/I5ik1wvP+HH4QrSeETAhpp+V3qkih5ift/zyc+/HMjvBJvPiwh/bMeuJkTw==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -946,11 +946,11 @@ packages:
   '@niche-works/utils@0.4.2':
     resolution: {integrity: sha512-Kt9UaZQaoqSE+DYavPfsXDWcCSFdUsgDWDrfnUvdm2lq1P+42XMesQvRNFQm2HBGD6YXTaPYhE9ObcfjxfvDUA==}
 
-  '@niche-works/utils@0.5.1':
-    resolution: {integrity: sha512-UY1oFAFwFeCqIlnlLKiTviRd8Dmoh9UX/2c68STSSpUzfl1NOBTs0INDj0n1Ei/bwsBDbDD6GEZa60WDruGXpw==}
+  '@niche-works/utils@0.5.3':
+    resolution: {integrity: sha512-F69LT7q38Po+qDKV7frFg4kjn5uMQ8AfJw96a/wA7HDD+KuHQ9omiw075dbbv6A939SOyBICMtSpKc5niUK5cQ==}
 
-  '@niche-works/utils@0.5.2':
-    resolution: {integrity: sha512-dX1gbbysF2PHBTknVaHU2CSf0VsfpazPUJSXmZtf7UALK+flw/XHpndtH/LxLAsKiVskTKNSDwf+AJ59vrkLrQ==}
+  '@niche-works/web-font-observer@0.1.0':
+    resolution: {integrity: sha512-4pIp1GRgKuU513z+QHrZNbhpXh3yVeYsK2tF+WDBeKaeIQg1MfaK0T6XoBo4fHPcavExvlMx1EaG/owwF1MuPQ==}
 
   '@niche-works/web-utils@0.1.1':
     resolution: {integrity: sha512-j1pJ/Ii/1zMyZNHq2mrP20ldg18iA13UEONpRkiQUREcQPHD9m38P2YZe2Y2pXvOksnfVzCksdw45o8R0EhRVw==}
@@ -2504,9 +2504,6 @@ packages:
 
   flatted@3.4.2:
     resolution: {integrity: sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA==}
-
-  fontfaceobserver@2.3.0:
-    resolution: {integrity: sha512-6FPvD/IVyT4ZlNe7Wcn5Fb/4ChigpucKYSvD6a+0iMoLn2inpo711eyIcKjmDtE5XNcgAkSH9uN/nfAeZzHEfg==}
 
   fs-extra@11.3.2:
     resolution: {integrity: sha512-Xr9F6z6up6Ws+NjzMCZc6WXg2YFRlrLP9NQDO3VQrWrfiojdhS56TzueT88ze0uBdCTwEIhQ3ptnmKeWGFAe0A==}
@@ -4515,12 +4512,12 @@ snapshots:
       sass: 1.105.0
       type-fest: 5.6.0
 
-  '@niche-works/react-defer-rendering@0.4.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@niche-works/react-defer-rendering@0.6.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
-      '@niche-works/react-utils': 0.1.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@niche-works/utils': 0.5.1
+      '@niche-works/react-utils': 0.2.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@niche-works/utils': 0.5.3
+      '@niche-works/web-font-observer': 0.1.0
       '@niche-works/web-utils': 0.1.1
-      fontfaceobserver: 2.3.0
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
@@ -4530,7 +4527,7 @@ snapshots:
       '@niche-works/react-utils': 0.2.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@niche-works/style-layouts': 0.7.0
       '@niche-works/types': 0.3.2
-      '@niche-works/utils': 0.5.2
+      '@niche-works/utils': 0.5.3
       clsx: 2.1.1
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
@@ -4610,7 +4607,7 @@ snapshots:
       klona: 2.0.6
       remeda: 2.34.0
 
-  '@niche-works/utils@0.5.1':
+  '@niche-works/utils@0.5.3':
     dependencies:
       '@niche-works/constants': 0.2.0
       '@niche-works/types': 0.4.0
@@ -4618,13 +4615,7 @@ snapshots:
       klona: 2.0.6
       remeda: 2.34.0
 
-  '@niche-works/utils@0.5.2':
-    dependencies:
-      '@niche-works/constants': 0.2.0
-      '@niche-works/types': 0.4.0
-      big.js: 6.2.2
-      klona: 2.0.6
-      remeda: 2.34.0
+  '@niche-works/web-font-observer@0.1.0': {}
 
   '@niche-works/web-utils@0.1.1': {}
 
@@ -6142,8 +6133,6 @@ snapshots:
       keyv: 4.5.4
 
   flatted@3.4.2: {}
-
-  fontfaceobserver@2.3.0: {}
 
   fs-extra@11.3.2:
     dependencies:
