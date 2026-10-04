@@ -27,6 +27,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@niche-works/react-defer-rendering": "^0.6.0",
+    "@niche-works/react-execution-controller": "^0.1.1",
     "@niche-works/react-layout": "^0.6.1",
     "@niche-works/react-merge": "^0.1.2",
     "@niche-works/react-parts-props": "^0.2.0",

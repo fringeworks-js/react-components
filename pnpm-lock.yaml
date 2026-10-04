@@ -20,6 +20,9 @@ importers:
       '@niche-works/react-defer-rendering':
         specifier: ^0.6.0
         version: 0.6.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@niche-works/react-execution-controller':
+        specifier: ^0.1.1
+        version: 0.1.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@niche-works/react-layout':
         specifier: ^0.6.1
         version: 0.6.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -872,8 +875,17 @@ packages:
   '@niche-works/dev@0.5.5':
     resolution: {integrity: sha512-mZEt7c07NTW/c3sNNKqr43ezIWQRAb9tXZ7eOGpa0ZDGeieg7dDyrVrXUPHHO0CNk5E+N/hyK3mh15+VFW7WHg==}
 
+  '@niche-works/execution-controller@0.3.1':
+    resolution: {integrity: sha512-uLy73oDUK6oYwV+kIUd9hCs3o0/gHcLiyOV3iH10xi9XS1MXDWeV9R7O5cab9sP+L92PDrVljWMJTTb9Gs/W8g==}
+
   '@niche-works/react-defer-rendering@0.6.0':
     resolution: {integrity: sha512-Y1YVum1xwKgGKh2cu9KsAhZin5/I5ik1wvP+HH4QrSeETAhpp+V3qkih5ift/zyc+/HMjvBJvPiwh/bMeuJkTw==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+
+  '@niche-works/react-execution-controller@0.1.1':
+    resolution: {integrity: sha512-MeCSlun97J+QOVdA2KVBp788gVWg9c0I7/4Krt8jky/SSZkcJsxN9pMh70EwPX2LIaktt4vMe/Ugd9xyDKeRFA==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -4512,12 +4524,23 @@ snapshots:
       sass: 1.105.0
       type-fest: 5.6.0
 
+  '@niche-works/execution-controller@0.3.1':
+    dependencies:
+      '@niche-works/types': 0.3.2
+
   '@niche-works/react-defer-rendering@0.6.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@niche-works/react-utils': 0.2.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@niche-works/utils': 0.5.3
       '@niche-works/web-font-observer': 0.1.0
       '@niche-works/web-utils': 0.1.1
+      react: 19.2.6
+      react-dom: 19.2.6(react@19.2.6)
+
+  '@niche-works/react-execution-controller@0.1.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+    dependencies:
+      '@niche-works/execution-controller': 0.3.1
+      '@niche-works/types': 0.4.0
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
