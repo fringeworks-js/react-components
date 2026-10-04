@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { ComponentType } from 'react';
 import { createElement } from 'react';
-import LxLayoutContainer from '../../src/containers/LxLayoutContainer';
+import FrgLayoutContainer from '../../src/containers/FrgLayoutContainer';
 import type { LayoutName } from '../_shared/types';
 
 /**
- * `layout`を固定したLxLayoutContainer
+ * `layout`を固定したFrgLayoutContainer
  * @param layout レイアウト名
  * @returns
  */
 function fixLayout(layout: LayoutName): ComponentType<any> {
   const FixedLayoutContainer = (props: any) =>
-    createElement(LxLayoutContainer, { ...props, layout });
-  FixedLayoutContainer.displayName = `LxLayoutContainer(${layout})`;
+    createElement(FrgLayoutContainer, { ...props, layout });
+  FixedLayoutContainer.displayName = `FrgLayoutContainer(${layout})`;
   return FixedLayoutContainer;
 }
 

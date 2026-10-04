@@ -28,7 +28,7 @@
     "@emotion/styled": "^11.14.0",
     "@fringeworks/react-defer-rendering": "^0.8.0",
     "@fringeworks/react-execution-controller": "^0.8.0",
-    "@fringeworks/react-layouts": "^0.8.0",
+    "@fringeworks/react-layouts": "^0.8.1",
     "@fringeworks/react-merge": "^0.8.0",
     "@fringeworks/react-parts-props": "^0.8.0",
     "@fringeworks/react-style-props": "^0.8.0",

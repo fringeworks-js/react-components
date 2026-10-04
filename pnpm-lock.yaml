@@ -125,8 +125,8 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@fringeworks/react-layouts':
-        specifier: ^0.8.0
-        version: 0.8.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        specifier: ^0.8.1
+        version: 0.8.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@fringeworks/react-merge':
         specifier: ^0.8.0
         version: 0.8.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -928,8 +928,8 @@ packages:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
 
-  '@fringeworks/react-layouts@0.8.0':
-    resolution: {integrity: sha512-A+5NdnqiLjcKsmIrpDAY1XUnT4VC96Jn++zmKmOsElQQAA7fNJ6SKEv1A6p5/w0nLEGr+PACmVKjY04ZqG47xQ==}
+  '@fringeworks/react-layouts@0.8.1':
+    resolution: {integrity: sha512-fkJy7GAk4MV4zpyN0P9mHehZ3H/Xskc7xPC8+YyjsaJXK7zIqAmw9dOgJVHi5ZH9mUyqI+Mjwn5bS0oz0VK6+A==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -972,8 +972,8 @@ packages:
     peerDependencies:
       rollup: ^4.0.0
 
-  '@fringeworks/style-layouts@0.8.0':
-    resolution: {integrity: sha512-6zrKfqtWjhLio/MKXRv7Yg6nmLiavcR5DzUDRCVjjV02x07ag+nPwZltMz0l/nsh5beOZNta43Hk9I2SG52odQ==}
+  '@fringeworks/style-layouts@0.8.1':
+    resolution: {integrity: sha512-7XuIrHq9OnXogvf2gaKlRq+udkbYTSpqmq0fXUiWPmQV5CXCQ7D8U/B5zYZ9YmS7uW+6J198L4crph7IFCYcpw==}
 
   '@fringeworks/style-utils@0.8.0':
     resolution: {integrity: sha512-Omq6/CBZWJZE6+b9zpCQnlrSjMwf7VOrEWJ6LlLqaHQ2iJ05Hixwz1/3ujs3rBstZn43i+Mud/RG2SGgwSIiYA==}
@@ -4568,11 +4568,11 @@ snapshots:
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
-  '@fringeworks/react-layouts@0.8.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@fringeworks/react-layouts@0.8.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
       '@fringeworks/react-style-proxy': 0.8.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@fringeworks/react-utils': 0.8.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/style-layouts': 0.8.0
+      '@fringeworks/style-layouts': 0.8.1
       '@fringeworks/types': 0.8.0
       '@fringeworks/utils': 0.8.0
       clsx: 2.1.1
@@ -4622,7 +4622,7 @@ snapshots:
       tslib: 2.8.1
       type-fest: 5.10.0
 
-  '@fringeworks/style-layouts@0.8.0':
+  '@fringeworks/style-layouts@0.8.1':
     dependencies:
       '@fringeworks/style-utils': 0.8.0
       '@fringeworks/types': 0.8.0
