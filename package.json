@@ -1,13 +1,13 @@
 {
-  "name": "@niche-works/react-components",
-  "version": "0.3.0",
+  "name": "@fringeworks/react-components",
+  "version": "0.8.0",
   "private": true,
   "keywords": [
     "react"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mitsuhiroseino/niche-works-react-components.git"
+    "url": "git+https://github.com/fringeworks-js/react-components.git"
   },
   "license": "MIT",
   "author": "Mitsuhiro Seino",
@@ -26,15 +26,15 @@
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@niche-works/react-defer-rendering": "^0.6.0",
-    "@niche-works/react-execution-controller": "^0.1.1",
-    "@niche-works/react-layout": "^0.6.1",
-    "@niche-works/react-merge": "^0.1.2",
-    "@niche-works/react-parts-props": "^0.2.0",
-    "@niche-works/react-style-props": "^0.3.0",
-    "@niche-works/react-utils": "^0.2.3",
-    "@niche-works/types": "^0.3.2",
-    "@niche-works/utils": "^0.5.3",
+    "@fringeworks/react-defer-rendering": "^0.8.0",
+    "@fringeworks/react-execution-controller": "^0.8.0",
+    "@fringeworks/react-layouts": "^0.8.0",
+    "@fringeworks/react-merge": "^0.8.0",
+    "@fringeworks/react-parts-props": "^0.8.0",
+    "@fringeworks/react-style-props": "^0.8.0",
+    "@fringeworks/react-utils": "^0.8.0",
+    "@fringeworks/types": "^0.8.0",
+    "@fringeworks/utils": "^0.8.0",
     "re-resizable": "^6.11.2"
   },
   "devDependencies": {
@@ -42,8 +42,8 @@
     "@chromatic-com/storybook": "^5.1.2",
     "@emotion/babel-plugin": "^11.13.5",
     "@eslint/js": "^10.0.1",
-    "@niche-works/dev": "^0.5.5",
-    "@niche-works/rollup-plugin-dist-package": "^0.2.2",
+    "@fringeworks/dev": "^0.8.0",
+    "@fringeworks/rollup-plugin-dist-package": "^0.8.0",
     "@pandacss/dev": "^1.12.1",
     "@playwright/test": "^1.60.0",
     "@rolldown/plugin-babel": "^0.2.3",
@@ -95,5 +95,6 @@
     "react-dom": {
       "optional": true
     }
-  }
+  },
+  "packageManager": "pnpm@12.3.4+sha512.961aa41fb077da3a04a441d9f8e15ebc0c96da8ef710b2eb67bf9ee7cb0610eabd48f1fd85f51cffe73846785fa0f87c56a3a872a1d893f8446741b5cce45457"
 }

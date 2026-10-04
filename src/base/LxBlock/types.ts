@@ -1,5 +1,5 @@
-import type { WithPartsProps } from '@niche-works/react-parts-props';
-import type { StyleProps } from '@niche-works/react-style-props';
+import type { WithPartsProps } from '@fringeworks/react-parts-props';
+import type { StyleProps } from '@fringeworks/react-style-props';
 import type { LxDivProps } from '../../primitives/LxDiv';
 
 /**

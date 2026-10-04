@@ -1,5 +1,5 @@
-import useDeferUntilWebFontReady from '@niche-works/react-defer-rendering/useDeferUntilWebFontReady';
-import applyDefaultProps from '@niche-works/react-utils/utils/applyDefaultProps';
+import useDeferUntilWebFontReady from '@fringeworks/react-defer-rendering/useDeferUntilWebFontReady';
+import applyDefaultProps from '@fringeworks/react-utils/utils/applyDefaultProps';
 import type { FC } from 'react';
 import type { LxWebFontBoundaryProps } from './types';
 

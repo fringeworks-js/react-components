@@ -1,7 +1,7 @@
 import type {
   UseDeferUntilWebFontReadyOptions,
   WebFontTargets,
-} from '@niche-works/react-defer-rendering/useDeferUntilWebFontReady';
+} from '@fringeworks/react-defer-rendering/useDeferUntilWebFontReady';
 import type { PropsWithChildren } from 'react';
 
 /**

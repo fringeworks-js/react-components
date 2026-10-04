@@ -1,3 +1,3 @@
-# @niche-works/react-components
+# @fringeworks/react-components
 
 A niche components for react.

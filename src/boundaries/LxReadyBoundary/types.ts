@@ -1,5 +1,5 @@
-import type { RenderingState } from '@niche-works/react-defer-rendering';
-import type { UseDeferUntilReadyOptions } from '@niche-works/react-defer-rendering/useDeferUntilReady';
+import type { RenderingState } from '@fringeworks/react-defer-rendering';
+import type { UseDeferUntilReadyOptions } from '@fringeworks/react-defer-rendering/useDeferUntilReady';
 import type { PropsWithChildren } from 'react';
 
 /**

@@ -1,4 +1,4 @@
-import exactKeysFromRecord from '@niche-works/utils/object/exactKeysFromRecord';
+import exactKeysFromRecord from '@fringeworks/utils/object/exactKeysFromRecord';
 import type { LxWebFontBoundaryOwnProps } from './types';
 
 export const LX_WEB_FONT_BOUNDARY_PROP_KEYS =

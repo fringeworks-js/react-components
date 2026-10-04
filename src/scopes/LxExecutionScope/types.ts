@@ -1,4 +1,4 @@
-import type { ExecutionScopeProps } from '@niche-works/react-execution-controller/ExecutionScope';
+import type { ExecutionScopeProps } from '@fringeworks/react-execution-controller/ExecutionScope';
 
 /**
  * プロパティ

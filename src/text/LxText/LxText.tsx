@@ -1,4 +1,4 @@
-import distribute from '@niche-works/utils/object/distribute';
+import distribute from '@fringeworks/utils/object/distribute';
 import { forwardRef } from 'react';
 import LxInline from '../../base/LxInline';
 import LxWebFontBoundary from '../../boundaries/LxWebFontBoundary';

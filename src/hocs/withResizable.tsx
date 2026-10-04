@@ -1,5 +1,5 @@
-import type { LooseDictionary } from '@niche-works/types';
-import { unsafeCast } from '@niche-works/utils';
+import type { LooseDictionary } from '@fringeworks/types';
+import { unsafeCast } from '@fringeworks/utils';
 import type { ResizableProps } from 're-resizable/lib';
 import { Resizable } from 're-resizable/lib';
 import type {

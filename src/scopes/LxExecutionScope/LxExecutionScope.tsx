@@ -1,4 +1,4 @@
-import ExecutionScope from '@niche-works/react-execution-controller/ExecutionScope';
+import ExecutionScope from '@fringeworks/react-execution-controller/ExecutionScope';
 import type { FC } from 'react';
 import type { LxExecutionScopeProps } from './types';
 

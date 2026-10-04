@@ -1,5 +1,5 @@
-import mergePartProps from '@niche-works/react-parts-props/mergePartProps';
-import applyStyleProps from '@niche-works/react-style-props/applyStyleProps';
+import mergePartProps from '@fringeworks/react-parts-props/mergePartProps';
+import applyStyleProps from '@fringeworks/react-style-props/applyStyleProps';
 import { forwardRef } from 'react';
 import LxDiv from '../../primitives/LxDiv';
 import type { LxBlockProps } from './types';

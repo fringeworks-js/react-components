@@ -11,5 +11,5 @@ export {
   AlignY,
   AlignYBase,
   Direction,
-} from '@niche-works/react-layout/constants';
+} from '@fringeworks/react-layouts/constants';
 export type { ArgTypes, Meta, StoryObj } from '@storybook/react-vite';

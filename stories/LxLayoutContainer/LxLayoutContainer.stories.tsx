@@ -1,5 +1,5 @@
-import type { LayoutType } from '@niche-works/react-layout/constants';
-import { LayoutType as LayoutTypes } from '@niche-works/react-layout/constants';
+import type { LayoutType } from '@fringeworks/react-layouts/constants';
+import { LayoutType as LayoutTypes } from '@fringeworks/react-layouts/constants';
 import type { ArgTypes, Meta, StoryObj } from '@storybook/react-vite';
 import LxLayoutContainer from '../../src/containers/LxLayoutContainer';
 import LayoutContainer from '../_internal/LayoutContainer';
