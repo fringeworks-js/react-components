@@ -1,3 +1,3 @@
 # @fringeworks/react-components
 
-A niche components for react.
+`@fringeworks/react-components` is a collection of React components some will find handy.
