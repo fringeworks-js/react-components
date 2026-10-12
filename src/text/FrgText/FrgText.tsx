@@ -2,7 +2,7 @@ import distribute from '@fringeworks/utils/object/distribute';
 import { forwardRef } from 'react';
 import FrgInline from '../../base/FrgInline';
 import FrgWebFontBoundary from '../../boundaries/FrgWebFontBoundary';
-import { LX_WEB_FONT_BOUNDARY_PROP_KEYS } from '../../boundaries/FrgWebFontBoundary/constants';
+import { FRG_WEB_FONT_BOUNDARY_PROP_KEYS } from '../../boundaries/FrgWebFontBoundary/constants';
 import type { FrgTextProps } from './types';
 
 /**
@@ -10,7 +10,7 @@ import type { FrgTextProps } from './types';
  */
 const FrgText = forwardRef<HTMLSpanElement, FrgTextProps>((props, ref) => {
   const { boundaryProps, inlineProps } = distribute(props, {
-    boundaryProps: LX_WEB_FONT_BOUNDARY_PROP_KEYS,
+    boundaryProps: FRG_WEB_FONT_BOUNDARY_PROP_KEYS,
     inlineProps: null,
   });
   const { fonts, ...restBoundaryProps } = boundaryProps;

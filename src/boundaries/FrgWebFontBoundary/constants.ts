@@ -1,7 +1,7 @@
 import exactKeysFromRecord from '@fringeworks/utils/object/exactKeysFromRecord';
 import type { FrgWebFontBoundaryOwnProps } from './types';
 
-export const LX_WEB_FONT_BOUNDARY_PROP_KEYS =
+export const FRG_WEB_FONT_BOUNDARY_PROP_KEYS: (keyof FrgWebFontBoundaryOwnProps)[] =
   exactKeysFromRecord<FrgWebFontBoundaryOwnProps>({
     pending: true,
     fallback: true,
