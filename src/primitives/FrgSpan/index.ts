@@ -1,2 +1,2 @@
-export { default } from './FrgSpan';
+export { default as FrgSpan, default } from './FrgSpan';
 export type * from './types';

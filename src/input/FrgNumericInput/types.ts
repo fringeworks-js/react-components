@@ -1,9 +1,9 @@
-import type { LimitDecimalOptions } from '@fringeworks/numeric-string';
-import type { HTMLAttributes } from 'react';
+import type { LimitDecimalOptions } from '@fringeworks/numeric-string/limitDecimal';
+import type { InputHTMLAttributes } from 'react';
 
 export type FrgNumericInputProps = Omit<
-  HTMLAttributes<HTMLInputElement>,
-  'value' | 'input'
+  InputHTMLAttributes<HTMLInputElement>,
+  'value' | 'defaultValue' | 'type'
 > &
   LimitDecimalOptions & {
     /**
@@ -11,5 +11,5 @@ export type FrgNumericInputProps = Omit<
      */
     value?: string | number | null | undefined;
 
-    onChangeValue?: (value: string | null | undefined) => void;
+    onChangeValue?: (value: string) => void;
   };

@@ -1,2 +1,2 @@
-export { default } from './FrgDiv';
+export { default as FrgDiv, default } from './FrgDiv';
 export type * from './types';

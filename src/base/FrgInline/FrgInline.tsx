@@ -6,9 +6,9 @@ import type { FrgInlineProps } from './types';
 
 const FrgInline = forwardRef<HTMLSpanElement, FrgInlineProps>((props, ref) => {
   const { partsProps, ...rest } = props;
-  const applyedProps = applyStyleProps(rest);
-  const spanProps = mergePartProps(applyedProps, partsProps?.root);
-  return <FrgSpan ref={ref} {...rest} {...spanProps} />;
+  const appliedProps = applyStyleProps(rest);
+  const spanProps = mergePartProps(appliedProps, partsProps?.root);
+  return <FrgSpan ref={ref} {...spanProps} />;
 });
 FrgInline.displayName = 'FrgInline';
 export default FrgInline;

@@ -1,4 +1,7 @@
-import type { WithLayoutProps } from '@fringeworks/react-layouts/withLayout';
-import type { FrgBlockProps } from '../../base/FrgBlock';
+import type { ComponentProps } from 'react';
+import type FrgLayoutContainer from './FrgLayoutContainer';
 
-export type FrgLayoutContainerProps = FrgBlockProps & WithLayoutProps;
+/**
+ * プロパティ
+ */
+export type FrgLayoutContainerProps = ComponentProps<typeof FrgLayoutContainer>;

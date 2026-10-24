@@ -6,9 +6,9 @@ import type { FrgBlockProps } from './types';
 
 const FrgBlock = forwardRef<HTMLDivElement, FrgBlockProps>((props, ref) => {
   const { partsProps, ...rest } = props;
-  const applyedProps = applyStyleProps(rest);
-  const divProps = mergePartProps(applyedProps, partsProps?.root);
-  return <FrgDiv ref={ref} {...rest} {...divProps} />;
+  const appliedProps = applyStyleProps(rest);
+  const divProps = mergePartProps(appliedProps, partsProps?.root);
+  return <FrgDiv ref={ref} {...divProps} />;
 });
 FrgBlock.displayName = 'FrgBlock';
 export default FrgBlock;

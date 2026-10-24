@@ -21,6 +21,8 @@ export default defineConfig({
       presets: [reactCompilerPreset()],
     }),
   ],
+  // link:で参照したパッケージが別のReactを読み込まないようにする
+  resolve: { dedupe: ['react', 'react-dom'] },
   test: {
     projects: [
       {

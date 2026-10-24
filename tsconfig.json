@@ -1,8 +1,7 @@
 {
   "extends": "@fringeworks/dev/tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react"
+    "jsx": "react-jsx"
   },
   "include": ["src", "globals.d.ts"]
 }

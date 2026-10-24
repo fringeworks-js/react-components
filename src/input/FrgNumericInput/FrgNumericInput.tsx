@@ -1,29 +1,17 @@
-import { limitDecimal } from '@fringeworks/numeric-string';
-import { distribute } from '@fringeworks/utils';
-import { forwardRef, useMemo } from 'react';
+import limitDecimal from '@fringeworks/numeric-string/limitDecimal';
+import distribute from '@fringeworks/utils/object/distribute';
+import { forwardRef } from 'react';
+import { LIMIT_DECIMAL_OPTION_KEYS } from '../../_internal/constants';
 import type { FrgNumericInputProps } from './types';
 
 const FrgNumericInput = forwardRef<HTMLInputElement, FrgNumericInputProps>(
   (props, ref) => {
     const { value, onChangeValue, onChange, ...rest } = props;
     const { limit: limitOptions, input: inputProps } = distribute(rest, {
-      limit: [
-        'emptyValue',
-        'nanValue',
-        'outOfRangeValue',
-        'min',
-        'max',
-        'decimals',
-        'roundingMode',
-        'clampToMin',
-        'clampToMax',
-        'interactive',
-        'trimLeadingZeros',
-      ],
+      limit: LIMIT_DECIMAL_OPTION_KEYS,
       input: null,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const strValue = useMemo(() => limitDecimal(value, limitOptions), [value]);
+    const strValue = limitDecimal(value, limitOptions);
 
     return (
       <input

@@ -1,5 +1,4 @@
 import useDeferUntilWebFontReady from '@fringeworks/react-defer-rendering/useDeferUntilWebFontReady';
-import applyDefaultProps from '@fringeworks/react-utils/utils/applyDefaultProps';
 import type { FC } from 'react';
 import type { FrgWebFontBoundaryProps } from './types';
 
@@ -11,11 +10,7 @@ import type { FrgWebFontBoundaryProps } from './types';
 const FrgWebFontBoundary: FC<FrgWebFontBoundaryProps> = (
   props: FrgWebFontBoundaryProps,
 ) => {
-  const { fonts, children, ...rest } = applyDefaultProps(props, {
-    children: <></>,
-    pending: <></>,
-    fallback: <></>,
-  });
+  const { fonts, children, ...rest } = props;
   const { node } = useDeferUntilWebFontReady(children, fonts, rest);
   return node;
 };

@@ -1,3 +1,2 @@
-import './styles.scss';
-export { default } from './FrgLayoutContainer';
+export { default as FrgLayoutContainer, default } from './FrgLayoutContainer';
 export type * from './types';
