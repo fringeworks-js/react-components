@@ -36,13 +36,14 @@
     "@fringeworks/react-execution-controller": "^0.9.0",
     "@fringeworks/react-layouts": "^0.9.1",
     "@fringeworks/react-parts-props": "^0.9.0",
-    "@fringeworks/react-style-props": "^0.9.0",
-    "@fringeworks/utils": "^0.11.4"
+    "@fringeworks/react-style-props": "^0.10.0",
+    "@fringeworks/react-text-fitting": "^0.5.0",
+    "@fringeworks/utils": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
     "@chromatic-com/storybook": "^5.1.2",
-    "@fringeworks/dev": "^0.13.1",
+    "@fringeworks/dev": "^0.13.2",
     "@rolldown/plugin-babel": "^0.2.3",
     "@storybook/addon-a11y": "^10.3.6",
     "@storybook/addon-docs": "^10.3.6",
