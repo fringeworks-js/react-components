@@ -1,0 +1,43 @@
+// Button の見た目
+// 詳細度を 0 にするため、セレクターは :where() で包む
+// 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+
+:where(.frg-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--frg-button-gap, 6px);
+  box-sizing: border-box;
+  // ブラウザーごとに違う既定の余白・文字をそろえる
+  margin: 0;
+  padding: var(--frg-button-paddingY, 0.375em)
+    var(--frg-button-paddingX, 0.875em);
+  border: 1px solid var(--frg-button-borderColor, #8a8f98);
+  border-radius: var(--frg-button-radius, 0.375em);
+  background-color: var(--frg-button-backgroundColor, #fff);
+  color: var(--frg-button-color, inherit);
+  font: inherit;
+  line-height: 1.2;
+  cursor: pointer;
+  // 続けて押したときに、文字が選択されないようにする
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:where(.frg-button:hover:not(:disabled)) {
+  background-color: var(--frg-button-backgroundColor-hover, #f1f3f5);
+}
+
+:where(.frg-button:active:not(:disabled)) {
+  background-color: var(--frg-button-backgroundColor-active, #e3e6ea);
+}
+
+:where(.frg-button:focus-visible) {
+  outline: 2px solid var(--frg-button-focusColor, #2f6fde);
+  outline-offset: 2px;
+}
+
+:where(.frg-button:disabled) {
+  cursor: not-allowed;
+  opacity: var(--frg-button-disabledOpacity, 0.5);
+}

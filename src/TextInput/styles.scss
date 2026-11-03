@@ -1,0 +1,37 @@
+// TextInput の見た目
+// 詳細度を 0 にするため、セレクターは :where() で包む
+// 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+// 幅は決めない（利用者がクラスや style で決める）
+
+:where(.frg-textinput) {
+  box-sizing: border-box;
+  // ブラウザーごとに違う既定の余白・文字をそろえる
+  margin: 0;
+  padding: var(--frg-textinput-paddingY, 0.375em)
+    var(--frg-textinput-paddingX, 0.625em);
+  border: 1px solid var(--frg-textinput-borderColor, #8a8f98);
+  border-radius: var(--frg-textinput-radius, 0.375em);
+  background-color: var(--frg-textinput-backgroundColor, #fff);
+  color: var(--frg-textinput-color, inherit);
+  font: inherit;
+  line-height: 1.2;
+}
+
+:where(.frg-textinput)::placeholder {
+  color: var(--frg-textinput-placeholderColor, #8a8f98);
+  opacity: 1;
+}
+
+:where(.frg-textinput[aria-invalid='true']) {
+  border-color: var(--frg-textinput-invalidColor, #d93025);
+}
+
+:where(.frg-textinput:focus-visible) {
+  outline: 2px solid var(--frg-textinput-focusColor, #2f6fde);
+  outline-offset: 1px;
+}
+
+:where(.frg-textinput:disabled) {
+  cursor: not-allowed;
+  opacity: var(--frg-textinput-disabledOpacity, 0.5);
+}

@@ -1,6 +1,6 @@
 {
   "name": "@fringeworks/react-components",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "private": true,
   "description": "A collection of React components some will find handy.",
   "keywords": [
@@ -12,6 +12,10 @@
   },
   "license": "MIT",
   "author": "Mitsuhiro Seino",
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
+  ],
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
@@ -22,23 +26,20 @@
   "scripts": {
     "build": "tsdown",
     "build-storybook": "storybook build",
+    "check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\"",
     "indexes": "tsx ./scripts/indexes.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "pnpm build && npm publish ./dist",
     "storybook": "storybook dev -p 6006",
+    "test": "vitest",
     "tidy": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" --config ./prettier.tidy.config.ts"
   },
   "dependencies": {
-    "@fringeworks/numeric-string": "^0.3.0",
-    "@fringeworks/react-defer-rendering": "^0.9.1",
-    "@fringeworks/react-execution-controller": "^0.9.0",
-    "@fringeworks/react-layouts": "^0.9.1",
     "@fringeworks/react-parts-props": "^0.9.0",
-    "@fringeworks/react-style-props": "^0.10.0",
-    "@fringeworks/react-text-fitting": "^0.5.0",
-    "@fringeworks/utils": "^2.1.0"
+    "@fringeworks/react-primitives": "^0.1.0",
+    "@fringeworks/style-layouts": "^0.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -68,6 +69,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.105.0",
+    "sass-embedded": "^1.99.0",
     "storybook": "^10.3.6",
     "tsdown": "^0.23.1",
     "tsx": "^4.23.15",

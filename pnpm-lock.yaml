@@ -108,31 +108,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@fringeworks/numeric-string':
-        specifier: ^0.3.0
-        version: 0.3.0
-      '@fringeworks/react-defer-rendering':
-        specifier: ^0.9.1
-        version: 0.9.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/react-execution-controller':
-        specifier: ^0.9.0
-        version: 0.9.0(@fringeworks/execution-controller@0.9.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/react-layouts':
-        specifier: ^0.9.1
-        version: 0.9.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/react-parts-props':
-        specifier: ^0.9.0
-        version: 0.9.0(react@19.2.6)
-      '@fringeworks/react-style-props':
-        specifier: ^0.10.0
-        version: 0.10.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/react-text-fitting':
-        specifier: ^0.5.0
-        version: 0.5.0(react@19.2.6)
-      '@fringeworks/utils':
-        specifier: ^2.1.0
-        version: 2.1.0
     devDependencies:
       '@babel/core':
         specifier: ^7.29.0
@@ -212,9 +187,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.2.6(react@19.2.6)
-      sass:
-        specifier: ^1.105.0
-        version: 1.105.0
       storybook:
         specifier: ^10.3.6
         version: 10.3.6(@testing-library/dom@10.4.1)(prettier@3.9.10)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
@@ -763,105 +735,10 @@ packages:
       typescript:
         optional: true
 
-  '@fringeworks/execution-controller@0.9.0':
-    resolution: {integrity: sha512-AysH9FD6r8D4h0qHrJVzYgdsiKSzj/GACnj1k+EY/c1Pa/Gr863Bct8I5r8f90mqqo5x8JGwNr5zcaPEH/63aA==}
-
-  '@fringeworks/numeric-string@0.3.0':
-    resolution: {integrity: sha512-aE4GX188P6ko+WcjK12kzKqn+wBY7gE5i4+U+/n1mJeDDmhyG/CL5DA7lqt4A+o9WpN0dnYOb2bXIM67uppvYw==}
-
-  '@fringeworks/react-defer-rendering@0.9.1':
-    resolution: {integrity: sha512-kdcy3ugMLGnpTmNyCzjoh8z9FSee6hEvjx3+UR7N9CUBiFx3lTsVrPeT/wqxi0QFMJp3TFk8jFBBG9Rlf4qNHQ==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-execution-controller@0.9.0':
-    resolution: {integrity: sha512-FYuGvpcqRVqn2a70fAWGXUDDvINeKNNf1CZuCnk1N8q9MaaPSiERunsqMOGJU8DXg7mjaDQMlgwDaC/nC7ousA==}
-    peerDependencies:
-      '@fringeworks/execution-controller': ^0.9.0
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-layouts@0.9.1':
-    resolution: {integrity: sha512-clsdG3E7PuN77ktga6PwgDxRVoXrJD69IdxxDrBRE0OSfv5YyQGWu4Q8JrWOteH59L1KYXw22IlV6c36JHK60Q==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-merge@0.9.0':
-    resolution: {integrity: sha512-JASj+UlSUZsA7Zf9ExIW/V7uhu2UZ0Au31wK/Yx4uURdjLobIM+J0VYAlZwKk0OAgYzIXWccxaX4H32USC44Qg==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-parts-props@0.9.0':
-    resolution: {integrity: sha512-rISEsYevKImZ2HXDPb2TuOMX2+cQLtNMc7Gnh4CKAMFKflYnzaiXXBbwdLbE5jJRbZeLbD4lHU+KWVQUvXPLzg==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-style-props@0.10.0':
-    resolution: {integrity: sha512-x/5dcVs3R+SDULuuPQrxtrx+BhazYx8tLv1wUZrv9G+KH7UwvJf6b3Ws3R+XzWq58gQfJOaBNAQyYsi9Jr/m/Q==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-style-proxy@0.9.1':
-    resolution: {integrity: sha512-7TtqcqLS7ormsXrwNRdqnTkE4pryI67BZU1jixYPq56rRBLc828ZGb17qf9RKgeiWTlW6ulZlm3223npRaslpA==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-style-proxy@0.9.2':
-    resolution: {integrity: sha512-V5qd8cjpSXLkPZ1BxOqojariGHzQ42WL3TEZ+d3diUXE/1uFHcUJuPop2XkuV9YQbaNR3XriR9QhhN+Yf6uO/g==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-      react-dom: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-text-fitting@0.5.0':
-    resolution: {integrity: sha512-TTrc/2ReIF85qwG4nCKEvVn6AmWChHMn/qmeyJSEjZC9LFcZBewgA7fzltaGsJSyKBiQImSqcuNfZZlr27jwpA==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-utils@0.12.0':
-    resolution: {integrity: sha512-D9/8E9xoH1+hSv7OkgjIa5zL3ipxAHN4TCpd8U2PxxG6iSGUfn1qTFgnNGrbhIwvxrvLrnqZ4G9GV2VuaFMEZw==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-
-  '@fringeworks/react-utils@0.9.2':
-    resolution: {integrity: sha512-IQc2KUfCSXr3BZxrZjcVeFHg7ZK1jH4ui8A9fqg0jzjX8gAKWKx7U/kLgNfdO+tyHb3gDENrntc9b8wBViXtAQ==}
-    peerDependencies:
-      react: ^18.0.0 || ^19.0.0
-
   '@fringeworks/rollup-plugin-dist-package@0.9.2':
     resolution: {integrity: sha512-cISXRnI8ItzA/nXaGIFV4pmumTCsrUK5VCuz7UkoyZeXbg55WOL3WE5NWGTVmKsSgPDlDhFaZ7xy1li8jMGm7A==}
     peerDependencies:
       rollup: ^4.0.0
-
-  '@fringeworks/style-layouts@0.9.1':
-    resolution: {integrity: sha512-lr4Gi8ziSNFZvr3KTnXCgPZAyTeJFXDVyPMnfhNiUE3jUqYHHNvpyhwn1k0T+CZhKrFfv66IsgWcmLMF2Er5+Q==}
-
-  '@fringeworks/style-utils@0.9.0':
-    resolution: {integrity: sha512-R2ZMzmXPxjwkKMEn9/jAjWQ2fy1B0J1m37vGpJWgwD4BNr7szFFKwxImnwF94sE4RQEL70bYYzlCYyNUvuX1Rg==}
-
-  '@fringeworks/text-fitting@0.5.0':
-    resolution: {integrity: sha512-7HAyHKN7lztWu1Pdr3V9C8DutTnaaY+CnZk2FXF+Ib4R4LLIY5lSZHth+VHVz/ZlP8+KZwhRxY0TP5I+OxDx3A==}
-
-  '@fringeworks/types@0.9.2':
-    resolution: {integrity: sha512-fXCzLgsFnLhe1cnUVfArOh6IHpNCeQ9JXdgx4vwx0cNEkumy6iy+HDpDt8xY5YbXRf5oxxrBumdQS+4+54Ivtg==}
-
-  '@fringeworks/types@1.0.0':
-    resolution: {integrity: sha512-o9co16ePKE1cL/Qpail6LnTVrTC/HeIATrYBDpNcd/aef2mNEVUdhVD2X001YdkpCAXnwgEjnmSOpBqMEtI4aA==}
-
-  '@fringeworks/utils@0.11.4':
-    resolution: {integrity: sha512-t9l0XzXbvyIZKsSi/jDqCkutsdIRLOQDOomvNXuJnQOgjucwnohVZCmixKrunPRWRY0TOJwSNpinEQx/mSIXrg==}
-
-  '@fringeworks/utils@2.0.0':
-    resolution: {integrity: sha512-iCXRAvfGLgTfiWuzsCri6EhLXKG80+mVBiGHacZi96yy1W0RQR3HQxNwcixYlo001iy5PIA5fU1fqyu5d6fxtw==}
-
-  '@fringeworks/utils@2.1.0':
-    resolution: {integrity: sha512-yxT/Saw6gu6EQbja9Bgjw9iNvsngcA3CX/EsMLEYQUvmd89CuYjZiR3OC1L8xPcKnuzRIQfMizwTu2ylZVKg0g==}
-
-  '@fringeworks/web-font-observer@0.9.0':
-    resolution: {integrity: sha512-v29XsKVxKIPfHHTTe2aqE5fhs5B0Spr4BU0sdyjv+T/aHaqzwqTI0DBMwctly+w1WxPWxXYD5OlE+k+ROYG8eg==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1804,9 +1681,6 @@ packages:
   bidi-js@1.1.0:
     resolution: {integrity: sha512-fX1Onk0tdVPC7obPWB5EbJ1z7NVhLq4m2xZLq2YXBkxzMXIGRpNMU88n0EPgWseKl12J7zXs7qrDxPK4sRs2fg==}
 
-  big.js@6.2.2:
-    resolution: {integrity: sha512-y/ie+Faknx7sZA5MfGA2xKlu0GDv8RWrXGsmlteyJQ2lvoKv9GBK/fpRMc2qlSoBAgNxrixICFCBefIq8WCQpQ==}
-
   brace-expansion@5.0.6:
     resolution: {integrity: sha512-kLpxurY4Z4r9sgMsyG0Z9uzsBlgiU/EFKhj/h91/8yHu0edo7XuixOIH3VcJ8kkxs6/jPzoI6U9Vj3WqbMQ94g==}
     engines: {node: 18 || 20 || >=22}
@@ -1861,10 +1735,6 @@ packages:
         optional: true
       '@chromatic-com/playwright':
         optional: true
-
-  clsx@2.1.1:
-    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
-    engines: {node: '>=6'}
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
@@ -2299,10 +2169,6 @@ packages:
 
   keyv@5.6.0:
     resolution: {integrity: sha512-CYDD3SOtsHtyXeEORYRx2qBtpDJFjRTGXUtmNEMGyzYOKj1TE3tycdlho7kA1Ufx9OYWZzg52QFBGALTirzDSw==}
-
-  klona@2.0.6:
-    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
-    engines: {node: '>= 8'}
 
   levn@0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
@@ -3564,130 +3430,12 @@ snapshots:
       - supports-color
       - vue-tsc
 
-  '@fringeworks/execution-controller@0.9.0':
-    dependencies:
-      '@fringeworks/types': 0.9.2
-
-  '@fringeworks/numeric-string@0.3.0':
-    dependencies:
-      big.js: 6.2.2
-
-  '@fringeworks/react-defer-rendering@0.9.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@fringeworks/react-utils': 0.9.2(react@19.2.6)
-      '@fringeworks/utils': 0.11.4
-      '@fringeworks/web-font-observer': 0.9.0
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-
-  '@fringeworks/react-execution-controller@0.9.0(@fringeworks/execution-controller@0.9.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@fringeworks/execution-controller': 0.9.0
-      '@fringeworks/react-utils': 0.9.2(react@19.2.6)
-      '@fringeworks/types': 0.9.2
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-
-  '@fringeworks/react-layouts@0.9.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@fringeworks/react-style-proxy': 0.9.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/react-utils': 0.9.2(react@19.2.6)
-      '@fringeworks/style-layouts': 0.9.1
-      '@fringeworks/types': 0.9.2
-      '@fringeworks/utils': 0.11.4
-      clsx: 2.1.1
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-
-  '@fringeworks/react-merge@0.9.0(react@19.2.6)':
-    dependencies:
-      '@fringeworks/react-utils': 0.9.2(react@19.2.6)
-      '@fringeworks/utils': 0.11.4
-      clsx: 2.1.1
-      react: 19.2.6
-      remeda: 2.50.0
-
-  '@fringeworks/react-parts-props@0.9.0(react@19.2.6)':
-    dependencies:
-      '@fringeworks/react-merge': 0.9.0(react@19.2.6)
-      react: 19.2.6
-
-  '@fringeworks/react-style-props@0.10.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@fringeworks/react-style-proxy': 0.9.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      '@fringeworks/react-utils': 0.12.0(react@19.2.6)
-      '@fringeworks/types': 1.0.0
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-
-  '@fringeworks/react-style-proxy@0.9.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-
-  '@fringeworks/react-style-proxy@0.9.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
-    dependencies:
-      '@fringeworks/utils': 2.0.0
-      react: 19.2.6
-      react-dom: 19.2.6(react@19.2.6)
-
-  '@fringeworks/react-text-fitting@0.5.0(react@19.2.6)':
-    dependencies:
-      '@fringeworks/react-utils': 0.12.0(react@19.2.6)
-      '@fringeworks/text-fitting': 0.5.0
-      '@fringeworks/utils': 2.1.0
-      react: 19.2.6
-
-  '@fringeworks/react-utils@0.12.0(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-
-  '@fringeworks/react-utils@0.9.2(react@19.2.6)':
-    dependencies:
-      react: 19.2.6
-
   '@fringeworks/rollup-plugin-dist-package@0.9.2(rollup@4.60.3)':
     dependencies:
       fs-extra: 11.4.1
       rollup: 4.60.3
       sort-package-json: 3.6.1
       type-fest: 5.10.0
-
-  '@fringeworks/style-layouts@0.9.1':
-    dependencies:
-      '@fringeworks/style-utils': 0.9.0
-      '@fringeworks/types': 0.9.2
-      '@fringeworks/utils': 0.11.4
-
-  '@fringeworks/style-utils@0.9.0': {}
-
-  '@fringeworks/text-fitting@0.5.0':
-    dependencies:
-      '@fringeworks/utils': 2.1.0
-
-  '@fringeworks/types@0.9.2': {}
-
-  '@fringeworks/types@1.0.0': {}
-
-  '@fringeworks/utils@0.11.4':
-    dependencies:
-      '@fringeworks/types': 0.9.2
-      klona: 2.0.6
-      remeda: 2.50.0
-
-  '@fringeworks/utils@2.0.0':
-    dependencies:
-      '@fringeworks/types': 1.0.0
-      klona: 2.0.6
-      remeda: 2.50.0
-
-  '@fringeworks/utils@2.1.0':
-    dependencies:
-      '@fringeworks/types': 1.0.0
-      klona: 2.0.6
-      remeda: 2.50.0
-
-  '@fringeworks/web-font-observer@0.9.0': {}
 
   '@humanfs/core@0.19.2':
     dependencies:
@@ -4536,8 +4284,6 @@ snapshots:
     dependencies:
       require-from-string: 2.0.2
 
-  big.js@6.2.2: {}
-
   brace-expansion@5.0.6:
     dependencies:
       balanced-match: 4.0.4
@@ -4587,8 +4333,6 @@ snapshots:
       readdirp: 5.1.1
 
   chromatic@13.3.5: {}
-
-  clsx@2.1.1: {}
 
   convert-source-map@2.0.0: {}
 
@@ -5035,8 +4779,6 @@ snapshots:
   keyv@5.6.0:
     dependencies:
       '@keyv/serialize': 1.1.1
-
-  klona@2.0.6: {}
 
   levn@0.4.1:
     dependencies:

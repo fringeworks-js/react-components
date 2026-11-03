@@ -1,0 +1,8 @@
+// すべての部品の CSS
+@use 'Button/styles' as button;
+@use 'ButtonGroup/styles' as buttonGroup;
+@use 'Checkbox/styles' as checkbox;
+@use 'CheckboxGroup/styles' as checkboxGroup;
+@use 'Collapsible/styles' as collapsible;
+@use 'RadioGroup/styles' as radioGroup;
+@use 'TextInput/styles' as textInput;

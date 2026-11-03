@@ -1,0 +1,23 @@
+// CheckboxGroup の見た目
+// 並べ方は style-layouts の stack・flow で実現する
+@use '@fringeworks/style-layouts/stack.css';
+@use '@fringeworks/style-layouts/flow.css';
+@use '../Checkbox/styles' as checkbox;
+
+// すべて選ぶを親、選択肢を子として並べ、すべての選択肢を操作するものだと分かるようにする
+// 色や線は足さず、配置だけで見分ける
+
+// 縦並び: すべて選ぶの後ろの選択肢を字下げし、チェックボックスをすべて選ぶの文字の位置にそろえる
+:where(
+  .frg-checkboxgroup.frgs-layout-stack > .frg-checkboxgroup-selectall ~ *
+) {
+  margin-inline-start: var(
+    --frg-checkboxgroup-indent,
+    calc(var(--frg-checkbox-size, 1em) + var(--frg-checkbox-gap, 6px))
+  );
+}
+
+// 横並び: すべて選ぶを1行目に置き、選択肢を次の行から並べる
+:where(.frg-checkboxgroup.frgs-layout-flow > .frg-checkboxgroup-selectall) {
+  flex-basis: 100%;
+}

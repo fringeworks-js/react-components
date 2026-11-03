@@ -1,0 +1,54 @@
+// ラジオボタンの見た目（RadioGroup の中で使う）
+// 詳細度を 0 にするため、セレクターは :where() で包む
+// 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+
+$checked-color: var(--frg-radio-checkedColor, #2f6fde);
+
+:where(.frg-radio) {
+  // ラジオボタンと文字を横に並べ、縦の中央をそろえる
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frg-radio-gap, 6px);
+  cursor: pointer;
+  // 続けて押したときに、ラベルの文字が選択されないようにする
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:where(.frg-radio[data-disabled]) {
+  cursor: not-allowed;
+  opacity: var(--frg-radio-disabledOpacity, 0.5);
+}
+
+:where(.frg-radio-input) {
+  // ブラウザーの標準の見た目を消し、CSS で描く
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  box-sizing: border-box;
+  width: var(--frg-radio-size, 1em);
+  height: var(--frg-radio-size, 1em);
+  // ブラウザーごとに違う既定の余白をなくす
+  margin: 0;
+  border: 1px solid var(--frg-radio-borderColor, #8a8f98);
+  border-radius: 50%;
+  background-color: var(--frg-radio-backgroundColor, #fff);
+  cursor: inherit;
+}
+
+// 選んだら塗り、中に白い点を描く（チェックボックスの印と同じく白）
+:where(.frg-radio-input:checked) {
+  border-color: $checked-color;
+  background-color: $checked-color;
+  background-image: radial-gradient(circle, #fff 0 30%, transparent 32%);
+}
+
+// ラジオボタンには aria-invalid を付けられないので、label の属性で見る
+:where(.frg-radio[data-invalid] .frg-radio-input) {
+  border-color: var(--frg-radio-invalidColor, #d93025);
+}
+
+:where(.frg-radio-input:focus-visible) {
+  outline: 2px solid var(--frg-radio-focusColor, #2f6fde);
+  outline-offset: 2px;
+}

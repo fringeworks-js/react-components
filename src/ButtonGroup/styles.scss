@@ -1,0 +1,5 @@
+// ButtonGroup の見た目
+// 並べ方は style-layouts の stack・flow で実現する
+@use '@fringeworks/style-layouts/stack.css';
+@use '@fringeworks/style-layouts/flow.css';
+@use '../Button/styles' as button;

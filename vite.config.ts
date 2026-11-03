@@ -24,7 +24,16 @@ export default defineConfig({
   // link:で参照したパッケージが別のReactを読み込まないようにする
   resolve: { dedupe: ['react', 'react-dom'] },
   test: {
+    globals: true,
     projects: [
+      {
+        extends: true,
+        test: {
+          name: 'unit',
+          include: ['src/**/*.test.{ts,tsx}'],
+          environment: 'jsdom',
+        },
+      },
       {
         extends: true,
         plugins: [
