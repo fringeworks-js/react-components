@@ -48,6 +48,9 @@ import '@fringeworks/react-components/checkbox.css';
 import '@fringeworks/react-components/checkboxgroup.css';
 import '@fringeworks/react-components/collapsible.css';
 import '@fringeworks/react-components/radiogroup.css';
+import '@fringeworks/react-components/recordfields.css';
+import '@fringeworks/react-components/switch.css';
+import '@fringeworks/react-components/table.css';
 import '@fringeworks/react-components/textinput.css';
 ```
 
@@ -68,15 +71,18 @@ The look is neutral and does not follow any design system. You can adjust it in 
 
 ## API
 
-| Component       | Description                                    |
-| --------------- | ---------------------------------------------- |
-| `Checkbox`      | A checkbox                                     |
-| `CheckboxGroup` | A group of checkboxes laid out from options    |
-| `RadioGroup`    | A group of radio buttons laid out from options |
-| `Button`        | A button                                       |
-| `ButtonGroup`   | A group of buttons laid out from options       |
-| `TextInput`     | A text input                                   |
-| `Collapsible`   | A collapsible component                        |
+| Component       | Description                                      |
+| --------------- | ------------------------------------------------ |
+| `Checkbox`      | A checkbox                                       |
+| `Switch`        | A switch                                         |
+| `CheckboxGroup` | A group of checkboxes laid out from options      |
+| `RadioGroup`    | A group of radio buttons laid out from options   |
+| `Button`        | A button                                         |
+| `ButtonGroup`   | A group of buttons laid out from options         |
+| `TextInput`     | A text input                                     |
+| `Collapsible`   | A collapsible component                          |
+| `Table`         | A table that takes an array of rows              |
+| `RecordFields`  | A component that lays out the fields of a record |
 
 ### `Checkbox`
 
@@ -105,6 +111,34 @@ The look is neutral and does not follow any design system. You can adjust it in 
 | `--frg-checkbox-disabledOpacity` | `0.5`     | The opacity when `disabled`                                   |
 
 The check mark is white and cannot be changed with a CSS variable, because it is drawn as a background image. To change it, override `background-image` for `:checked`.
+
+### `Switch`
+
+```tsx
+<Switch value={enabled} onValueChange={setEnabled}>
+  Receive notifications
+</Switch>
+```
+
+[`Switch` of react-primitives](https://github.com/fringeworks-js/react-primitives) with a look. It takes the same props as `Switch` of react-primitives (those of `Checkbox` without `indeterminate`).
+
+- Places an `<input type="checkbox" role="switch" class="frg-switch-input">` and `children` inside a `<label class="frg-switch">`.
+- When `disabled` or `invalid`, it adds `data-disabled` or `data-invalid` to the `<label>`.
+- The track and the thumb are drawn with the background color and image of the `<input>` (`appearance: none`). No elements are added, so keyboard operation and focus are those of the standard `<input>`. With reduced motion (`prefers-reduced-motion`), the thumb does not animate.
+- Pass it to `withCheckboxGroup` of react-primitives to create a group of switches (`withCheckboxGroup({ Checkbox: Switch })`).
+
+| CSS variable                   | Default       | Description                                                   |
+| ------------------------------ | ------------- | ------------------------------------------------------------- |
+| `--frg-switch-gap`             | `6px`         | The space between the switch and the label                    |
+| `--frg-switch-width`           | `2em`         | The width of the switch                                       |
+| `--frg-switch-height`          | `1.125em`     | The height of the switch (also decides the size of the thumb) |
+| `--frg-switch-trackColor`      | `#b8bdc6`     | The track color when off                                      |
+| `--frg-switch-checkedColor`    | `#2f6fde`     | The track color when on                                       |
+| `--frg-switch-thumbColor`      | `#fff`        | The thumb color                                               |
+| `--frg-switch-borderColor`     | `transparent` | The border color of the track                                 |
+| `--frg-switch-invalidColor`    | `#d93025`     | The border color when `invalid`                               |
+| `--frg-switch-focusColor`      | `#2f6fde`     | The outline color when focused by keyboard                    |
+| `--frg-switch-disabledOpacity` | `0.5`         | The opacity when `disabled`                                   |
 
 ### `CheckboxGroup`
 
@@ -264,6 +298,72 @@ A group of buttons laid out from options. It is `withButtonGroup` of react-primi
 | `--frg-collapsible-contentGap`      | `8px`          | The space between the heading and content when open |
 | `--frg-collapsible-focusColor`      | `#2f6fde`      | The outline color when focused by keyboard          |
 | `--frg-collapsible-disabledOpacity` | `0.5`          | The opacity of the heading when `disabled`          |
+
+### `Table`
+
+```tsx
+type Member = { id: string; name: string; age: number };
+
+const columns: TableColumn<Member>[] = [
+  {
+    key: 'name',
+    label: 'Name',
+    renderValue: (props) => <TextInput {...props} />,
+  },
+  { key: 'age', label: 'Age' },
+];
+
+<Table value={members} onValueChange={setMembers} columns={columns} />;
+```
+
+[`Table` of react-primitives](https://github.com/fringeworks-js/react-primitives) with a look. It takes the same props as `Table` of react-primitives (`columns`, `value`, `defaultValue`, `onValueChange`, and the props of `<table>`). Import the column type (`TableColumn`) from react-primitives as well.
+
+- It takes an array of rows as `value`, and when the value of a cell is committed, reports the changed array and the changed cell (`{ type: 'update', path: [id, key] }`) through `onValueChange`. Rows are identified by `id`.
+- A cell whose column has no `renderValue` shows its value as text. The props `renderValue` receives (`value`, `onValueChange`, `aria-labelledby`) can be passed to `TextInput` and `Checkbox` as is.
+- It renders `<table class="frg-table">`. It adds borders between rows and padding to cells, and makes headers bold and start-aligned (`text-align: start`). It does not set a width; set one with a class or `style`.
+
+| CSS variable                        | Default       | Description                               |
+| ----------------------------------- | ------------- | ----------------------------------------- |
+| `--frg-table-paddingX`              | `0.75em`      | The horizontal padding of cells           |
+| `--frg-table-paddingY`              | `0.5em`       | The vertical padding of cells             |
+| `--frg-table-borderColor`           | `#d5d8dd`     | The color of the borders between rows     |
+| `--frg-table-color`                 | `inherit`     | The text color                            |
+| `--frg-table-headerBorderColor`     | `#8a8f98`     | The color of the border under the headers |
+| `--frg-table-headerBackgroundColor` | `transparent` | The background color of the headers       |
+| `--frg-table-headerFontWeight`      | `600`         | The font weight of the headers            |
+
+### `RecordFields`
+
+```tsx
+const fields: RecordField<Member>[] = [
+  { key: 'id', label: 'ID' },
+  {
+    key: 'name',
+    label: 'Name',
+    renderValue: (props) => <TextInput {...props} />,
+  },
+  {
+    key: 'active',
+    label: 'Active',
+    renderValue: (props) => <Checkbox {...props} />,
+  },
+];
+
+<RecordFields value={member} onValueChange={setMember} fields={fields} />;
+```
+
+[`RecordFields` of react-primitives](https://github.com/fringeworks-js/react-primitives) with a look. It takes the same props as `RecordFields` of react-primitives (`fields`, `value`, `defaultValue`, `onValueChange`, and the props of `<div>`). Import the field type (`RecordField`) from react-primitives as well.
+
+- It takes a record as `value`, and when the value of a field is committed, reports the changed record and the changed field (`{ type: 'update', path: [key] }`) through `onValueChange`. It has no submission (`<form>`).
+- A field without `renderValue` shows its value as text. The props `renderValue` receives can be passed to `TextInput`, `Checkbox`, `RadioGroup`, and so on as is. The array of fields can also be passed to `columns` of `Table` as is.
+- It renders the fields vertically inside `<div class="frg-recordfields">`, with each label above its value. Labels are bold. It does not set a width; set one with a class or `style`.
+
+| CSS variable                         | Default   | Description                         |
+| ------------------------------------ | --------- | ----------------------------------- |
+| `--frg-recordfields-gap`             | `12px`    | The space between fields            |
+| `--frg-recordfields-labelGap`        | `4px`     | The space between a label and value |
+| `--frg-recordfields-labelColor`      | `inherit` | The label text color                |
+| `--frg-recordfields-labelFontWeight` | `600`     | The font weight of labels           |
 
 ### Types
 

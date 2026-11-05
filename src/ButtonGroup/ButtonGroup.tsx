@@ -1,10 +1,9 @@
 import { mergePartProps } from '@fringeworks/react-parts-props';
-import {
-  withButtonGroup,
-  type ButtonGroupProps as ButtonGroupPrimitiveProps,
-} from '@fringeworks/react-primitives';
+import { withButtonGroup } from '@fringeworks/react-primitives';
 import type { ReactElement } from 'react';
-import createGroupLayout from '../_internal/_groupLayout';
+import createGroupLayout, {
+  type GroupLayoutProps,
+} from '../_internal/_groupLayout';
 import Button from '../Button';
 import type { ButtonGroupProps } from './types';
 
@@ -32,7 +31,7 @@ export default function ButtonGroup<V>({
   // 利用者が指定した className・style は、レイアウトのものに重ねる（同じプロパティは利用者の値を優先する）
   return (
     <ButtonGroupBase
-      {...mergePartProps<ButtonGroupPrimitiveProps<V>>(
+      {...mergePartProps<Omit<ButtonGroupProps<V>, keyof GroupLayoutProps>>(
         {
           className: `frg-buttongroup ${layout.className}`,
           style: layout.style,

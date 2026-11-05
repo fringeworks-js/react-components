@@ -4,4 +4,7 @@ export * from './Checkbox';
 export * from './CheckboxGroup';
 export * from './Collapsible';
 export * from './RadioGroup';
+export * from './RecordFields';
+export * from './Switch';
+export * from './Table';
 export * from './TextInput';

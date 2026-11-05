@@ -1,19 +1,27 @@
 import { mergePartProps } from '@fringeworks/react-parts-props';
 import {
   withCheckboxGroup,
-  type CheckboxGroupProps as CheckboxGroupPrimitiveProps,
-  type CheckboxSlotProps,
+  type CheckboxProps,
 } from '@fringeworks/react-primitives';
 import type { ReactElement } from 'react';
-import createGroupLayout from '../_internal/_groupLayout';
+import createGroupLayout, {
+  type GroupLayoutProps,
+} from '../_internal/_groupLayout';
 import Checkbox from '../Checkbox';
 import type { CheckboxGroupProps } from './types';
 
 /**
  * すべて選ぶのチェックボックス（選択肢と見分けられるよう、クラスを足す）
  */
-function SelectAll(props: CheckboxSlotProps) {
-  return <Checkbox {...props} className="frg-checkboxgroup-selectall" />;
+function SelectAll(props: CheckboxProps) {
+  return (
+    <Checkbox
+      {...mergePartProps<CheckboxProps>(
+        { className: 'frg-checkboxgroup-selectall' },
+        props,
+      )}
+    />
+  );
 }
 
 const CheckboxGroupBase = withCheckboxGroup({ Checkbox, SelectAll });
@@ -35,7 +43,7 @@ export default function CheckboxGroup<V>({
   // 利用者が指定した className・style は、レイアウトのものに重ねる（同じプロパティは利用者の値を優先する）
   return (
     <CheckboxGroupBase
-      {...mergePartProps<CheckboxGroupPrimitiveProps<V>>(
+      {...mergePartProps<Omit<CheckboxGroupProps<V>, keyof GroupLayoutProps>>(
         {
           className: `frg-checkboxgroup ${layout.className}`,
           style: layout.style,

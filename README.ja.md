@@ -48,6 +48,9 @@ import '@fringeworks/react-components/checkbox.css';
 import '@fringeworks/react-components/checkboxgroup.css';
 import '@fringeworks/react-components/collapsible.css';
 import '@fringeworks/react-components/radiogroup.css';
+import '@fringeworks/react-components/recordfields.css';
+import '@fringeworks/react-components/switch.css';
+import '@fringeworks/react-components/table.css';
 import '@fringeworks/react-components/textinput.css';
 ```
 
@@ -71,12 +74,15 @@ import '@fringeworks/react-components/textinput.css';
 | コンポーネント  | 説明                                         |
 | --------------- | -------------------------------------------- |
 | `Checkbox`      | チェックボックス                             |
+| `Switch`        | スイッチ                                     |
 | `CheckboxGroup` | 選択肢から並べた、チェックボックスのグループ |
 | `RadioGroup`    | 選択肢から並べた、ラジオボタンのグループ     |
 | `Button`        | ボタン                                       |
 | `ButtonGroup`   | 選択肢から並べた、ボタンのグループ           |
 | `TextInput`     | テキストの入力                               |
 | `Collapsible`   | 折りたためる部品                             |
+| `Table`         | 行の配列を受け取る表                         |
+| `RecordFields`  | レコードの項目を並べる部品                   |
 
 ### `Checkbox`
 
@@ -105,6 +111,34 @@ import '@fringeworks/react-components/textinput.css';
 | `--frg-checkbox-disabledOpacity` | `0.5`     | `disabled` のときの不透明度            |
 
 チェックの印は白で、CSS 変数では変えられません（背景画像で描いているため）。変えたい場合は、`:checked` の `background-image` を上書きしてください。
+
+### `Switch`
+
+```tsx
+<Switch value={enabled} onValueChange={setEnabled}>
+  通知を受け取る
+</Switch>
+```
+
+[react-primitives の `Switch`](https://github.com/fringeworks-js/react-primitives) に、見た目を付けたものです。プロパティは react-primitives の `Switch` と同じです（`Checkbox` から `indeterminate` を除いたもの）。
+
+- `<label class="frg-switch">` の中に `<input type="checkbox" role="switch" class="frg-switch-input">` と `children` を置きます。
+- `disabled`・`invalid` のときは、`<label>` に `data-disabled`・`data-invalid` を付けます。
+- 溝とつまみは、`<input>` のまま（`appearance: none`）背景の色と画像で描いています。要素を足さないので、キーボードでの操作やフォーカスは標準の `<input>` のままです。動きを減らす設定（`prefers-reduced-motion`）では、つまみを動かすアニメーションを止めます。
+- react-primitives の `withCheckboxGroup` に組み込むと、スイッチを並べたグループになります（`withCheckboxGroup({ Checkbox: Switch })`）。
+
+| CSS 変数                       | 既定値        | 説明                                     |
+| ------------------------------ | ------------- | ---------------------------------------- |
+| `--frg-switch-gap`             | `6px`         | スイッチと文字の間隔                     |
+| `--frg-switch-width`           | `2em`         | スイッチの幅                             |
+| `--frg-switch-height`          | `1.125em`     | スイッチの高さ（つまみの大きさも決まる） |
+| `--frg-switch-trackColor`      | `#b8bdc6`     | オフのときの溝の色                       |
+| `--frg-switch-checkedColor`    | `#2f6fde`     | オンのときの溝の色                       |
+| `--frg-switch-thumbColor`      | `#fff`        | つまみの色                               |
+| `--frg-switch-borderColor`     | `transparent` | 溝の枠の色                               |
+| `--frg-switch-invalidColor`    | `#d93025`     | `invalid` のときの枠の色                 |
+| `--frg-switch-focusColor`      | `#2f6fde`     | キーボードでフォーカスしたときの線の色   |
+| `--frg-switch-disabledOpacity` | `0.5`         | `disabled` のときの不透明度              |
 
 ### `CheckboxGroup`
 
@@ -264,6 +298,72 @@ import '@fringeworks/react-components/textinput.css';
 | `--frg-collapsible-contentGap`      | `8px`          | 開いたときの、見出しと中身の間隔       |
 | `--frg-collapsible-focusColor`      | `#2f6fde`      | キーボードでフォーカスしたときの線の色 |
 | `--frg-collapsible-disabledOpacity` | `0.5`          | `disabled` のときの見出しの不透明度    |
+
+### `Table`
+
+```tsx
+type Member = { id: string; name: string; age: number };
+
+const columns: TableColumn<Member>[] = [
+  {
+    key: 'name',
+    label: '名前',
+    renderValue: (props) => <TextInput {...props} />,
+  },
+  { key: 'age', label: '年齢' },
+];
+
+<Table value={members} onValueChange={setMembers} columns={columns} />;
+```
+
+[react-primitives の `Table`](https://github.com/fringeworks-js/react-primitives) に、見た目を付けたものです。プロパティは react-primitives の `Table` と同じです（`columns`・`value`・`defaultValue`・`onValueChange` と、`<table>` のプロパティ）。列の型（`TableColumn`）も react-primitives から import します。
+
+- 行の配列を `value` で受け取り、セルの値が確定したら、変わった後の配列と、変わったセル（`{ type: 'update', path: [id, key] }`）を `onValueChange` で知らせます。行は `id` で見分けます。
+- 列の `renderValue` を省略したセルは、値を文字にして表示します。`renderValue` が受け取る props（`value`・`onValueChange`・`aria-labelledby`）は、`TextInput`・`Checkbox` にそのまま渡せます。
+- `<table class="frg-table">` を描きます。行の区切りの罫線とセルの余白を付け、見出しを太字・左寄せ（`text-align: start`）にします。幅は決めていないので、クラスや `style` で指定してください。
+
+| CSS 変数                            | 既定値        | 説明                 |
+| ----------------------------------- | ------------- | -------------------- |
+| `--frg-table-paddingX`              | `0.75em`      | セルの左右の余白     |
+| `--frg-table-paddingY`              | `0.5em`       | セルの上下の余白     |
+| `--frg-table-borderColor`           | `#d5d8dd`     | 行の区切りの罫線の色 |
+| `--frg-table-color`                 | `inherit`     | 文字の色             |
+| `--frg-table-headerBorderColor`     | `#8a8f98`     | 見出しの下の罫線の色 |
+| `--frg-table-headerBackgroundColor` | `transparent` | 見出しの背景の色     |
+| `--frg-table-headerFontWeight`      | `600`         | 見出しの文字の太さ   |
+
+### `RecordFields`
+
+```tsx
+const fields: RecordField<Member>[] = [
+  { key: 'id', label: 'ID' },
+  {
+    key: 'name',
+    label: '名前',
+    renderValue: (props) => <TextInput {...props} />,
+  },
+  {
+    key: 'active',
+    label: '有効',
+    renderValue: (props) => <Checkbox {...props} />,
+  },
+];
+
+<RecordFields value={member} onValueChange={setMember} fields={fields} />;
+```
+
+[react-primitives の `RecordFields`](https://github.com/fringeworks-js/react-primitives) に、見た目を付けたものです。プロパティは react-primitives の `RecordFields` と同じです（`fields`・`value`・`defaultValue`・`onValueChange` と、`<div>` のプロパティ）。項目の型（`RecordField`）も react-primitives から import します。
+
+- レコードを `value` で受け取り、項目の値が確定したら、変わった後のレコードと、変わった項目（`{ type: 'update', path: [key] }`）を `onValueChange` で知らせます。送信（`<form>`）は持ちません。
+- 項目の `renderValue` を省略すると、値を文字にして表示します。`renderValue` が受け取る props は、`TextInput`・`Checkbox`・`RadioGroup` などにそのまま渡せます。項目の配列は、`Table` の `columns` にもそのまま渡せます。
+- `<div class="frg-recordfields">` の中に項目を縦に並べ、ラベルを値の上に置きます。ラベルは太字にします。幅は決めていないので、クラスや `style` で指定してください。
+
+| CSS 変数                             | 既定値    | 説明               |
+| ------------------------------------ | --------- | ------------------ |
+| `--frg-recordfields-gap`             | `12px`    | 項目の間隔         |
+| `--frg-recordfields-labelGap`        | `4px`     | ラベルと値の間隔   |
+| `--frg-recordfields-labelColor`      | `inherit` | ラベルの文字の色   |
+| `--frg-recordfields-labelFontWeight` | `600`     | ラベルの文字の太さ |
 
 ### 型
 

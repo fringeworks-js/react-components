@@ -5,5 +5,8 @@ import './Checkbox/styles.scss';
 import './CheckboxGroup/styles.scss';
 import './Collapsible/styles.scss';
 import './RadioGroup/styles.scss';
+import './RecordFields/styles.scss';
+import './Switch/styles.scss';
+import './Table/styles.scss';
 import './TextInput/styles.scss';
 import './styles.scss';

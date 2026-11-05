@@ -1,10 +1,9 @@
 import { mergePartProps } from '@fringeworks/react-parts-props';
-import {
-  withRadioGroup,
-  type RadioGroupProps as RadioGroupPrimitiveProps,
-} from '@fringeworks/react-primitives';
+import { withRadioGroup } from '@fringeworks/react-primitives';
 import type { ReactElement } from 'react';
-import createGroupLayout from '../_internal/_groupLayout';
+import createGroupLayout, {
+  type GroupLayoutProps,
+} from '../_internal/_groupLayout';
 import Radio from './_Radio';
 import type { RadioGroupProps } from './types';
 
@@ -27,7 +26,7 @@ export default function RadioGroup<V>({
   // 利用者が指定した className・style は、レイアウトのものに重ねる（同じプロパティは利用者の値を優先する）
   return (
     <RadioGroupBase
-      {...mergePartProps<RadioGroupPrimitiveProps<V>>(
+      {...mergePartProps<Omit<RadioGroupProps<V>, keyof GroupLayoutProps>>(
         {
           className: `frg-radiogroup ${layout.className}`,
           style: layout.style,

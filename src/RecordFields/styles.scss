@@ -1,0 +1,24 @@
+// RecordFields の見た目
+// 詳細度を 0 にするため、セレクターは :where() で包む
+// 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+// 幅は決めない（利用者がクラスや style で決める）
+// 値の部品の中に別の RecordFields を置いても影響しないよう、項目とラベルは子の結合子でたどる
+
+// 項目を縦に並べる
+:where(.frg-recordfields) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frg-recordfields-gap, 12px);
+}
+
+// 項目の中は、ラベルを値の上に置く
+:where(.frg-recordfields > div) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--frg-recordfields-labelGap, 4px);
+}
+
+:where(.frg-recordfields > div > div:first-child) {
+  color: var(--frg-recordfields-labelColor, inherit);
+  font-weight: var(--frg-recordfields-labelFontWeight, 600);
+}

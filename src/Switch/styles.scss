@@ -1,0 +1,73 @@
+// Switch の見た目
+// 詳細度を 0 にするため、セレクターは :where() で包む
+// 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+
+$width: var(--frg-switch-width, 2em);
+$height: var(--frg-switch-height, 1.125em);
+$checked-color: var(--frg-switch-checkedColor, #2f6fde);
+
+:where(.frg-switch) {
+  // スイッチと文字を横に並べ、縦の中央をそろえる
+  display: inline-flex;
+  align-items: center;
+  gap: var(--frg-switch-gap, 6px);
+  cursor: pointer;
+  // 続けて押したときに、ラベルの文字が選択されないようにする
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+:where(.frg-switch[data-disabled]) {
+  cursor: not-allowed;
+  opacity: var(--frg-switch-disabledOpacity, 0.5);
+}
+
+:where(.frg-switch-input) {
+  // ブラウザーの標準の見た目を消し、溝を背景の色、つまみを背景の画像（円のグラデーション）で描く
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  box-sizing: border-box;
+  width: $width;
+  height: $height;
+  // ブラウザーごとに違う既定の余白をなくす
+  margin: 0;
+  // 枠線はつまみの位置をずらさないよう、box-shadow で描く
+  border: 0;
+  border-radius: $height;
+  box-shadow: inset 0 0 0 1px var(--frg-switch-borderColor, transparent);
+  background-color: var(--frg-switch-trackColor, #b8bdc6);
+  // つまみは高さと同じ大きさの正方形に描いた円。左右の端に寄せて、オン・オフを表す
+  background-image: radial-gradient(
+    circle closest-side,
+    var(--frg-switch-thumbColor, #fff) 75%,
+    transparent calc(75% + 1px)
+  );
+  background-repeat: no-repeat;
+  background-size: $height $height;
+  background-position: left center;
+  cursor: inherit;
+  transition:
+    background-position 0.15s,
+    background-color 0.15s;
+}
+
+:where(.frg-switch-input:checked) {
+  background-color: $checked-color;
+  background-position: right center;
+}
+
+:where(.frg-switch-input[aria-invalid='true']) {
+  box-shadow: inset 0 0 0 2px var(--frg-switch-invalidColor, #d93025);
+}
+
+:where(.frg-switch-input:focus-visible) {
+  outline: 2px solid var(--frg-switch-focusColor, #2f6fde);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.frg-switch-input) {
+    transition: none;
+  }
+}

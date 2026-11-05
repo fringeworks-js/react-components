@@ -16,9 +16,14 @@ export default function Checkbox(props: CheckboxProps) {
       {...mergePartProps<CheckboxProps>(
         {
           className: 'frg-checkbox',
-          'data-disabled': props.disabled || undefined,
-          'data-invalid': props.invalid || undefined,
-          partsProps: { input: { className: 'frg-checkbox-input' } },
+          partsProps: {
+            // 主要素は <input> なので、<label> の属性は partsProps.label で付ける
+            label: {
+              'data-disabled': props.disabled || undefined,
+              'data-invalid': props.invalid || undefined,
+            },
+            input: { className: 'frg-checkbox-input' },
+          },
         },
         props,
       )}
