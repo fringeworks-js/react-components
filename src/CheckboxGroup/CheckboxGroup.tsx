@@ -1,13 +1,11 @@
 import { mergePartProps } from '@fringeworks/react-parts-props';
-import {
-  withCheckboxGroup,
-  type CheckboxProps,
-} from '@fringeworks/react-primitives';
+import { withCheckboxGroup } from '@fringeworks/react-primitives';
+import clsx from 'clsx';
 import type { ReactElement } from 'react';
 import createGroupLayout, {
   type GroupLayoutProps,
 } from '../_internal/_groupLayout';
-import Checkbox from '../Checkbox';
+import Checkbox, { type CheckboxProps } from '../Checkbox';
 import type { CheckboxGroupProps } from './types';
 
 /**
@@ -45,7 +43,7 @@ export default function CheckboxGroup<V>({
     <CheckboxGroupBase
       {...mergePartProps<Omit<CheckboxGroupProps<V>, keyof GroupLayoutProps>>(
         {
-          className: `frg-checkboxgroup ${layout.className}`,
+          className: clsx('frg-checkboxgroup', layout.className),
           style: layout.style,
         },
         rest,

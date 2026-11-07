@@ -138,9 +138,12 @@ export const CustomizedWithCssVariables: Story = {
       {...args}
       style={
         {
-          '--frg-checkbox-size': '18px',
-          '--frg-checkbox-checkedColor': '#b5476b',
-          '--frg-checkbox-borderColor': '#b5476b',
+          '--frg-checkbox-indicator-size': '18px',
+          '--frg-checkbox-indicator-backgroundColor-checked': '#b5476b',
+          '--frg-checkbox-indicator-backgroundColor-indeterminate': '#b5476b',
+          '--frg-checkbox-indicator-borderColor': '#b5476b',
+          '--frg-checkbox-indicator-borderColor-checked': '#b5476b',
+          '--frg-checkbox-indicator-borderColor-indeterminate': '#b5476b',
         } as CSSProperties
       }
     />

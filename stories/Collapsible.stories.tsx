@@ -73,9 +73,9 @@ export const States: Story = {
         summary="CSS 変数で調整"
         style={
           {
-            '--frg-collapsible-markerColor': '#2f6fde',
-            '--frg-collapsible-gap': '10px',
-            '--frg-collapsible-contentGap': '4px',
+            '--frg-collapsible-indicator-color': '#2f6fde',
+            '--frg-collapsible-summary-gap': '10px',
+            '--frg-collapsible-gap': '4px',
           } as CSSProperties
         }
       />

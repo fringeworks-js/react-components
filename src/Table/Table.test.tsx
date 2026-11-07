@@ -42,4 +42,21 @@ describe('Table', () => {
       { type: 'update', path: ['1', 'name'] },
     );
   });
+
+  it('design の値を、<table> の CSS 変数にする', () => {
+    render(
+      <Table
+        value={[]}
+        columns={columns}
+        design={{ headerCell: { fontWeight: 700 }, cell: { paddingX: 4 } }}
+      />,
+    );
+    const table = screen.getByRole('table');
+    expect(
+      table.style.getPropertyValue('--frg-table-headerCell-fontWeight'),
+    ).toBe('700');
+    expect(table.style.getPropertyValue('--frg-table-cell-paddingX')).toBe(
+      '4px',
+    );
+  });
 });

@@ -1,4 +1,3 @@
-import { withCheckboxGroup } from '@fringeworks/react-primitives';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, type CSSProperties } from 'react';
 import { Switch } from '../src';
@@ -65,39 +64,9 @@ export const CustomStyle: Story = {
   args: {
     defaultValue: true,
     style: {
-      '--frg-switch-width': '2.75em',
-      '--frg-switch-height': '1.5em',
-      '--frg-switch-checkedColor': '#0a7d4f',
+      '--frg-switch-indicator-width': '2.75em',
+      '--frg-switch-indicator-height': '1.5em',
+      '--frg-switch-indicator-backgroundColor-checked': '#0a7d4f',
     } as CSSProperties,
-  },
-};
-
-// react-primitives の withCheckboxGroup に、見た目を付けた Switch を組み込む
-const SwitchGroup = withCheckboxGroup({ Checkbox: Switch });
-
-/**
- * react-primitives の `withCheckboxGroup` に `Switch` を組み込み、スイッチを並べたグループにする。
- * `Switch` の口の props は `CheckboxSlotProps` と合うので、そのまま組み込める
- */
-export const InGroup: Story = {
-  render: function Render() {
-    const [value, setValue] = useState<string[]>(['mail']);
-    return (
-      <div style={{ display: 'grid', gap: 8, justifyItems: 'start' }}>
-        <SwitchGroup
-          aria-label="通知"
-          style={{ display: 'grid', gap: 8 }}
-          options={[
-            { value: 'mail', label: 'メール' },
-            { value: 'push', label: 'プッシュ通知' },
-          ]}
-          value={value}
-          onValueChange={setValue}
-          showSelectAll
-          selectAllLabel="すべて"
-        />
-        <span>value: {JSON.stringify(value)}</span>
-      </div>
-    );
   },
 };

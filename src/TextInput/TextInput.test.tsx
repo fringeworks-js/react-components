@@ -20,4 +20,19 @@ describe('TextInput', () => {
 
     expect(onValueChange).toHaveBeenCalledExactlyOnceWith('a');
   });
+
+  it('design の値を、<input> の CSS 変数にする（プレースホルダーは placeholder）', () => {
+    render(
+      <TextInput
+        design={{ placeholder: { color: 'gray' }, borderRadius: 0 }}
+      />,
+    );
+    const input = screen.getByRole('textbox');
+    expect(
+      input.style.getPropertyValue('--frg-textinput-placeholder-color'),
+    ).toBe('gray');
+    expect(input.style.getPropertyValue('--frg-textinput-borderRadius')).toBe(
+      '0px',
+    );
+  });
 });

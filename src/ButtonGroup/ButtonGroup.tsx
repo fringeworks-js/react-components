@@ -1,5 +1,6 @@
 import { mergePartProps } from '@fringeworks/react-parts-props';
 import { withButtonGroup } from '@fringeworks/react-primitives';
+import clsx from 'clsx';
 import type { ReactElement } from 'react';
 import createGroupLayout, {
   type GroupLayoutProps,
@@ -33,7 +34,7 @@ export default function ButtonGroup<V>({
     <ButtonGroupBase
       {...mergePartProps<Omit<ButtonGroupProps<V>, keyof GroupLayoutProps>>(
         {
-          className: `frg-buttongroup ${layout.className}`,
+          className: clsx('frg-buttongroup', layout.className),
           style: layout.style,
         },
         rest,

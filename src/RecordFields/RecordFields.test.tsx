@@ -48,4 +48,21 @@ describe('RecordFields', () => {
       { type: 'update', path: ['name'] },
     );
   });
+
+  it('design の値を、ルートの <div> の CSS 変数にする', () => {
+    const { container } = render(
+      <RecordFields
+        value={{ id: '1', name: '山田' }}
+        fields={fields}
+        design={{ field: { gap: 2 }, label: { color: 'gray' } }}
+      />,
+    );
+    const root = container.firstElementChild as HTMLElement;
+    expect(root.style.getPropertyValue('--frg-recordfields-field-gap')).toBe(
+      '2px',
+    );
+    expect(root.style.getPropertyValue('--frg-recordfields-label-color')).toBe(
+      'gray',
+    );
+  });
 });

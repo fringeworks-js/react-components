@@ -1,19 +1,18 @@
 // Checkbox の見た目
 // 詳細度を 0 にするため、セレクターは :where() で包む
 // 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+// 変数の名前は design の値と同じ（--frg-checkbox[-<部分>]-<プロパティ>[-<状態>]）。
+// 状態が重なったときは、後に書いたものが勝つ（focus → checked → indeterminate → invalid → disabled の順）
 
-// チェックの印（白。印の色は背景画像のため CSS 変数で変えられない）
-$mark-check: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8.5l2.5 2.5L12 5.5'/%3e%3c/svg%3e");
-// 不確定の印
-$mark-indeterminate: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
-
-$checked-color: var(--frg-checkbox-checkedColor, #2f6fde);
+$accent: #2f6fde;
 
 :where(.frg-checkbox) {
-  // チェックボックスと文字を横に並べ、縦の中央をそろえる
+  // 印と文字を横に並べ、縦の中央をそろえる
   display: inline-flex;
   align-items: center;
   gap: var(--frg-checkbox-gap, 6px);
+  color: var(--frg-checkbox-color, inherit);
+  opacity: var(--frg-checkbox-opacity, 1);
   cursor: pointer;
   // 続けて押したときに、ラベルの文字が選択されないようにする
   -webkit-user-select: none;
@@ -22,47 +21,68 @@ $checked-color: var(--frg-checkbox-checkedColor, #2f6fde);
 
 :where(.frg-checkbox[data-disabled]) {
   cursor: not-allowed;
-  opacity: var(--frg-checkbox-disabledOpacity, 0.5);
+  opacity: var(--frg-checkbox-opacity-disabled, 0.5);
 }
 
+// <input> は視覚的に隠す（キーボード操作・フォーカス・支援技術への伝わり方は標準のまま）
+// <label> が <input> と印を包むので、印を押しても切り替わる
 :where(.frg-checkbox-input) {
-  // ブラウザーの標準の見た目を消し、CSS で描く
-  -webkit-appearance: none;
-  appearance: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:where(.frg-checkbox-indicator) {
+  display: inline-flex;
   flex: none;
   box-sizing: border-box;
-  width: var(--frg-checkbox-size, 1em);
-  height: var(--frg-checkbox-size, 1em);
-  // ブラウザーごとに違う既定の余白をなくす
-  margin: 0;
-  border: 1px solid var(--frg-checkbox-borderColor, #8a8f98);
-  border-radius: var(--frg-checkbox-radius, 0.25em);
-  background-color: var(--frg-checkbox-backgroundColor, #fff);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  cursor: inherit;
+  width: var(--frg-checkbox-indicator-size, 1em);
+  height: var(--frg-checkbox-indicator-size, 1em);
+  border: 1px solid var(--frg-checkbox-indicator-borderColor, #8a8f98);
+  border-radius: var(--frg-checkbox-indicator-borderRadius, 0.25em);
+  background-color: var(--frg-checkbox-indicator-backgroundColor, #fff);
+  // 印（SVG の currentColor）の色
+  color: var(--frg-checkbox-indicator-color, #fff);
 }
 
-:where(.frg-checkbox-input:checked, .frg-checkbox-input:indeterminate) {
-  border-color: $checked-color;
-  background-color: $checked-color;
+:where(.frg-checkbox-indicator) > svg {
+  width: 100%;
+  height: 100%;
 }
 
-:where(.frg-checkbox-input:checked) {
-  background-image: $mark-check;
+:where(.frg-checkbox-input:focus-visible + .frg-checkbox-indicator) {
+  outline: 2px solid var(--frg-checkbox-indicator-outlineColor-focus, $accent);
+  outline-offset: 2px;
+}
+
+:where(.frg-checkbox-indicator[data-checked]) {
+  border-color: var(--frg-checkbox-indicator-borderColor-checked, $accent);
+  background-color: var(
+    --frg-checkbox-indicator-backgroundColor-checked,
+    $accent
+  );
+  color: var(--frg-checkbox-indicator-color-checked, #fff);
 }
 
 // 不確定はチェックより優先する（すべて選ぶで、一部だけ選ばれているとき）
-:where(.frg-checkbox-input:indeterminate) {
-  background-image: $mark-indeterminate;
+:where(.frg-checkbox-indicator[data-indeterminate]) {
+  border-color: var(
+    --frg-checkbox-indicator-borderColor-indeterminate,
+    $accent
+  );
+  background-color: var(
+    --frg-checkbox-indicator-backgroundColor-indeterminate,
+    $accent
+  );
+  color: var(--frg-checkbox-indicator-color-indeterminate, #fff);
 }
 
-:where(.frg-checkbox-input[aria-invalid='true']) {
-  border-color: var(--frg-checkbox-invalidColor, #d93025);
-}
-
-:where(.frg-checkbox-input:focus-visible) {
-  outline: 2px solid var(--frg-checkbox-focusColor, #2f6fde);
-  outline-offset: 2px;
+:where(.frg-checkbox-indicator[data-invalid]) {
+  border-color: var(--frg-checkbox-indicator-borderColor-invalid, #d93025);
 }

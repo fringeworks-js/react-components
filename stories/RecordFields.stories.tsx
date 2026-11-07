@@ -134,9 +134,9 @@ export const CustomStyle: Story = {
       style={
         {
           '--frg-recordfields-gap': '20px',
-          '--frg-recordfields-labelGap': '6px',
-          '--frg-recordfields-labelColor': '#0a7d4f',
-          '--frg-recordfields-labelFontWeight': '400',
+          '--frg-recordfields-field-gap': '6px',
+          '--frg-recordfields-label-color': '#0a7d4f',
+          '--frg-recordfields-label-fontWeight': '400',
         } as CSSProperties
       }
     />

@@ -13,7 +13,7 @@
 ) {
   margin-inline-start: var(
     --frg-checkboxgroup-indent,
-    calc(var(--frg-checkbox-size, 1em) + var(--frg-checkbox-gap, 6px))
+    calc(var(--frg-checkbox-indicator-size, 1em) + var(--frg-checkbox-gap, 6px))
   );
 }
 

@@ -122,9 +122,10 @@ export const CustomizedWithCssVariables: Story = {
       {...args}
       style={
         {
-          '--frg-radio-size': '18px',
-          '--frg-radio-checkedColor': '#0a7d4f',
-          '--frg-radio-borderColor': '#0a7d4f',
+          '--frg-radio-indicator-size': '18px',
+          '--frg-radio-indicator-backgroundColor-checked': '#0a7d4f',
+          '--frg-radio-indicator-borderColor': '#0a7d4f',
+          '--frg-radio-indicator-borderColor-checked': '#0a7d4f',
         } as CSSProperties
       }
     />

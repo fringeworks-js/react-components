@@ -23,4 +23,16 @@ describe('Button', () => {
 
     expect(onMainAction).toHaveBeenCalledExactlyOnceWith('save');
   });
+
+  it('design の値を、<button> の CSS 変数にする', () => {
+    render(
+      <Button design={{ backgroundColor: { hover: '#eee' }, paddingX: 20 }} />,
+    );
+    const button = screen.getByRole('button');
+    expect(
+      button.style.getPropertyValue('--frg-button-backgroundColor-hover'),
+    ).toBe('#eee');
+    expect(button.style.getPropertyValue('--frg-button-paddingX')).toBe('20px');
+    expect(button.hasAttribute('design')).toBe(false);
+  });
 });

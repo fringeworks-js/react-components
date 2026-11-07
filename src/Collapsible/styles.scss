@@ -1,13 +1,16 @@
 // Collapsible の見た目
 // 詳細度を 0 にするため、セレクターは :where() で包む
 // 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+// 変数の名前は design の値と同じ（--frg-collapsible[-<部分>]-<プロパティ>[-<状態>]）。
+// 状態が重なったときは、後に書いたものが勝つ（focus → disabled の順）
 
 :where(.frg-collapsible-summary) {
-  // ブラウザーごとに違う三角の印を消し、CSS で描いた印に置き換える
+  // ブラウザーごとに違う三角の印を消し、印の要素（frg-collapsible-indicator）で描く
   display: flex;
   align-items: center;
-  gap: var(--frg-collapsible-gap, 6px);
+  gap: var(--frg-collapsible-summary-gap, 6px);
   list-style: none;
+  opacity: var(--frg-collapsible-summary-opacity, 1);
   cursor: pointer;
   // 続けて押したときに、見出しの文字が選択されないようにする
   -webkit-user-select: none;
@@ -19,40 +22,40 @@
 }
 
 // 印（›）。開くと下を向く
-:where(.frg-collapsible-summary)::before {
-  content: '';
+:where(.frg-collapsible-indicator) {
   flex: none;
   box-sizing: border-box;
   width: 0.45em;
   height: 0.45em;
   margin-inline: 0.15em 0.1em;
-  border-right: 2px solid var(--frg-collapsible-markerColor, currentColor);
-  border-bottom: 2px solid var(--frg-collapsible-markerColor, currentColor);
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  color: var(--frg-collapsible-indicator-color, currentColor);
   transform: rotate(-45deg);
   transition: transform 0.15s;
 }
 
-:where(.frg-collapsible[open] > .frg-collapsible-summary)::before {
+:where(.frg-collapsible-indicator[data-open]) {
   transform: rotate(45deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :where(.frg-collapsible-summary)::before {
+  :where(.frg-collapsible-indicator) {
     transition: none;
   }
 }
 
-// 開いたとき、見出しと中身の間を空ける
+// 開いたとき、見出しと中身の間を空ける（<details> を flex にできるかがブラウザーで違うので、gap ではなく margin で空ける）
 :where(.frg-collapsible[open] > .frg-collapsible-summary) {
-  margin-bottom: var(--frg-collapsible-contentGap, 8px);
+  margin-bottom: var(--frg-collapsible-gap, 8px);
 }
 
 :where(.frg-collapsible-summary:focus-visible) {
-  outline: 2px solid var(--frg-collapsible-focusColor, #2f6fde);
+  outline: 2px solid var(--frg-collapsible-summary-outlineColor-focus, #2f6fde);
   outline-offset: 2px;
 }
 
 :where(.frg-collapsible-summary[aria-disabled='true']) {
   cursor: not-allowed;
-  opacity: var(--frg-collapsible-disabledOpacity, 0.5);
+  opacity: var(--frg-collapsible-summary-opacity-disabled, 0.5);
 }

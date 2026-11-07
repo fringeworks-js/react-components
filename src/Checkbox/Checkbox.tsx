@@ -1,21 +1,35 @@
+import { createDesignStyle } from '@fringeworks/react-contract';
 import { mergePartProps } from '@fringeworks/react-parts-props';
-import {
-  Checkbox as CheckboxPrimitive,
-  type CheckboxProps,
-} from '@fringeworks/react-primitives';
+import { withCheckbox } from '@fringeworks/react-primitives';
+import type { ReactElement } from 'react';
+import CheckboxIndicator from './_CheckboxIndicator';
+import { checkboxDesignDefinition } from './constants';
+import type { CheckboxProps } from './types';
+
+const CheckboxBase = withCheckbox({ Indicator: CheckboxIndicator });
 
 /**
  * 見た目を付けたチェックボックス
  *
- * react-primitives の `Checkbox` に、`frg-checkbox` のクラスと状態の属性（`data-disabled`・`data-invalid`）を付ける。
+ * react-primitives の `withCheckbox` に、見た目を付けた印（`Indicator`）を組み込み、`frg-checkbox` のクラスと
+ * 状態の属性（`data-disabled`・`data-invalid`）を付ける。`<input>` は視覚的に隠し、印で状態を見せる。
+ * `design` の値は、ルートの `<label>` の `style` に CSS 変数として設定する。
  * 見た目は `styles.css`（または `checkbox.css`）を読み込むと付く。
  */
-export default function Checkbox(props: CheckboxProps) {
+export default function Checkbox({
+  design,
+  ...props
+}: CheckboxProps): ReactElement {
   return (
-    <CheckboxPrimitive
-      {...mergePartProps<CheckboxProps>(
+    <CheckboxBase
+      {...mergePartProps<Omit<CheckboxProps, 'design'>>(
         {
           className: 'frg-checkbox',
+          style: createDesignStyle(
+            'frg-checkbox',
+            checkboxDesignDefinition,
+            design,
+          ),
           partsProps: {
             // 主要素は <input> なので、<label> の属性は partsProps.label で付ける
             label: {
@@ -30,3 +44,6 @@ export default function Checkbox(props: CheckboxProps) {
     />
   );
 }
+
+// withDesign（react-contract）が、design を重ねるときに読む
+Checkbox.designDefinition = checkboxDesignDefinition;

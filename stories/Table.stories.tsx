@@ -101,10 +101,11 @@ export const CustomStyle: Story = {
       columns={columns}
       style={
         {
-          '--frg-table-paddingX': '1em',
-          '--frg-table-borderColor': '#e3e6ea',
-          '--frg-table-headerBorderColor': '#0a7d4f',
-          '--frg-table-headerBackgroundColor': '#eef7f2',
+          '--frg-table-headerCell-paddingX': '1em',
+          '--frg-table-cell-paddingX': '1em',
+          '--frg-table-cell-borderColor': '#e3e6ea',
+          '--frg-table-headerCell-borderColor': '#0a7d4f',
+          '--frg-table-headerCell-backgroundColor': '#eef7f2',
         } as CSSProperties
       }
     />

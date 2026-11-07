@@ -1,6 +1,7 @@
 // Table の見た目
 // 詳細度を 0 にするため、セレクターは :where() で包む
 // 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+// 変数の名前は design の値と同じ（--frg-table[-<部分>]-<プロパティ>[-<状態>]）
 // 幅は決めない（利用者がクラスや style で決める）
 // セルの中に別の表を置いても影響しないよう、行とセルは子の結合子でたどる
 
@@ -12,14 +13,20 @@
 }
 
 :where(.frg-table > thead > tr > th, .frg-table > tbody > tr > td) {
-  padding: var(--frg-table-paddingY, 0.5em) var(--frg-table-paddingX, 0.75em);
-  border-bottom: 1px solid var(--frg-table-borderColor, #d5d8dd);
   text-align: start;
   vertical-align: middle;
 }
 
 :where(.frg-table > thead > tr > th) {
-  border-bottom-color: var(--frg-table-headerBorderColor, #8a8f98);
-  background-color: var(--frg-table-headerBackgroundColor, transparent);
-  font-weight: var(--frg-table-headerFontWeight, 600);
+  padding: var(--frg-table-headerCell-paddingY, 0.5em)
+    var(--frg-table-headerCell-paddingX, 0.75em);
+  border-bottom: 1px solid var(--frg-table-headerCell-borderColor, #8a8f98);
+  background-color: var(--frg-table-headerCell-backgroundColor, transparent);
+  font-weight: var(--frg-table-headerCell-fontWeight, 600);
+}
+
+:where(.frg-table > tbody > tr > td) {
+  padding: var(--frg-table-cell-paddingY, 0.5em)
+    var(--frg-table-cell-paddingX, 0.75em);
+  border-bottom: 1px solid var(--frg-table-cell-borderColor, #d5d8dd);
 }

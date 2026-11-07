@@ -1,6 +1,7 @@
 // Button の見た目
 // 詳細度を 0 にするため、セレクターは :where() で包む
 // 変数は要素で宣言せず、使う場所で既定値を書く（入れ子にしても外側の値を消さない）
+// 変数の名前は design の値と同じ（--frg-button[-<部分>]-<プロパティ>[-<状態>]）
 
 :where(.frg-button) {
   display: inline-flex;
@@ -13,9 +14,10 @@
   padding: var(--frg-button-paddingY, 0.375em)
     var(--frg-button-paddingX, 0.875em);
   border: 1px solid var(--frg-button-borderColor, #8a8f98);
-  border-radius: var(--frg-button-radius, 0.375em);
+  border-radius: var(--frg-button-borderRadius, 0.375em);
   background-color: var(--frg-button-backgroundColor, #fff);
   color: var(--frg-button-color, inherit);
+  opacity: var(--frg-button-opacity, 1);
   font: inherit;
   line-height: 1.2;
   cursor: pointer;
@@ -33,11 +35,11 @@
 }
 
 :where(.frg-button:focus-visible) {
-  outline: 2px solid var(--frg-button-focusColor, #2f6fde);
+  outline: 2px solid var(--frg-button-outlineColor-focus, #2f6fde);
   outline-offset: 2px;
 }
 
 :where(.frg-button:disabled) {
   cursor: not-allowed;
-  opacity: var(--frg-button-disabledOpacity, 0.5);
+  opacity: var(--frg-button-opacity-disabled, 0.5);
 }

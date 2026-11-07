@@ -59,4 +59,37 @@ describe('RadioGroup', () => {
 
     expect(onValueChange).toHaveBeenCalledExactlyOnceWith('s');
   });
+
+  it('ラジオボタンの直後に印を描き、選ぶと data-checked を付ける', () => {
+    render(<RadioGroup options={options} />);
+    const [s] = screen.getAllByRole('radio');
+    const indicator = s!.nextElementSibling!;
+    expect(indicator.className).toBe('frg-radio-indicator');
+    expect(indicator.getAttribute('aria-hidden')).toBe('true');
+    fireEvent.click(s!);
+    expect(
+      screen
+        .getAllByRole('radio')[0]!
+        .nextElementSibling!.hasAttribute('data-checked'),
+    ).toBe(true);
+  });
+
+  it('partsProps.radio.design を、ラジオボタンの CSS 変数にする', () => {
+    render(
+      <RadioGroup
+        options={options}
+        partsProps={{
+          radio: {
+            design: { indicator: { backgroundColor: { checked: 'red' } } },
+          },
+        }}
+      />,
+    );
+    const label = screen.getAllByRole('radio')[0]!.closest('label')!;
+    expect(
+      label.style.getPropertyValue(
+        '--frg-radio-indicator-backgroundColor-checked',
+      ),
+    ).toBe('red');
+  });
 });

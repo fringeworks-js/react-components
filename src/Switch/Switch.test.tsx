@@ -26,4 +26,34 @@ describe('Switch', () => {
     fireEvent.click(screen.getByRole('switch'));
     expect(onValueChange).toHaveBeenCalledExactlyOnceWith(false);
   });
+
+  it('<input> の直後に溝を描き、中につまみを置く。オンにすると data-checked を付ける', () => {
+    render(<Switch />);
+    const indicator = screen.getByRole('switch').nextElementSibling!;
+    expect(indicator.className).toBe('frg-switch-indicator');
+    expect(indicator.firstElementChild?.className).toBe('frg-switch-thumb');
+    fireEvent.click(screen.getByRole('switch'));
+    expect(
+      screen
+        .getByRole('switch')
+        .nextElementSibling!.hasAttribute('data-checked'),
+    ).toBe(true);
+  });
+
+  it('design の値を、<label> の CSS 変数にする（つまみは thumb）', () => {
+    render(
+      <Switch
+        design={{ indicator: { width: 40 }, thumb: { backgroundColor: 'red' } }}
+      />,
+    );
+    const label = screen.getByRole('switch').parentElement!;
+    expect(label.style.getPropertyValue('--frg-switch-indicator-width')).toBe(
+      '40px',
+    );
+    expect(
+      label.style.getPropertyValue(
+        '--frg-switch-thumb-backgroundColor-checked',
+      ),
+    ).toBe('red');
+  });
 });

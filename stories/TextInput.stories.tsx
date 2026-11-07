@@ -88,9 +88,9 @@ export const States: Story = {
         style={
           {
             width: 280,
-            '--frg-textinput-radius': '999px',
+            '--frg-textinput-borderRadius': '999px',
             '--frg-textinput-paddingX': '1em',
-            '--frg-textinput-focusColor': '#0a7d4f',
+            '--frg-textinput-outlineColor-focus': '#0a7d4f',
           } as CSSProperties
         }
       />
