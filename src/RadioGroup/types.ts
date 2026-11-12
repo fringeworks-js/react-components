@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type {
   RadioGroupProps as RadioGroupPrimitiveProps,
   RadioProps as RadioPrimitiveProps,
@@ -30,3 +30,8 @@ export type RadioGroupProps<V> = RadioGroupPrimitiveProps<
   { Radio: typeof Radio }
 > &
   GroupLayoutProps;
+
+/**
+ * createRadioDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateRadioDesignOptions = CreateDesignOptions;

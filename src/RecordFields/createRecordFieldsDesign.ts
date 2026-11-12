@@ -1,12 +1,12 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import {
   recordFieldsDesignDefinition,
   recordFieldsDesignTemplate,
 } from './constants';
-import type { RecordFieldsDesign } from './types';
+import type {
+  CreateRecordFieldsDesignOptions,
+  RecordFieldsDesign,
+} from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、RecordFieldsのデザインの値を作る
@@ -21,7 +21,7 @@ import type { RecordFieldsDesign } from './types';
  * @returns RecordFieldsに渡すデザインの値
  */
 export default function createRecordFieldsDesign(
-  options: CreateDesignOptions,
+  options: CreateRecordFieldsDesignOptions,
 ): RecordFieldsDesign {
   return createDesign(
     recordFieldsDesignDefinition,

@@ -1,12 +1,9 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import {
   textInputDesignDefinition,
   textInputDesignTemplate,
 } from './constants';
-import type { TextInputDesign } from './types';
+import type { CreateTextInputDesignOptions, TextInputDesign } from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、TextInputのデザインの値を作る
@@ -21,7 +18,7 @@ import type { TextInputDesign } from './types';
  * @returns TextInputに渡すデザインの値
  */
 export default function createTextInputDesign(
-  options: CreateDesignOptions,
+  options: CreateTextInputDesignOptions,
 ): TextInputDesign {
   return createDesign(
     textInputDesignDefinition,

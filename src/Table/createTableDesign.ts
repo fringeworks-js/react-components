@@ -1,9 +1,6 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import { tableDesignDefinition, tableDesignTemplate } from './constants';
-import type { TableDesign } from './types';
+import type { CreateTableDesignOptions, TableDesign } from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、Tableのデザインの値を作る
@@ -18,7 +15,7 @@ import type { TableDesign } from './types';
  * @returns Tableに渡すデザインの値
  */
 export default function createTableDesign(
-  options: CreateDesignOptions,
+  options: CreateTableDesignOptions,
 ): TableDesign {
   return createDesign(tableDesignDefinition, tableDesignTemplate, options);
 }

@@ -8,3 +8,4 @@ export * from './RecordFields';
 export * from './Switch';
 export * from './Table';
 export * from './TextInput';
+export type * from './types';

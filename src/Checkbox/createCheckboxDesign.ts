@@ -1,9 +1,6 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import { checkboxDesignDefinition, checkboxDesignTemplate } from './constants';
-import type { CheckboxDesign } from './types';
+import type { CheckboxDesign, CreateCheckboxDesignOptions } from './types';
 
 /**
  * メインの色などから、Checkbox のデザインの値を作る
@@ -18,7 +15,7 @@ import type { CheckboxDesign } from './types';
  * @returns Checkbox に渡すデザインの値
  */
 export default function createCheckboxDesign(
-  options: CreateDesignOptions,
+  options: CreateCheckboxDesignOptions,
 ): CheckboxDesign {
   return createDesign(
     checkboxDesignDefinition,

@@ -8,8 +8,6 @@
 
 ```bash
 npm install @fringeworks/react-components
-# or
-pnpm add @fringeworks/react-components
 ```
 
 Supports React 18 and 19.
@@ -123,10 +121,10 @@ export const AppButton = withDesign(Button, createButtonDesign(brand));
 ```
 
 ```ts
-create<ComponentName>Design(options: CreateDesignOptions): <ComponentName>Design
+create<ComponentName>Design(options: Create<ComponentName>DesignOptions): <ComponentName>Design
 ```
 
-The inputs (`CreateDesignOptions`) are the same as for [`createDesign` of react-contract](https://github.com/fringeworks-js/react-contract): `primaryColor`, `primaryContrastColor`, `errorColor`, `neutralColor`, `radius`, and `scaling`. All are optional. Each function calls `createDesign` with the component's default template (the constant `<componentName>DesignTemplate`). To use a different template, pass your own template to `createDesign`.
+The inputs (`Create<ComponentName>DesignOptions`, an alias of `CreateDesignOptions` of react-contract) are the same as for [`createDesign` of react-contract](https://github.com/fringeworks-js/react-contract): `primaryColor`, `primaryContrastColor`, `errorColor`, `neutralColor`, `radius`, and `scaling`. All are optional. Each function calls `createDesign` with the component's default template (the constant `<componentName>DesignTemplate`). To use a different template, pass your own template to `createDesign`.
 
 | Function                   | How the inputs are used                                                                                                                                                                                                                                                                                                                                                                                               |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -452,27 +450,58 @@ The design values you can pass with `design` (the CSS variable is `--frg-recordf
 
 ### Types
 
-| Type                    | Description                                                             |
-| ----------------------- | ----------------------------------------------------------------------- |
-| `CheckboxGroupProps<V>` | The props of `CheckboxGroup`                                            |
-| `RadioGroupProps<V>`    | The props of `RadioGroup`                                               |
-| `ButtonGroupProps<V>`   | The props of `ButtonGroup`                                              |
-| `CheckboxProps`         | The props of `Checkbox`                                                 |
-| `SwitchProps`           | The props of `Switch`                                                   |
-| `ButtonProps<V>`        | The props of `Button`                                                   |
-| `TextInputProps`        | The props of `TextInput`                                                |
-| `CollapsibleProps`      | The props of `Collapsible`                                              |
-| `TableProps<R>`         | The props of `Table`                                                    |
-| `RecordFieldsProps<T>`  | The props of `RecordFields`                                             |
-| `RadioProps`            | The props of the radio buttons inside `RadioGroup` (`partsProps.radio`) |
-| `CheckboxDesign`        | The value of `design` of `Checkbox`                                     |
-| `SwitchDesign`          | The value of `design` of `Switch`                                       |
-| `ButtonDesign`          | The value of `design` of `Button`                                       |
-| `TextInputDesign`       | The value of `design` of `TextInput`                                    |
-| `CollapsibleDesign`     | The value of `design` of `Collapsible`                                  |
-| `TableDesign`           | The value of `design` of `Table`                                        |
-| `RecordFieldsDesign`    | The value of `design` of `RecordFields`                                 |
-| `RadioDesign`           | The value of `design` of the radio buttons inside `RadioGroup`          |
+| Type                                 | Description                                                                                                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `CheckboxGroupProps<V>`              | The props of `CheckboxGroup`                                                                                                   |
+| `RadioGroupProps<V>`                 | The props of `RadioGroup`                                                                                                      |
+| `ButtonGroupProps<V>`                | The props of `ButtonGroup`                                                                                                     |
+| `CheckboxProps`                      | The props of `Checkbox`                                                                                                        |
+| `SwitchProps`                        | The props of `Switch`                                                                                                          |
+| `ButtonProps<V>`                     | The props of `Button`                                                                                                          |
+| `TextInputProps`                     | The props of `TextInput`                                                                                                       |
+| `CollapsibleProps`                   | The props of `Collapsible`                                                                                                     |
+| `TableProps<R>`                      | The props of `Table`                                                                                                           |
+| `RecordFieldsProps<T>`               | The props of `RecordFields`                                                                                                    |
+| `RadioProps`                         | The props of the radio buttons inside `RadioGroup` (`partsProps.radio`)                                                        |
+| `CheckboxDesign`                     | The value of `design` of `Checkbox`                                                                                            |
+| `SwitchDesign`                       | The value of `design` of `Switch`                                                                                              |
+| `ButtonDesign`                       | The value of `design` of `Button`                                                                                              |
+| `TextInputDesign`                    | The value of `design` of `TextInput`                                                                                           |
+| `CollapsibleDesign`                  | The value of `design` of `Collapsible`                                                                                         |
+| `TableDesign`                        | The value of `design` of `Table`                                                                                               |
+| `RecordFieldsDesign`                 | The value of `design` of `RecordFields`                                                                                        |
+| `RadioDesign`                        | The value of `design` of the radio buttons inside `RadioGroup`                                                                 |
+| `Create<ComponentName>DesignOptions` | Options of `create<ComponentName>Design` (the same as `CreateDesignOptions` of react-contract)                                 |
+| `DesignDefinition`                   | The design definition of a component (the type of `<componentName>DesignDefinition`) (a type of `@fringeworks/react-contract`) |
+| `DesignPartDefinition`               | The properties the root or a part takes and the states that apply (a type of `@fringeworks/react-contract`)                    |
+| `DesignTemplate<D, O>`               | A design template (the type of `<componentName>DesignTemplate`) (a type of `@fringeworks/react-contract`)                      |
+| `DesignColorSpec<K>`                 | A spec that makes a color (data that can be JSON) (a type of `@fringeworks/react-contract`)                                    |
+| `DesignColorFunction<O>`             | A function that takes the inputs and returns a color (written in a template) (a type of `@fringeworks/react-contract`)         |
+| `DesignLengthSpec<K>`                | A spec that makes a length (data that can be JSON) (a type of `@fringeworks/react-contract`)                                   |
+| `DesignLengthFunction<O>`            | A function that takes the inputs and returns a length (written in a template) (a type of `@fringeworks/react-contract`)        |
+| `DesignValue<T, S>`                  | A design value (one value or an object per state) (a type of `@fringeworks/react-contract`)                                    |
+| `DesignState`                        | The states that design values are split by (a type of `@fringeworks/react-contract`)                                           |
+| `DesignPropertyValues`               | Design properties and the types of values they take (a type of `@fringeworks/react-contract`)                                  |
+| `Option<V>`                          | An option (`value`, `label?`, `disabled?`) (a type of `@fringeworks/react-contract`)                                           |
+| `DisplayOption<V>`                   | An option to show (the argument of the functions in `partsProps`) (a type of `@fringeworks/react-contract`)                    |
+| `UnlistedPlacement`                  | Where to show unlisted values (`'hidden'`, `'start'`, `'end'`) (a type of `@fringeworks/react-contract`)                       |
+| `TableColumn<R>`                     | A column of `Table` (a type of `@fringeworks/react-primitives`)                                                                |
+| `TableAlign`                         | The alignment of a column (a type of `@fringeworks/react-primitives`)                                                          |
+| `TableRowId`                         | The id of a row (a type of `@fringeworks/react-primitives`)                                                                    |
+| `TableRowContext<R>`                 | Information about a row that the functions in `partsProps` and `renderRow` receive (a type of `@fringeworks/react-primitives`) |
+| `TableCellContext<R, V>`             | Information about a cell that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)                |
+| `TableHeaderCellContext<R>`          | Information about a header cell that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)         |
+| `TableCellElementProps`              | Props passed to the cell elements of a column (a type of `@fringeworks/react-primitives`)                                      |
+| `TableHeaderCellProps`               | Props passed to the header cell element of a column (a type of `@fringeworks/react-primitives`)                                |
+| `TableRenderRowProps<P>`             | Props that `renderRow` receives (a type of `@fringeworks/react-primitives`)                                                    |
+| `TableValueChangeDetails`            | Details of `onValueChange` of `Table` (a type of `@fringeworks/react-primitives`)                                              |
+| `RecordField<T>`                     | A field of `RecordFields` (a type of `@fringeworks/react-primitives`)                                                          |
+| `RecordFieldContext<T>`              | Information about a field that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)               |
+| `FieldValueContext<T>`               | Information that the functions rendering the value of a field or column receive (a type of `@fringeworks/react-primitives`)    |
+| `FieldValueProps<V>`                 | Props that the component rendering the value of a field or column receives (a type of `@fringeworks/react-primitives`)         |
+| `RecordFieldsValueChangeDetails`     | Details of `onValueChange` of `RecordFields` (a type of `@fringeworks/react-primitives`)                                       |
+| `TextInputType`                      | The values of `type` of `TextInput` (a type of `@fringeworks/react-primitives`)                                                |
+| `ValueChangeTiming`                  | When `TextInput` commits the value (`'commit'`, `'input'`) (a type of `@fringeworks/react-primitives`)                         |
 
 The design definitions (the keys each component accepts and their states) are exported as the constants `checkboxDesignDefinition`, `switchDesignDefinition`, `buttonDesignDefinition`, `textInputDesignDefinition`, `collapsibleDesignDefinition`, `tableDesignDefinition`, `recordFieldsDesignDefinition`, `radioDesignDefinition` (`DesignDefinition` of react-contract). The default templates used by `create<ComponentName>Design` are exported as the constants `checkboxDesignTemplate`, `switchDesignTemplate`, `buttonDesignTemplate`, `textInputDesignTemplate`, `collapsibleDesignTemplate`, `tableDesignTemplate`, `recordFieldsDesignTemplate`, `radioDesignTemplate` (`DesignTemplate` of react-contract).
 

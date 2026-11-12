@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type {
   TableProps as TablePrimitiveProps,
   TableRowId,
@@ -20,3 +20,24 @@ export type TableProps<R extends { id: TableRowId }> =
      */
     design?: TableDesign;
   };
+
+/**
+ * createTableDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateTableDesignOptions = CreateDesignOptions;
+
+// 列の型（`columns`）と、その中の型、行の id、行の描き方（`renderRow`）、値の変化の付帯情報、
+// `partsProps` の関数が受け取る行・セルの情報。
+// 利用者が `@fringeworks/react-primitives` を入れずに使えるよう、ここから export する
+export type {
+  TableAlign,
+  TableCellContext,
+  TableCellElementProps,
+  TableColumn,
+  TableHeaderCellContext,
+  TableHeaderCellProps,
+  TableRenderRowProps,
+  TableRowContext,
+  TableRowId,
+  TableValueChangeDetails,
+} from '@fringeworks/react-primitives';

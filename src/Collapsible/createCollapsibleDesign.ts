@@ -1,12 +1,12 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import {
   collapsibleDesignDefinition,
   collapsibleDesignTemplate,
 } from './constants';
-import type { CollapsibleDesign } from './types';
+import type {
+  CollapsibleDesign,
+  CreateCollapsibleDesignOptions,
+} from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、Collapsibleのデザインの値を作る
@@ -21,7 +21,7 @@ import type { CollapsibleDesign } from './types';
  * @returns Collapsibleに渡すデザインの値
  */
 export default function createCollapsibleDesign(
-  options: CreateDesignOptions,
+  options: CreateCollapsibleDesignOptions,
 ): CollapsibleDesign {
   return createDesign(
     collapsibleDesignDefinition,

@@ -8,8 +8,6 @@
 
 ```bash
 npm install @fringeworks/react-components
-# または
-pnpm add @fringeworks/react-components
 ```
 
 React 18 と 19 に対応しています。
@@ -123,10 +121,10 @@ export const AppButton = withDesign(Button, createButtonDesign(brand));
 ```
 
 ```ts
-create<名前>Design(options: CreateDesignOptions): <名前>Design
+create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 ```
 
-入力（`CreateDesignOptions`）は [react-contract の `createDesign`](https://github.com/fringeworks-js/react-contract) と同じで、`primaryColor`・`primaryContrastColor`・`errorColor`・`neutralColor`・`radius`・`scaling` です。どれも省略できます。各関数は、部品の既定の割り当て（定数 `<名前>DesignTemplate`）で `createDesign` を呼びます。割り当てを変えたいときは、`createDesign` に自分の割り当てを渡します。
+入力（`Create<名前>DesignOptions`。react-contract の `CreateDesignOptions` の別名）は [react-contract の `createDesign`](https://github.com/fringeworks-js/react-contract) と同じで、`primaryColor`・`primaryContrastColor`・`errorColor`・`neutralColor`・`radius`・`scaling` です。どれも省略できます。各関数は、部品の既定の割り当て（定数 `<名前>DesignTemplate`）で `createDesign` を呼びます。割り当てを変えたいときは、`createDesign` に自分の割り当てを渡します。
 
 | 関数                       | 入力の使い道                                                                                                                                                                                                                                                                                        |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -452,27 +450,58 @@ const fields: RecordField<Member>[] = [
 
 ### 型
 
-| 型                      | 説明                                                              |
-| ----------------------- | ----------------------------------------------------------------- |
-| `CheckboxGroupProps<V>` | `CheckboxGroup` のプロパティ                                      |
-| `RadioGroupProps<V>`    | `RadioGroup` のプロパティ                                         |
-| `ButtonGroupProps<V>`   | `ButtonGroup` のプロパティ                                        |
-| `CheckboxProps`         | `Checkbox` のプロパティ                                           |
-| `SwitchProps`           | `Switch` のプロパティ                                             |
-| `ButtonProps<V>`        | `Button` のプロパティ                                             |
-| `TextInputProps`        | `TextInput` のプロパティ                                          |
-| `CollapsibleProps`      | `Collapsible` のプロパティ                                        |
-| `TableProps<R>`         | `Table` のプロパティ                                              |
-| `RecordFieldsProps<T>`  | `RecordFields` のプロパティ                                       |
-| `RadioProps`            | `RadioGroup` の中のラジオボタンのプロパティ（`partsProps.radio`） |
-| `CheckboxDesign`        | `Checkbox` の `design` の値                                       |
-| `SwitchDesign`          | `Switch` の `design` の値                                         |
-| `ButtonDesign`          | `Button` の `design` の値                                         |
-| `TextInputDesign`       | `TextInput` の `design` の値                                      |
-| `CollapsibleDesign`     | `Collapsible` の `design` の値                                    |
-| `TableDesign`           | `Table` の `design` の値                                          |
-| `RecordFieldsDesign`    | `RecordFields` の `design` の値                                   |
-| `RadioDesign`           | `RadioGroup` の中のラジオボタンの `design` の値                   |
+| 型                               | 説明                                                                                                  |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `CheckboxGroupProps<V>`          | `CheckboxGroup` のプロパティ                                                                          |
+| `RadioGroupProps<V>`             | `RadioGroup` のプロパティ                                                                             |
+| `ButtonGroupProps<V>`            | `ButtonGroup` のプロパティ                                                                            |
+| `CheckboxProps`                  | `Checkbox` のプロパティ                                                                               |
+| `SwitchProps`                    | `Switch` のプロパティ                                                                                 |
+| `ButtonProps<V>`                 | `Button` のプロパティ                                                                                 |
+| `TextInputProps`                 | `TextInput` のプロパティ                                                                              |
+| `CollapsibleProps`               | `Collapsible` のプロパティ                                                                            |
+| `TableProps<R>`                  | `Table` のプロパティ                                                                                  |
+| `RecordFieldsProps<T>`           | `RecordFields` のプロパティ                                                                           |
+| `RadioProps`                     | `RadioGroup` の中のラジオボタンのプロパティ（`partsProps.radio`）                                     |
+| `CheckboxDesign`                 | `Checkbox` の `design` の値                                                                           |
+| `SwitchDesign`                   | `Switch` の `design` の値                                                                             |
+| `ButtonDesign`                   | `Button` の `design` の値                                                                             |
+| `TextInputDesign`                | `TextInput` の `design` の値                                                                          |
+| `CollapsibleDesign`              | `Collapsible` の `design` の値                                                                        |
+| `TableDesign`                    | `Table` の `design` の値                                                                              |
+| `RecordFieldsDesign`             | `RecordFields` の `design` の値                                                                       |
+| `RadioDesign`                    | `RadioGroup` の中のラジオボタンの `design` の値                                                       |
+| `Create<名前>DesignOptions`      | `create<名前>Design` のオプション（react-contract の `CreateDesignOptions` と同じ）                   |
+| `DesignDefinition`               | 部品のデザインの定義（`<名前>DesignDefinition` の型）（`@fringeworks/react-contract` の型）           |
+| `DesignPartDefinition`           | ルートまたは部分の、受け付けるプロパティと効く状態（`@fringeworks/react-contract` の型）              |
+| `DesignTemplate<D, O>`           | デザインの割り当て（`<名前>DesignTemplate` の型）（`@fringeworks/react-contract` の型）               |
+| `DesignColorSpec<K>`             | 色を作る指定（JSON にできるデータ）（`@fringeworks/react-contract` の型）                             |
+| `DesignColorFunction<O>`         | 入力を受け取って色を返す関数（割り当ての値に書く）（`@fringeworks/react-contract` の型）              |
+| `DesignLengthSpec<K>`            | 長さを作る指定（JSON にできるデータ）（`@fringeworks/react-contract` の型）                           |
+| `DesignLengthFunction<O>`        | 入力を受け取って長さを返す関数（割り当ての値に書く）（`@fringeworks/react-contract` の型）            |
+| `DesignValue<T, S>`              | デザインの値（1つの値か、状態ごとのオブジェクト）（`@fringeworks/react-contract` の型）               |
+| `DesignState`                    | デザインの値を分ける状態（`@fringeworks/react-contract` の型）                                        |
+| `DesignPropertyValues`           | デザインのプロパティと、受け付ける値の型（`@fringeworks/react-contract` の型）                        |
+| `Option<V>`                      | 選択肢（`value`・`label?`・`disabled?`）（`@fringeworks/react-contract` の型）                        |
+| `DisplayOption<V>`               | 表示する選択肢（`partsProps` の関数の引数）（`@fringeworks/react-contract` の型）                     |
+| `UnlistedPlacement`              | 選択肢外の値を表示する位置（`'hidden'`・`'start'`・`'end'`）（`@fringeworks/react-contract` の型）    |
+| `TableColumn<R>`                 | `Table` の列（`@fringeworks/react-primitives` の型）                                                  |
+| `TableAlign`                     | 列の揃え方（`@fringeworks/react-primitives` の型）                                                    |
+| `TableRowId`                     | 行の id（`@fringeworks/react-primitives` の型）                                                       |
+| `TableRowContext<R>`             | `partsProps` の関数・`renderRow` が受け取る行の情報（`@fringeworks/react-primitives` の型）           |
+| `TableCellContext<R, V>`         | `partsProps` の関数が受け取るセルの情報（`@fringeworks/react-primitives` の型）                       |
+| `TableHeaderCellContext<R>`      | `partsProps` の関数が受け取る見出しのセルの情報（`@fringeworks/react-primitives` の型）               |
+| `TableCellElementProps`          | 列ごとにセルの要素に渡す props（`@fringeworks/react-primitives` の型）                                |
+| `TableHeaderCellProps`           | 列ごとに見出しのセルの要素に渡す props（`@fringeworks/react-primitives` の型）                        |
+| `TableRenderRowProps<P>`         | `renderRow` が受け取る props（`@fringeworks/react-primitives` の型）                                  |
+| `TableValueChangeDetails`        | `Table` の `onValueChange` の付帯情報（`@fringeworks/react-primitives` の型）                         |
+| `RecordField<T>`                 | `RecordFields` の項目（`@fringeworks/react-primitives` の型）                                         |
+| `RecordFieldContext<T>`          | `partsProps` の関数が受け取る項目の情報（`@fringeworks/react-primitives` の型）                       |
+| `FieldValueContext<T>`           | 項目・列の値を描く関数が受け取る情報（`@fringeworks/react-primitives` の型）                          |
+| `FieldValueProps<V>`             | 項目・列の値を描く部品が受け取る props（`@fringeworks/react-primitives` の型）                        |
+| `RecordFieldsValueChangeDetails` | `RecordFields` の `onValueChange` の付帯情報（`@fringeworks/react-primitives` の型）                  |
+| `TextInputType`                  | `TextInput` の `type` の値（`@fringeworks/react-primitives` の型）                                    |
+| `ValueChangeTiming`              | `TextInput` の値を確定するタイミング（`'commit'`・`'input'`）（`@fringeworks/react-primitives` の型） |
 
 デザインの定義（受け付けるキーと、効く状態）は、定数 `checkboxDesignDefinition`・`switchDesignDefinition`・`buttonDesignDefinition`・`textInputDesignDefinition`・`collapsibleDesignDefinition`・`tableDesignDefinition`・`recordFieldsDesignDefinition`・`radioDesignDefinition` として export しています（react-contract の `DesignDefinition`）。`create<名前>Design` が使う既定の割り当ては、定数 `checkboxDesignTemplate`・`switchDesignTemplate`・`buttonDesignTemplate`・`textInputDesignTemplate`・`collapsibleDesignTemplate`・`tableDesignTemplate`・`recordFieldsDesignTemplate`・`radioDesignTemplate` として export しています（react-contract の `DesignTemplate`）。
 

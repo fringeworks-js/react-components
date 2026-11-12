@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type { CheckboxProps as CheckboxPrimitiveProps } from '@fringeworks/react-primitives';
 import type CheckboxIndicator from './_CheckboxIndicator';
 import type { checkboxDesignDefinition } from './constants';
@@ -19,3 +19,8 @@ export type CheckboxProps = CheckboxPrimitiveProps<{
    */
   design?: CheckboxDesign;
 };
+
+/**
+ * createCheckboxDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateCheckboxDesignOptions = CreateDesignOptions;

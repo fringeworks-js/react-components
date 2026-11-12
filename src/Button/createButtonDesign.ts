@@ -1,9 +1,6 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import { buttonDesignDefinition, buttonDesignTemplate } from './constants';
-import type { ButtonDesign } from './types';
+import type { ButtonDesign, CreateButtonDesignOptions } from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、Buttonのデザインの値を作る
@@ -18,7 +15,7 @@ import type { ButtonDesign } from './types';
  * @returns Buttonに渡すデザインの値
  */
 export default function createButtonDesign(
-  options: CreateDesignOptions,
+  options: CreateButtonDesignOptions,
 ): ButtonDesign {
   return createDesign(buttonDesignDefinition, buttonDesignTemplate, options);
 }

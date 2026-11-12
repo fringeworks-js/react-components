@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type { CollapsibleProps as CollapsiblePrimitiveProps } from '@fringeworks/react-primitives';
 import type CollapsibleIndicator from './_CollapsibleIndicator';
 import type { collapsibleDesignDefinition } from './constants';
@@ -19,3 +19,8 @@ export type CollapsibleProps = CollapsiblePrimitiveProps<{
    */
   design?: CollapsibleDesign;
 };
+
+/**
+ * createCollapsibleDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateCollapsibleDesignOptions = CreateDesignOptions;

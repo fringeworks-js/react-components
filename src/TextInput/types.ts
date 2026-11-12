@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type { TextInputProps as TextInputPrimitiveProps } from '@fringeworks/react-primitives';
 import type { textInputDesignDefinition } from './constants';
 
@@ -16,3 +16,15 @@ export type TextInputProps = TextInputPrimitiveProps & {
    */
   design?: TextInputDesign;
 };
+
+/**
+ * createTextInputDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateTextInputDesignOptions = CreateDesignOptions;
+
+// `type` の値の型と、値を確定するタイミングの型（`valueChangeTiming`）。
+// 利用者が `@fringeworks/react-primitives` を入れずに使えるよう、ここから export する
+export type {
+  TextInputType,
+  ValueChangeTiming,
+} from '@fringeworks/react-primitives';

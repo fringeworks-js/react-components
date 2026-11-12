@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type { SwitchProps as SwitchPrimitiveProps } from '@fringeworks/react-primitives';
 import type SwitchIndicator from './_SwitchIndicator';
 import type { switchDesignDefinition } from './constants';
@@ -19,3 +19,8 @@ export type SwitchProps = SwitchPrimitiveProps<{
    */
   design?: SwitchDesign;
 };
+
+/**
+ * createSwitchDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateSwitchDesignOptions = CreateDesignOptions;

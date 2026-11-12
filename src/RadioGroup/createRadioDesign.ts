@@ -1,9 +1,6 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import { radioDesignDefinition, radioDesignTemplate } from './constants';
-import type { RadioDesign } from './types';
+import type { CreateRadioDesignOptions, RadioDesign } from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、RadioGroup の中のラジオボタンのデザインの値を作る
@@ -18,7 +15,7 @@ import type { RadioDesign } from './types';
  * @returns RadioGroup の中のラジオボタンに渡すデザインの値
  */
 export default function createRadioDesign(
-  options: CreateDesignOptions,
+  options: CreateRadioDesignOptions,
 ): RadioDesign {
   return createDesign(radioDesignDefinition, radioDesignTemplate, options);
 }

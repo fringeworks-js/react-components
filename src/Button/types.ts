@@ -1,4 +1,4 @@
-import type { Design } from '@fringeworks/react-contract';
+import type { CreateDesignOptions, Design } from '@fringeworks/react-contract';
 import type { ButtonProps as ButtonPrimitiveProps } from '@fringeworks/react-primitives';
 import type { buttonDesignDefinition } from './constants';
 
@@ -16,3 +16,8 @@ export type ButtonProps<V = undefined> = ButtonPrimitiveProps<V> & {
    */
   design?: ButtonDesign;
 };
+
+/**
+ * createButtonDesign のオプション（react-contract の `CreateDesignOptions` と同じ）
+ */
+export type CreateButtonDesignOptions = CreateDesignOptions;

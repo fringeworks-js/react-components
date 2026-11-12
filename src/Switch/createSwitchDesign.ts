@@ -1,9 +1,6 @@
-import {
-  createDesign,
-  type CreateDesignOptions,
-} from '@fringeworks/react-contract';
+import { createDesign } from '@fringeworks/react-contract';
 import { switchDesignDefinition, switchDesignTemplate } from './constants';
-import type { SwitchDesign } from './types';
+import type { CreateSwitchDesignOptions, SwitchDesign } from './types';
 
 /**
  * メインの色・角の丸み・詰め具合などから、Switchのデザインの値を作る
@@ -18,7 +15,7 @@ import type { SwitchDesign } from './types';
  * @returns Switchに渡すデザインの値
  */
 export default function createSwitchDesign(
-  options: CreateDesignOptions,
+  options: CreateSwitchDesignOptions,
 ): SwitchDesign {
   return createDesign(switchDesignDefinition, switchDesignTemplate, options);
 }
