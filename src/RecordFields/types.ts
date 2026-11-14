@@ -16,6 +16,10 @@ export type RecordFieldsProps<T extends object> =
      * デザインの値。ルートの `<div>` の `style` に、CSS 変数として設定する（`style` で同じ変数を指定したら、そちらを優先する）
      */
     design?: RecordFieldsDesign;
+    /**
+     * アプリで共通のデザインの値（`withDesign` が渡す）。`design` で指定していないプロパティ・状態を補う
+     */
+    fallbackDesign?: RecordFieldsDesign;
   };
 
 /**

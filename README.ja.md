@@ -91,7 +91,7 @@ import '@fringeworks/react-components/textinput.css';
 - 長さの数値は px です。どの値にも `var(--…)` を渡せるので、テーマの仕組みの CSS 変数につなげます。
 - `design` は、ルートの要素の `style` に CSS 変数として設定します。`style` で同じ変数を指定したら、そちらを優先します。同じ要素にクラスで設定した変数より強いので、デザイナーが CSS で調整する変数と重ならないようにしてください。
 
-アプリで共通のデザインは、[`@fringeworks/react-contract`](https://github.com/fringeworks-js/react-contract) の `withDesign` で、アプリで1回だけ決められます。使う場所の `design` は、`withDesign` で決めた値より優先します。どの部品も、静的なプロパティ `designDefinition` にデザインの定義を持っています。
+アプリで共通のデザインは、[`@fringeworks/react-contract`](https://github.com/fringeworks-js/react-contract) の `withDesign` で、アプリで1回だけ決められます。`withDesign` で決めた値は、部品の `fallbackDesign` プロパティで渡ります（`fallbackDesign` に直接渡すこともできます）。使う場所の `design` は、`fallbackDesign` の値より優先します。どの部品も、静的なプロパティ `designDefinition` にデザインの定義を持っています。
 
 ```tsx
 import { withDesign } from '@fringeworks/react-contract';

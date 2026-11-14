@@ -18,17 +18,19 @@ const CheckboxBase = withCheckbox({ Indicator: CheckboxIndicator });
  */
 export default function Checkbox({
   design,
+  fallbackDesign,
   ...props
 }: CheckboxProps): ReactElement {
   return (
     <CheckboxBase
-      {...mergePartProps<Omit<CheckboxProps, 'design'>>(
+      {...mergePartProps<Omit<CheckboxProps, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-checkbox',
           style: createDesignStyle(
             'frg-checkbox',
             checkboxDesignDefinition,
             design,
+            fallbackDesign,
           ),
           partsProps: {
             // 主要素は <input> なので、<label> の属性は partsProps.label で付ける

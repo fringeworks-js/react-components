@@ -14,17 +14,19 @@ import type { ButtonProps } from './types';
  */
 export default function Button<V = undefined>({
   design,
+  fallbackDesign,
   ...props
 }: ButtonProps<V>): ReactElement {
   return (
     <ButtonPrimitive
-      {...mergePartProps<Omit<ButtonProps<V>, 'design'>>(
+      {...mergePartProps<Omit<ButtonProps<V>, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-button',
           style: createDesignStyle(
             'frg-button',
             buttonDesignDefinition,
             design,
+            fallbackDesign,
           ),
         },
         props,

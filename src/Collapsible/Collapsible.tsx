@@ -17,17 +17,19 @@ const CollapsibleBase = withCollapsible({ Indicator: CollapsibleIndicator });
  */
 export default function Collapsible({
   design,
+  fallbackDesign,
   ...props
 }: CollapsibleProps): ReactElement {
   return (
     <CollapsibleBase
-      {...mergePartProps<Omit<CollapsibleProps, 'design'>>(
+      {...mergePartProps<Omit<CollapsibleProps, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-collapsible',
           style: createDesignStyle(
             'frg-collapsible',
             collapsibleDesignDefinition,
             design,
+            fallbackDesign,
           ),
           partsProps: { summary: { className: 'frg-collapsible-summary' } },
         },

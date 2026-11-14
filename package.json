@@ -1,6 +1,6 @@
 {
   "name": "@fringeworks/react-components",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "private": true,
   "description": "A collection of React components some will find handy.",
   "keywords": [
@@ -47,9 +47,9 @@
     "tidy": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json}\" --config ./prettier.tidy.config.ts"
   },
   "dependencies": {
-    "@fringeworks/react-contract": "^0.2.1",
+    "@fringeworks/react-contract": "^0.3.0",
     "@fringeworks/react-parts-props": "^0.9.1",
-    "@fringeworks/react-primitives": "^0.2.1",
+    "@fringeworks/react-primitives": "^0.2.2",
     "@fringeworks/style-layouts": "^0.10.2",
     "clsx": "^2.1.1"
   },

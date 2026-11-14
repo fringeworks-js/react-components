@@ -15,6 +15,10 @@ export type TextInputProps = TextInputPrimitiveProps & {
    * デザインの値。`<input>` の `style` に、CSS 変数として設定する（`style` で同じ変数を指定したら、そちらを優先する）
    */
   design?: TextInputDesign;
+  /**
+   * アプリで共通のデザインの値（`withDesign` が渡す）。`design` で指定していないプロパティ・状態を補う
+   */
+  fallbackDesign?: TextInputDesign;
 };
 
 /**

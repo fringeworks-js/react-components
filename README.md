@@ -91,7 +91,7 @@ The look is neutral, not tied to a design system, and can be adjusted in these w
 - Length numbers are px. Every value accepts `var(--…)`, so you can connect it to the CSS variables of a theme system.
 - `design` is set as CSS variables on the `style` of the root element. A variable you set with `style` wins. It is stronger than variables set with a class on the same element, so avoid overlapping with variables designers adjust in CSS.
 
-Design shared across your app can be set once with `withDesign` of [`@fringeworks/react-contract`](https://github.com/fringeworks-js/react-contract). The `design` given where a component is used wins over the values set with `withDesign`. Every component has its design definition in a static `designDefinition` property.
+Design shared across your app can be set once with `withDesign` of [`@fringeworks/react-contract`](https://github.com/fringeworks-js/react-contract). The values set with `withDesign` are passed in the component's `fallbackDesign` prop (you can also pass `fallbackDesign` directly). The `design` given where a component is used wins over the `fallbackDesign` values. Every component has its design definition in a static `designDefinition` property.
 
 ```tsx
 import { withDesign } from '@fringeworks/react-contract';

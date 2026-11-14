@@ -14,17 +14,19 @@ import type { TextInputProps } from './types';
  */
 export default function TextInput({
   design,
+  fallbackDesign,
   ...props
 }: TextInputProps): ReactElement {
   return (
     <TextInputPrimitive
-      {...mergePartProps<Omit<TextInputProps, 'design'>>(
+      {...mergePartProps<Omit<TextInputProps, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-textinput',
           style: createDesignStyle(
             'frg-textinput',
             textInputDesignDefinition,
             design,
+            fallbackDesign,
           ),
         },
         props,

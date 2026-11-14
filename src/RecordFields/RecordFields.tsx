@@ -14,17 +14,21 @@ import type { RecordFieldsProps } from './types';
  */
 export default function RecordFields<T extends object>({
   design,
+  fallbackDesign,
   ...props
 }: RecordFieldsProps<T>): ReactElement {
   return (
     <RecordFieldsPrimitive
-      {...mergePartProps<Omit<RecordFieldsProps<T>, 'design'>>(
+      {...mergePartProps<
+        Omit<RecordFieldsProps<T>, 'design' | 'fallbackDesign'>
+      >(
         {
           className: 'frg-recordfields',
           style: createDesignStyle(
             'frg-recordfields',
             recordFieldsDesignDefinition,
             design,
+            fallbackDesign,
           ),
         },
         props,

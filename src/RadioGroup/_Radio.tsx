@@ -15,13 +15,22 @@ const RadioBase = withRadio({ Indicator: RadioIndicator });
  * 状態の属性（`data-disabled`・`data-invalid`）を付ける。`<input>` は視覚的に隠し、印で状態を見せる。
  * `design` の値は、ルートの `<label>` の `style` に CSS 変数として設定する。
  */
-export default function Radio({ design, ...props }: RadioProps): ReactElement {
+export default function Radio({
+  design,
+  fallbackDesign,
+  ...props
+}: RadioProps): ReactElement {
   return (
     <RadioBase
-      {...mergePartProps<Omit<RadioProps, 'design'>>(
+      {...mergePartProps<Omit<RadioProps, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-radio',
-          style: createDesignStyle('frg-radio', radioDesignDefinition, design),
+          style: createDesignStyle(
+            'frg-radio',
+            radioDesignDefinition,
+            design,
+            fallbackDesign,
+          ),
           partsProps: {
             // 主要素は <input> なので、<label> の属性は partsProps.label で付ける
             label: {

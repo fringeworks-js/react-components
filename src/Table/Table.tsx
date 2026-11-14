@@ -17,14 +17,20 @@ import type { TableProps } from './types';
  */
 export default function Table<R extends { id: TableRowId }>({
   design,
+  fallbackDesign,
   ...props
 }: TableProps<R>): ReactElement {
   return (
     <TablePrimitive
-      {...mergePartProps<Omit<TableProps<R>, 'design'>>(
+      {...mergePartProps<Omit<TableProps<R>, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-table',
-          style: createDesignStyle('frg-table', tableDesignDefinition, design),
+          style: createDesignStyle(
+            'frg-table',
+            tableDesignDefinition,
+            design,
+            fallbackDesign,
+          ),
         },
         props,
       )}

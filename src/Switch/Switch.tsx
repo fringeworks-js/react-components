@@ -18,17 +18,19 @@ const SwitchBase = withSwitch({ Indicator: SwitchIndicator });
  */
 export default function Switch({
   design,
+  fallbackDesign,
   ...props
 }: SwitchProps): ReactElement {
   return (
     <SwitchBase
-      {...mergePartProps<Omit<SwitchProps, 'design'>>(
+      {...mergePartProps<Omit<SwitchProps, 'design' | 'fallbackDesign'>>(
         {
           className: 'frg-switch',
           style: createDesignStyle(
             'frg-switch',
             switchDesignDefinition,
             design,
+            fallbackDesign,
           ),
           partsProps: {
             // 主要素は <input> なので、<label> の属性は partsProps.label で付ける

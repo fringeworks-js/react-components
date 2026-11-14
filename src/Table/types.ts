@@ -19,6 +19,10 @@ export type TableProps<R extends { id: TableRowId }> =
      * デザインの値。`<table>` の `style` に、CSS 変数として設定する（`style` で同じ変数を指定したら、そちらを優先する）
      */
     design?: TableDesign;
+    /**
+     * アプリで共通のデザインの値（`withDesign` が渡す）。`design` で指定していないプロパティ・状態を補う
+     */
+    fallbackDesign?: TableDesign;
   };
 
 /**

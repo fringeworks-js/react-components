@@ -23,6 +23,10 @@ export type RadioProps = RadioPrimitiveProps<{
    * デザインの値。ルートの `<label>` の `style` に、CSS 変数として設定する
    */
   design?: RadioDesign;
+  /**
+   * アプリで共通のデザインの値（`withDesign` が渡す）。`design` で指定していないプロパティ・状態を補う
+   */
+  fallbackDesign?: RadioDesign;
 };
 
 export type RadioGroupProps<V> = RadioGroupPrimitiveProps<
