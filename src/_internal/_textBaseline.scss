@@ -1,0 +1,16 @@
+// 中身の無い印（既定の印の箱・›）を、文字のベースラインを基準に置く
+// react-icon の .frg-icon と同じ仕組み（planning/react-icon/plan.md の IC-17）。印の真ん中を、ベースラインから
+// 文字の大きさの --frg-icon-centerY 倍（既定は 0.37）の高さに置く。並べる部品は align-items: baseline にする。
+// 印は display: inline-flex にし、最初の子の擬似要素（::before）を印のベースラインにする
+// （inline-flex の箱のベースラインは最初の子のベースライン。中身の無い擬似要素は、下の辺がベースラインになる）。
+// 擬似要素は内容の箱の真ん中に置き、上の margin で下にずらす（margin を含めた箱が真ん中に来るので、
+// margin の半分だけ下がる）。印の高さや枠の太さ（画面の解像度で丸められる）に依らない
+//
+// $offset: 印の箱（border-box）の真ん中が、内容の箱の真ん中より下にある量（上下の枠の太さが違うとき）
+@mixin align-to-text-baseline($offset: 0px) {
+  &::before {
+    content: '';
+    align-self: center;
+    margin-top: calc(2 * (var(--frg-icon-centerY, 0.37) * 1em + #{$offset}));
+  }
+}

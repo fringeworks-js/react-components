@@ -64,7 +64,7 @@ describe('RadioGroup', () => {
     render(<RadioGroup options={options} />);
     const [s] = screen.getAllByRole('radio');
     const indicator = s!.nextElementSibling!;
-    expect(indicator.className).toBe('frg-radio-indicator');
+    expect(indicator.className).toBe('frg-radioindicator frg-radio-indicator');
     expect(indicator.getAttribute('aria-hidden')).toBe('true');
     fireEvent.click(s!);
     expect(

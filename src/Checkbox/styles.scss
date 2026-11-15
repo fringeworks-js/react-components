@@ -4,12 +4,16 @@
 // 変数の名前は design の値と同じ（--frg-checkbox[-<部分>]-<プロパティ>[-<状態>]）。
 // 状態が重なったときは、後に書いたものが勝つ（focus → checked → indeterminate → invalid → disabled の順）
 
+@use '../_internal/textBaseline';
+
 $accent: #2f6fde;
 
 :where(.frg-checkbox) {
-  // 印と文字を横に並べ、縦の中央をそろえる
+  // 印と文字を横に並べる。縦の位置は、文字のベースラインを基準にそろえる（印は、ベースラインから見た文字の真ん中に来る。
+  // 行の箱の真ん中にそろえると、文字が行の箱のどこに描かれるかがフォントで違うので、フォントによってずれる）。
+  // 文字が折り返したときは、1行目にそろう
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--frg-checkbox-gap, 6px);
   color: var(--frg-checkbox-color, inherit);
   opacity: var(--frg-checkbox-opacity, 1);
@@ -38,7 +42,45 @@ $accent: #2f6fde;
   white-space: nowrap;
 }
 
+// 印の土台（既定の印にも、差し替えた印にも付く。包む部品 _createIndicatorPart が付ける）
 :where(.frg-checkbox-indicator) {
+  flex: none;
+}
+
+:where(.frg-checkbox-input:focus-visible + .frg-checkbox-indicator) {
+  outline: 2px solid var(--frg-checkbox-indicator-outlineColor-focus, $accent);
+  outline-offset: 2px;
+}
+
+// 差し替えた印（withCheckboxIndicator・withCheckboxGroupIndicator で組み込んだもの）。箱は描かず、アイコンの大きさと色だけを決める。
+// 色の既定は、選んでいないときは灰色、選んだとき・不確定のときはメインの色（既定の印の白では、白い画面で見えなくなるため）
+:where(.frg-checkbox-indicator:not(.frg-checkboxindicator)) {
+  // 大きさは、周りの文字と同じに見える大きさの何倍か（indicator.scale。react-icon の --frg-icon-scale）。
+  // indicator.size（長さ）を決めると、その大きさになる（react-icon の --frg-icon-size）。
+  // font-size は react-icon の .frg-icon と同じ式にして、CSS を読み込む順に依らないようにする（アイコンでない印にも効く）
+  --frg-icon-scale: var(--frg-checkbox-indicator-scale, 1.2);
+  --frg-icon-size: var(--frg-checkbox-indicator-size);
+  font-size: var(
+    --frg-icon-size,
+    calc(1em * var(--frg-icon-scale, 1) * var(--frg-icon-glyphScale, 1))
+  );
+  color: var(--frg-checkbox-indicator-color, #8a8f98);
+  // react-icon は名前の文字がはみ出さないよう箱を clip-path で切るが、それではフォーカスの線も切れるので外す
+  clip-path: none;
+}
+
+:where(.frg-checkbox-indicator:not(.frg-checkboxindicator)[data-checked]) {
+  color: var(--frg-checkbox-indicator-color-checked, $accent);
+}
+
+:where(
+  .frg-checkbox-indicator:not(.frg-checkboxindicator)[data-indeterminate]
+) {
+  color: var(--frg-checkbox-indicator-color-indeterminate, $accent);
+}
+
+// 既定の印（種類のクラス frg-checkboxindicator）。枠と背景で箱を描く
+:where(.frg-checkboxindicator) {
   display: inline-flex;
   flex: none;
   box-sizing: border-box;
@@ -49,19 +91,16 @@ $accent: #2f6fde;
   background-color: var(--frg-checkbox-indicator-backgroundColor, #fff);
   // 印（SVG の currentColor）の色
   color: var(--frg-checkbox-indicator-color, #fff);
+
+  @include textBaseline.align-to-text-baseline;
 }
 
-:where(.frg-checkbox-indicator) > svg {
+:where(.frg-checkboxindicator) > svg {
   width: 100%;
   height: 100%;
 }
 
-:where(.frg-checkbox-input:focus-visible + .frg-checkbox-indicator) {
-  outline: 2px solid var(--frg-checkbox-indicator-outlineColor-focus, $accent);
-  outline-offset: 2px;
-}
-
-:where(.frg-checkbox-indicator[data-checked]) {
+:where(.frg-checkboxindicator[data-checked]) {
   border-color: var(--frg-checkbox-indicator-borderColor-checked, $accent);
   background-color: var(
     --frg-checkbox-indicator-backgroundColor-checked,
@@ -71,7 +110,7 @@ $accent: #2f6fde;
 }
 
 // 不確定はチェックより優先する（すべて選ぶで、一部だけ選ばれているとき）
-:where(.frg-checkbox-indicator[data-indeterminate]) {
+:where(.frg-checkboxindicator[data-indeterminate]) {
   border-color: var(
     --frg-checkbox-indicator-borderColor-indeterminate,
     $accent
@@ -83,6 +122,6 @@ $accent: #2f6fde;
   color: var(--frg-checkbox-indicator-color-indeterminate, #fff);
 }
 
-:where(.frg-checkbox-indicator[data-invalid]) {
+:where(.frg-checkboxindicator[data-invalid]) {
   border-color: var(--frg-checkbox-indicator-borderColor-invalid, #d93025);
 }

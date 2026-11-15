@@ -1,28 +1,5 @@
-import { mergePartProps } from '@fringeworks/react-parts-props';
-import { withCheckboxGroup } from '@fringeworks/react-primitives';
-import clsx from 'clsx';
-import type { ReactElement } from 'react';
-import createGroupLayout, {
-  type GroupLayoutProps,
-} from '../_internal/_groupLayout';
-import Checkbox, { type CheckboxProps } from '../Checkbox';
-import type { CheckboxGroupProps } from './types';
-
-/**
- * すべて選ぶのチェックボックス（選択肢と見分けられるよう、クラスを足す）
- */
-function SelectAll(props: CheckboxProps) {
-  return (
-    <Checkbox
-      {...mergePartProps<CheckboxProps>(
-        { className: 'frg-checkboxgroup-selectall' },
-        props,
-      )}
-    />
-  );
-}
-
-const CheckboxGroupBase = withCheckboxGroup({ Checkbox, SelectAll });
+import Checkbox from '../Checkbox';
+import createCheckboxGroup from './_createCheckboxGroup';
 
 /**
  * 見た目を付けたチェックボックスグループ
@@ -30,24 +7,8 @@ const CheckboxGroupBase = withCheckboxGroup({ Checkbox, SelectAll });
  * react-primitives の `withCheckboxGroup` に、見た目を付けた `Checkbox` を組み込み、
  * 入れ物に `frg-checkboxgroup` のクラスと、並べ方（style-layouts の `stack`・`flow`）を付ける。
  * 見た目は `styles.css`（または `checkboxgroup.css`）を読み込むと付く。
+ * チェックボックスの印を差し替えるときは、`withCheckboxGroupIndicator` で作る。
  */
-export default function CheckboxGroup<V>({
-  direction,
-  gap,
-  ...rest
-}: CheckboxGroupProps<V>): ReactElement {
-  const layout = createGroupLayout({ direction, gap });
+const CheckboxGroup = createCheckboxGroup(Checkbox, 'CheckboxGroup');
 
-  // 利用者が指定した className・style は、レイアウトのものに重ねる（同じプロパティは利用者の値を優先する）
-  return (
-    <CheckboxGroupBase
-      {...mergePartProps<Omit<CheckboxGroupProps<V>, keyof GroupLayoutProps>>(
-        {
-          className: clsx('frg-checkboxgroup', layout.className),
-          style: layout.style,
-        },
-        rest,
-      )}
-    />
-  );
-}
+export default CheckboxGroup;

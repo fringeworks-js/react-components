@@ -1,6 +1,7 @@
+import type { IconSlotProps } from '@fringeworks/react-contract';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, type CSSProperties } from 'react';
-import { Button, ButtonGroup } from '../src';
+import { Button, ButtonGroup, withButtonIcon } from '../src';
 import '../src/styles.scss';
 
 const meta = {
@@ -100,6 +101,66 @@ export const States: Story = {
       >
         CSS 変数で塗る
       </Button>
+    </div>
+  ),
+};
+
+// 例のためのアイコンの部品（実際には react-icon とそのアダプターの部品を組み込む）
+const demoPaths = {
+  save: 'M5 3h11l3 3v15H5z M8 3v6h8V3 M8 14h8v7H8z',
+  expand: 'M6 9l6 6 6-6',
+  add: 'M12 5v14 M5 12h14',
+} as const;
+
+function DemoIcon({
+  value,
+  className,
+  ...props
+}: IconSlotProps<keyof typeof demoPaths>) {
+  return (
+    <svg
+      {...props}
+      className={className}
+      aria-hidden={props['aria-label'] ? undefined : true}
+      viewBox="0 0 24 24"
+      width="1em"
+      height="1em"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d={demoPaths[value]} />
+    </svg>
+  );
+}
+
+const IconButton = withButtonIcon(DemoIcon);
+
+/**
+ * `withButtonIcon` で作った、アイコンを置けるボタン。`icon` は中身の前、`endIcon` は後ろ。間隔は `design` の `gap`
+ */
+export const WithIcon: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <IconButton {...args} icon="save">
+        保存
+      </IconButton>
+      <IconButton {...args} endIcon="expand">
+        メニュー
+      </IconButton>
+      <IconButton {...args} icon="add" aria-label="追加">
+        {undefined}
+      </IconButton>
+      <IconButton
+        {...args}
+        icon="save"
+        design={{ gap: 2 }}
+        style={{ fontSize: 20 }}
+      >
+        大きく
+      </IconButton>
     </div>
   ),
 };

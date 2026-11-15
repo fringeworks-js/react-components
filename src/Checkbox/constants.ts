@@ -22,6 +22,7 @@ export const checkboxDesignDefinition = {
   parts: {
     indicator: {
       size: [],
+      scale: [],
       borderRadius: [],
       borderColor: ['checked', 'indeterminate', 'invalid'],
       backgroundColor: ['checked', 'indeterminate'],

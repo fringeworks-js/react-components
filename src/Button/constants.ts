@@ -25,6 +25,11 @@ export const buttonDesignDefinition = {
     opacity: ['disabled'],
     outlineColor: ['focus'],
   },
+  parts: {
+    icon: {
+      scale: [],
+    },
+  },
 } as const satisfies DesignDefinition;
 
 /**

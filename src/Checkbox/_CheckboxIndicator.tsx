@@ -11,28 +11,22 @@ type CheckboxIndicatorProps = CheckboxIndicatorSlotProps &
 /**
  * チェックボックスの印（Checkbox に組み込む。単独では公開しない）
  *
- * 状態を `data-*` の属性で付け、CSS で枠と背景を描く。印（✓・−）は SVG の `currentColor` で描くので、
+ * 枠と背景は CSS で描く（種類のクラス `frg-checkboxindicator`）。土台のクラス `frg-checkbox-indicator` と状態の `data-*` の属性は、
+ * 包む部品（`_createIndicatorPart`）が付ける。印（✓・−）は SVG の `currentColor` で描くので、
  * 印の色を CSS 変数（`indicator.color`）で変えられる。不確定はチェックより優先する。
  */
 export default function CheckboxIndicator({
   checked,
   indeterminate,
-  disabled,
-  readOnly,
-  invalid,
+  // 状態の属性は包む部品が付けるので、要素には渡さない
+  disabled: _disabled,
+  readOnly: _readOnly,
+  invalid: _invalid,
   className,
   ...rest
 }: CheckboxIndicatorProps): ReactElement {
   return (
-    <span
-      {...rest}
-      className={clsx('frg-checkbox-indicator', className)}
-      data-checked={checked || undefined}
-      data-indeterminate={indeterminate || undefined}
-      data-disabled={disabled || undefined}
-      data-readonly={readOnly || undefined}
-      data-invalid={invalid || undefined}
-    >
+    <span {...rest} className={clsx('frg-checkboxindicator', className)}>
       {(checked || indeterminate) && (
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor">
           <path

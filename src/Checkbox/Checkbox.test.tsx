@@ -48,7 +48,9 @@ describe('Checkbox', () => {
     it('<input> の直後に印を描き、状態を属性で付ける', () => {
       render(<Checkbox invalid>りんご</Checkbox>);
       const indicator = getIndicator();
-      expect(indicator.className).toBe('frg-checkbox-indicator');
+      expect(indicator.className).toBe(
+        'frg-checkboxindicator frg-checkbox-indicator',
+      );
       expect(indicator.getAttribute('aria-hidden')).toBe('true');
       expect(indicator.hasAttribute('data-checked')).toBe(false);
       expect(indicator.hasAttribute('data-invalid')).toBe(true);
@@ -74,7 +76,9 @@ describe('Checkbox', () => {
 
     it('partsProps.indicator のクラスを重ねる', () => {
       render(<Checkbox partsProps={{ indicator: { className: 'mark' } }} />);
-      expect(getIndicator().className).toBe('frg-checkbox-indicator mark');
+      expect(getIndicator().className).toBe(
+        'frg-checkboxindicator frg-checkbox-indicator mark',
+      );
     });
   });
 

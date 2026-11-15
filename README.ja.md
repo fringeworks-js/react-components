@@ -144,18 +144,23 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 
 ## API
 
-| コンポーネント  | 説明                                         |
-| --------------- | -------------------------------------------- |
-| `Checkbox`      | チェックボックス                             |
-| `Switch`        | スイッチ                                     |
-| `CheckboxGroup` | 選択肢から並べた、チェックボックスのグループ |
-| `RadioGroup`    | 選択肢から並べた、ラジオボタンのグループ     |
-| `Button`        | ボタン                                       |
-| `ButtonGroup`   | 選択肢から並べた、ボタンのグループ           |
-| `TextInput`     | テキストの入力                               |
-| `Collapsible`   | 折りたためる部品                             |
-| `Table`         | 行の配列を受け取る表                         |
-| `RecordFields`  | レコードの項目を並べる部品                   |
+| コンポーネント                          | 説明                                         |
+| --------------------------------------- | -------------------------------------------- |
+| `Checkbox`                              | チェックボックス                             |
+| `Switch`                                | スイッチ                                     |
+| `CheckboxGroup`                         | 選択肢から並べた、チェックボックスのグループ |
+| `RadioGroup`                            | 選択肢から並べた、ラジオボタンのグループ     |
+| `withCheckboxIndicator(Indicator)`      | 印を差し替えたチェックボックスを作る         |
+| `withCheckboxGroupIndicator(Indicator)` | 印を差し替えたチェックボックスグループを作る |
+| `withRadioGroupIndicator(Indicator)`    | 印を差し替えたラジオグループを作る           |
+| `withCollapsibleIndicator(Indicator)`   | 開閉の印を差し替えた折りたためる部品を作る   |
+| `Button`                                | ボタン                                       |
+| `withButtonIcon(Icon)`                  | アイコンを置けるボタンを作る                 |
+| `ButtonGroup`                           | 選択肢から並べた、ボタンのグループ           |
+| `TextInput`                             | テキストの入力                               |
+| `Collapsible`                           | 折りたためる部品                             |
+| `Table`                                 | 行の配列を受け取る表                         |
+| `RecordFields`                          | レコードの項目を並べる部品                   |
 
 ### `Checkbox`
 
@@ -167,9 +172,9 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 
 [react-primitives の `Checkbox`](https://github.com/fringeworks-js/react-primitives) に、見た目を付けたものです。プロパティは react-primitives の `Checkbox` と同じです（`value`・`defaultValue`・`onValueChange`・`disabled`・`readOnly`・`required`・`invalid`・`indeterminate`・`children`・`partsProps`）。加えて、デザインの値を `design` で受け取ります（下の表）。
 
-- `<label class="frg-checkbox">` の中に、`<input type="checkbox" class="frg-checkbox-input">`、印の `<span class="frg-checkbox-indicator">`、`children` を置きます。
+- `<label class="frg-checkbox">` の中に、`<input type="checkbox" class="frg-checkbox-input">`、印の `<span class="frg-checkboxindicator frg-checkbox-indicator">`、`children` を置きます（`frg-checkbox-indicator` はどの印にも付く土台のクラス、`frg-checkboxindicator` は既定の印のクラス）。
 - `disabled`・`invalid` のときは、`<label>` に `data-disabled`・`data-invalid` を付けます。
-- ブラウザーによる見た目の差をなくすため、`<input>` は視覚的に隠し、印（`Indicator`）でチェックの状態を描きます。キーボードでの操作やフォーカスは、標準の `<input>` のままです（フォーカスの線は印に描きます）。印は、react-primitives の `withCheckbox` の `Indicator` で、任意のコンポーネントに差し替えられます。
+- ブラウザーによる見た目の差をなくすため、`<input>` は視覚的に隠し、印（`Indicator`）でチェックの状態を描きます。キーボードでの操作やフォーカスは、標準の `<input>` のままです（フォーカスの線は印に描きます）。印は、`withCheckboxIndicator` で差し替えられます（下の「印を差し替える」）。
 
 `design` で渡せるデザインの値です（CSS 変数は `--frg-checkbox-` の後にキーを `-` でつないだもの。例: `indicator.outlineColor.focus` → `--frg-checkbox-indicator-outlineColor-focus`）。
 
@@ -179,6 +184,7 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 | `color`                        | `inherit` | 文字の色                                                                      |
 | `opacity.disabled`             | `0.5`     | `disabled` のときの不透明度                                                   |
 | `indicator.size`               | `1em`     | 印の大きさ                                                                    |
+| `indicator.scale`              | `1.2`     | 差し替えた印の大きさの倍率（下の「印を差し替える」）                          |
 | `indicator.borderRadius`       | `0.25em`  | 印の角の丸み                                                                  |
 | `indicator.borderColor`        | `#8a8f98` | 印の枠の色（`checked`・`indeterminate` は `#2f6fde`、`invalid` は `#d93025`） |
 | `indicator.backgroundColor`    | `#fff`    | 印の背景の色（`checked`・`indeterminate` は `#2f6fde`）                       |
@@ -260,7 +266,7 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 選択肢から並べた、ラジオボタンのグループです。react-primitives の `withRadioGroup` に、見た目を付けたラジオボタンを組み込んでいます。プロパティは、react-primitives の `withRadioGroup` で作ったコンポーネントのもの（`options`・`value`・`defaultValue`・`onValueChange`・`disabled`・`readOnly`・`required`・`invalid`・`unlistedPlacement`・`keepUnlisted`）に加えて、`CheckboxGroup` と同じ `direction`・`gap` を受け取ります。
 
 - `value` は選んだ値で、何も選んでいないときは `null` です。選んだものは外せません（HTML のラジオボタンと同じ）。
-- `<div role="radiogroup" class="frg-radiogroup">` の中に、`<label class="frg-radio">` を並べます。`<label>` の中は、視覚的に隠した `<input type="radio" class="frg-radio-input">`、印の `<span class="frg-radio-indicator">`、文字です。Tab キーでグループに入り、矢印キーで選べます（ブラウザーの標準の動き）。
+- `<div role="radiogroup" class="frg-radiogroup">` の中に、`<label class="frg-radio">` を並べます。`<label>` の中は、視覚的に隠した `<input type="radio" class="frg-radio-input">`、印の `<span class="frg-radioindicator frg-radio-indicator">`、文字です。印は `withRadioGroupIndicator` で差し替えられます（下の「印を差し替える」）。Tab キーでグループに入り、矢印キーで選べます（ブラウザーの標準の動き）。
 - `disabled`・`invalid` のときは、`<label>` に `data-disabled`・`data-invalid` を付けます（ラジオボタンには `aria-invalid` を付けられないため、不正の見た目は `<label>` の属性で付けます）。
 - その他のプロパティは `<div>` に渡します。
 - 選択肢外の値の扱いは、react-primitives の `useRadioGroup` を見てください。選んだ値をラベルで表示するには、react-primitives の `OptionLabel` に同じ `value`・`options`・`unlistedPlacement` を渡します。
@@ -273,10 +279,83 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 | `color`                        | `inherit` | 文字の色                                                     |
 | `opacity.disabled`             | `0.5`     | `disabled` のときの不透明度                                  |
 | `indicator.size`               | `1em`     | 印の大きさ                                                   |
+| `indicator.scale`              | `1.2`     | 差し替えた印の大きさの倍率（下の「印を差し替える」）         |
 | `indicator.borderColor`        | `#8a8f98` | 印の枠の色（`checked` は `#2f6fde`、`invalid` は `#d93025`） |
 | `indicator.backgroundColor`    | `#fff`    | 印の背景の色（`checked` は `#2f6fde`）                       |
 | `indicator.color`              | `#fff`    | 選んだときの中の点の色（`checked`）                          |
 | `indicator.outlineColor.focus` | `#2f6fde` | キーボードでフォーカスしたときの線の色                       |
+
+### 印を差し替える
+
+`withCheckboxIndicator`・`withCheckboxGroupIndicator`・`withRadioGroupIndicator`・`withCollapsibleIndicator` で、チェックボックス・ラジオボタン・折りたためる部品の印（`Indicator`）を、アイコンのフォントなどに差し替えた部品を作れます。アプリで1回作り、画面ではそのまま置きます。作った部品は、元の部品（`Checkbox`・`CheckboxGroup`・`RadioGroup`・`Collapsible`）と同じプロパティを受け取ります。
+
+```tsx
+import {
+  type CheckboxIndicatorSlotProps,
+  withCheckboxGroupIndicator,
+  withCheckboxIndicator,
+} from '@fringeworks/react-components';
+import { MaterialSymbolOutlined } from '@fringeworks/react-icon-material-symbols';
+
+// 状態からアイコンの名前を選ぶ印。受け取った className・data-* は、そのまま要素に渡す
+function CheckboxSymbol({
+  checked,
+  indeterminate,
+  disabled,
+  readOnly,
+  invalid,
+  ...props
+}: CheckboxIndicatorSlotProps) {
+  const value = indeterminate
+    ? 'indeterminate_check_box'
+    : checked
+      ? 'check_box'
+      : 'check_box_outline_blank';
+  return (
+    <MaterialSymbolOutlined
+      {...props}
+      value={value}
+      filled={checked || indeterminate}
+    />
+  );
+}
+
+export const AppCheckbox = withCheckboxIndicator(CheckboxSymbol);
+export const AppCheckboxGroup = withCheckboxGroupIndicator(CheckboxSymbol);
+```
+
+| HOC                                     | 作るもの                                                             |
+| --------------------------------------- | -------------------------------------------------------------------- |
+| `withCheckboxIndicator(Indicator)`      | 印を差し替えた `Checkbox`                                            |
+| `withCheckboxGroupIndicator(Indicator)` | 選択肢とすべて選ぶのチェックボックスの印を差し替えた `CheckboxGroup` |
+| `withRadioGroupIndicator(Indicator)`    | ラジオボタンの印を差し替えた `RadioGroup`                            |
+| `withCollapsibleIndicator(Indicator)`   | 開閉の印を差し替えた `Collapsible`                                   |
+
+- 印は、react-primitives の `CheckboxIndicatorSlotProps`・`RadioIndicatorSlotProps`（`checked`・`indeterminate`・`disabled`・`readOnly`・`invalid`・`aria-hidden`）を受け取り、状態に合わせて描く部品です。
+- 印には、状態のほかに、土台のクラス（`frg-checkbox-indicator`・`frg-radio-indicator`）と状態の属性（`data-checked`・`data-indeterminate`・`data-disabled`・`data-readonly`・`data-invalid`）を渡します。印は、受け取ったものを要素に渡してください。フォーカスの線と、状態に合わせた色は、このクラスと属性で付けます。
+- 印と文字は、文字のベースラインを基準にそろえます（`align-items: baseline`）。react-icon のアイコンは、どのフォントでも文字の真ん中に来ます（react-icon の「大きさ・位置・色」）。文字が折り返したときは、1行目にそろいます。ボタンの中のアイコンも同じです。
+- 差し替えた印には、既定の印の箱（枠・背景・角の丸み）は付きません。`design` のうち、差し替えた印に効くのは `indicator.color`（アイコンの色。既定は、選んでいないときは `#8a8f98`、選んだとき・不確定のときは `#2f6fde`）・`indicator.scale`（アイコンの大きさ。周りの文字と同じに見える大きさの何倍か。アイコンのセットの倍率（react-icon の `--frg-icon-glyphScale`）が掛かる。既定は `1.2`）・`indicator.size`（アイコンの大きさを長さで決める。決めると `indicator.scale` は使わない）・`indicator.outlineColor.focus` です。`indicator.borderColor`・`backgroundColor`・`borderRadius` は効きません。
+- 折りたためる部品の印は、`CollapsibleIndicatorSlotProps`（`open`・`disabled`・`aria-hidden`）を受け取り、土台のクラス `frg-collapsible-indicator` と状態の属性（`data-open`・`data-disabled`）を渡します。`design` の `indicator.color`・`indicator.rotate`・`indicator.scale`・`indicator.size` が効きます。既定の印のように1つのアイコンを回して開閉を表すときは、`indicator.rotate` で開いたときの角度を決めます（差し替えた印の既定は回しません。アイコンの向きはセットごとに違うため）。開いたときにアイコンを描き分ける（`keyboard_arrow_right` と `keyboard_arrow_down` を切り替えるなど）こともできます。
+
+  ```tsx
+  // 右向きのアイコンを、開いたら下に向ける
+  function ExpandSymbol({
+    open,
+    disabled,
+    ...props
+  }: CollapsibleIndicatorSlotProps) {
+    return <MaterialSymbolOutlined {...props} value="keyboard_arrow_right" />;
+  }
+
+  export const AppCollapsible = withDesign(
+    withCollapsibleIndicator(ExpandSymbol),
+    {
+      indicator: { rotate: { open: 90 } },
+    },
+  );
+  ```
+
+- `withDesign` で包めます。
 
 ### `Button`
 
@@ -294,17 +373,56 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 
 `design` で渡せるデザインの値です（CSS 変数は `--frg-button-` の後にキーを `-` でつないだもの。例: `outlineColor.focus` → `--frg-button-outlineColor-focus`）。
 
-| キー                 | 既定値    | 説明                                                    |
-| -------------------- | --------- | ------------------------------------------------------- |
-| `gap`                | `6px`     | 中に並べたもの（アイコンと文字など）の間隔              |
-| `color`              | `inherit` | 文字の色                                                |
-| `backgroundColor`    | `#fff`    | 背景の色（`hover` は `#f1f3f5`、`active` は `#e3e6ea`） |
-| `borderColor`        | `#8a8f98` | 枠の色                                                  |
-| `borderRadius`       | `0.375em` | 角の丸み                                                |
-| `paddingX`           | `0.875em` | 左右の余白                                              |
-| `paddingY`           | `0.375em` | 上下の余白                                              |
-| `opacity.disabled`   | `0.5`     | `disabled` のときの不透明度                             |
-| `outlineColor.focus` | `#2f6fde` | キーボードでフォーカスしたときの線の色                  |
+| キー                 | 既定値    | 説明                                                                                                                                                                                                 |
+| -------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gap`                | `6px`     | 中に並べたもの（アイコンと文字など）の間隔                                                                                                                                                           |
+| `color`              | `inherit` | 文字の色                                                                                                                                                                                             |
+| `backgroundColor`    | `#fff`    | 背景の色（`hover` は `#f1f3f5`、`active` は `#e3e6ea`）                                                                                                                                              |
+| `borderColor`        | `#8a8f98` | 枠の色                                                                                                                                                                                               |
+| `borderRadius`       | `0.375em` | 角の丸み                                                                                                                                                                                             |
+| `paddingX`           | `0.875em` | 左右の余白                                                                                                                                                                                           |
+| `paddingY`           | `0.375em` | 上下の余白                                                                                                                                                                                           |
+| `opacity.disabled`   | `0.5`     | `disabled` のときの不透明度                                                                                                                                                                          |
+| `outlineColor.focus` | `#2f6fde` | キーボードでフォーカスしたときの線の色                                                                                                                                                               |
+| `icon.scale`         | `1.12`    | `withButtonIcon` で置いたアイコンの大きさ。周りの文字と同じに見える大きさの何倍かで、アイコンのセットの倍率（react-icon の `--frg-icon-glyphScale`）が掛かる（Material Symbols なら `1.4em` になる） |
+
+### `withButtonIcon`
+
+```ts
+withButtonIcon<I extends IconComponent>(Icon: I): ButtonWithIconComponent<I>
+```
+
+アイコンの部品を組み込んだ、アイコンを置けるボタンを作ります。アイコンのセットはアプリで1回決め、使う場所では名前だけを渡します。
+
+```tsx
+import { withButtonIcon } from '@fringeworks/react-components';
+import { MaterialSymbolOutlined } from '@fringeworks/react-icon-material-symbols';
+
+// アプリで1回だけ作る
+export const IconButton = withButtonIcon(MaterialSymbolOutlined);
+
+// 画面では名前だけを渡す
+<IconButton icon="save" onMainAction={save}>
+  保存
+</IconButton>;
+```
+
+| 引数   | 型              | 説明                                                                                                                                                               |
+| ------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Icon` | `IconComponent` | アイコンの部品（`@fringeworks/react-contract` の型）。`value` でアイコンの名前を受け取る部品で、`@fringeworks/react-icon` とそのアダプターの部品はどれも組み込める |
+
+作ったボタンは、`Button` と同じプロパティ（`design` を含む）に加えて、次のプロパティを受け取ります。
+
+| プロパティ         | 型                                      | 説明                                                                                                        |
+| ------------------ | --------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `icon?`            | `Icon` の `value` の型                  | 中身の前に置くアイコンの名前                                                                                |
+| `endIcon?`         | `Icon` の `value` の型                  | 中身の後ろに置くアイコンの名前                                                                              |
+| `partsProps.icon?` | `Icon` の props（`value` を除く）か関数 | アイコンに渡す props。値なら両方のアイコンに、関数なら位置（`{ placement: 'start' \| 'end' }`）ごとに決める |
+
+- アイコンと文字の間は、`design` の `gap` で決まります。アイコンの大きさは、ボタンの文字の大きさに合わせます（react-icon の部品の場合）。
+- アイコンには `value` だけを渡します。アイコンだけのボタンは、ボタンに `aria-label` を付けてください。
+- `Icon` に `createPrefixedIcon`（`@fringeworks/react-icon`）で作った部品を組み込むと、`icon="ms:save"` のように、複数のセットを名前で選べます。
+- `withDesign` で包めます（`designDefinition` は `Button` と同じ）。
 
 ### `ButtonGroup`
 
@@ -364,17 +482,20 @@ create<名前>Design(options: Create<名前>DesignOptions): <名前>Design
 [react-primitives の `Collapsible`](https://github.com/fringeworks-js/react-primitives) に、見た目を付けたものです。プロパティは react-primitives の `Collapsible` と同じです（`open`・`defaultOpen`・`onOpenChange`・`disabled`・`summary`・`children`・`partsProps` と、`<details>` のプロパティ）。加えて、デザインの値を `design` で受け取ります（下の表）。
 
 - HTML の `<details>`・`<summary>` で開閉します。ページ内検索で中の文字が見つかると、ブラウザーが開きます（`onOpenChange` も呼びます）。
-- `<details class="frg-collapsible">` と `<summary class="frg-collapsible-summary">` を描きます。ブラウザーごとに違う三角の印を消し、見出しの前に印の `<span class="frg-collapsible-indicator">`（›）を置いて、開くと下に向けます。枠や背景は付けません。
+- `<details class="frg-collapsible">` と `<summary class="frg-collapsible-summary">` を描きます。ブラウザーごとに違う三角の印を消し、見出しの前に印の `<span class="frg-collapsibleindicator frg-collapsible-indicator">`（›）を置いて、開くと下に向けます。印は `withCollapsibleIndicator` で差し替えられます（上の「印を差し替える」）。枠や背景は付けません。
 
 `design` で渡せるデザインの値です（CSS 変数は `--frg-collapsible-` の後にキーを `-` でつないだもの。例: `indicator.color` → `--frg-collapsible-indicator-color`）。
 
-| キー                         | 既定値         | 説明                                   |
-| ---------------------------- | -------------- | -------------------------------------- |
-| `gap`                        | `8px`          | 開いたときの、見出しと中身の間隔       |
-| `summary.gap`                | `6px`          | 印と見出しの間隔                       |
-| `summary.opacity.disabled`   | `0.5`          | `disabled` のときの見出しの不透明度    |
-| `summary.outlineColor.focus` | `#2f6fde`      | キーボードでフォーカスしたときの線の色 |
-| `indicator.color`            | `currentColor` | 印（›）の色                            |
+| キー                         | 既定値                            | 説明                                                                                           |
+| ---------------------------- | --------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `gap`                        | `8px`                             | 開いたときの、見出しと中身の間隔                                                               |
+| `summary.gap`                | `6px`                             | 印と見出しの間隔                                                                               |
+| `summary.opacity.disabled`   | `0.5`                             | `disabled` のときの見出しの不透明度                                                            |
+| `summary.outlineColor.focus` | `#2f6fde`                         | キーボードでフォーカスしたときの線の色                                                         |
+| `indicator.color`            | `currentColor`                    | 印（›）の色                                                                                    |
+| `indicator.rotate`           | `-45deg`（差し替えた印は `0deg`） | 印を回す角度（数値は deg）。`open` は開いたときの角度（既定は `45deg`、差し替えた印は `0deg`） |
+| `indicator.size`             | `1em`                             | 印の大きさ。差し替えた印は、決めるとその大きさになる                                           |
+| `indicator.scale`            | `1.2`                             | 差し替えた印の大きさ。周りの文字と同じに見える大きさの何倍かで、アイコンのセットの倍率が掛かる |
 
 ### `Table`
 
@@ -452,14 +573,27 @@ const fields: RecordField<Member>[] = [
 
 | 型                               | 説明                                                                                                  |
 | -------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `CheckboxGroupProps<V>`          | `CheckboxGroup` のプロパティ                                                                          |
-| `RadioGroupProps<V>`             | `RadioGroup` のプロパティ                                                                             |
+| `CheckboxGroupProps<V, I>`       | `CheckboxGroup` のプロパティ（`I` はチェックボックスの印）                                            |
+| `RadioGroupProps<V, I>`          | `RadioGroup` のプロパティ（`I` はラジオボタンの印）                                                   |
 | `ButtonGroupProps<V>`            | `ButtonGroup` のプロパティ                                                                            |
-| `CheckboxProps`                  | `Checkbox` のプロパティ                                                                               |
+| `CheckboxProps<I>`               | `Checkbox` のプロパティ（`I` は印。`withCheckboxIndicator` で作ったものは渡した印）                   |
+| `CheckboxComponent<I>`           | 見た目を付けたチェックボックス（`Checkbox`、`withCheckboxIndicator` で作ったもの）                    |
+| `CheckboxGroupComponent<I>`      | 見た目を付けたチェックボックスグループ（`CheckboxGroup`、`withCheckboxGroupIndicator` で作ったもの）  |
+| `RadioGroupComponent<I>`         | 見た目を付けたラジオグループ（`RadioGroup`、`withRadioGroupIndicator` で作ったもの）                  |
+| `CheckboxIndicatorComponent`     | チェックボックスの印に組み込める部品（`withCheckboxIndicator`・`withCheckboxGroupIndicator` に渡す）  |
+| `RadioIndicatorComponent`        | ラジオボタンの印に組み込める部品（`withRadioGroupIndicator` に渡す）                                  |
+| `CheckboxIndicatorSlotProps`     | チェックボックスの印が受け取る状態（`@fringeworks/react-primitives` の型）                            |
+| `RadioIndicatorSlotProps`        | ラジオボタンの印が受け取る状態（`@fringeworks/react-primitives` の型）                                |
 | `SwitchProps`                    | `Switch` のプロパティ                                                                                 |
-| `ButtonProps<V>`                 | `Button` のプロパティ                                                                                 |
+| `ButtonProps<V, P>`              | `Button` のプロパティ（`P` は組み込んだ部品。`withButtonIcon` で作ったものは `{ Icon }`）             |
+| `ButtonWithIconComponent<I>`     | `withButtonIcon` で作った、アイコンを置けるボタン                                                     |
+| `ButtonIconValue<P>`             | `withButtonIcon` で作ったボタンの `icon`・`endIcon` の型（`@fringeworks/react-primitives` の型）      |
+| `IconComponent`                  | `withButtonIcon` に渡すアイコンの部品（`@fringeworks/react-contract` の型）                           |
 | `TextInputProps`                 | `TextInput` のプロパティ                                                                              |
-| `CollapsibleProps`               | `Collapsible` のプロパティ                                                                            |
+| `CollapsibleProps<I>`            | `Collapsible` のプロパティ（`I` は開閉の印）                                                          |
+| `CollapsibleComponent<I>`        | 見た目を付けた折りたためる部品（`Collapsible`、`withCollapsibleIndicator` で作ったもの）              |
+| `CollapsibleIndicatorComponent`  | 開閉の印に組み込める部品（`withCollapsibleIndicator` に渡す）                                         |
+| `CollapsibleIndicatorSlotProps`  | 開閉の印が受け取る状態（`@fringeworks/react-primitives` の型）                                        |
 | `TableProps<R>`                  | `Table` のプロパティ                                                                                  |
 | `RecordFieldsProps<T>`           | `RecordFields` のプロパティ                                                                           |
 | `RadioProps`                     | `RadioGroup` の中のラジオボタンのプロパティ（`partsProps.radio`）                                     |

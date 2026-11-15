@@ -1,12 +1,5 @@
-import { createDesignStyle } from '@fringeworks/react-contract';
-import { mergePartProps } from '@fringeworks/react-parts-props';
-import { withCollapsible } from '@fringeworks/react-primitives';
-import type { ReactElement } from 'react';
 import CollapsibleIndicator from './_CollapsibleIndicator';
-import { collapsibleDesignDefinition } from './constants';
-import type { CollapsibleProps } from './types';
-
-const CollapsibleBase = withCollapsible({ Indicator: CollapsibleIndicator });
+import createCollapsible from './_createCollapsible';
 
 /**
  * 見た目を付けた、折りたためる部品
@@ -14,30 +7,8 @@ const CollapsibleBase = withCollapsible({ Indicator: CollapsibleIndicator });
  * react-primitives の `withCollapsible` に、見た目を付けた開閉の印（`Indicator`）を組み込み、`frg-collapsible` のクラスと、
  * 見出しの `frg-collapsible-summary` のクラスを付ける。`design` の値は、ルートの `<details>` の `style` に CSS 変数として設定する。
  * 見た目は `styles.css`（または `collapsible.css`）を読み込むと付く。
+ * 開閉の印を差し替えるときは、`withCollapsibleIndicator` で作る。
  */
-export default function Collapsible({
-  design,
-  fallbackDesign,
-  ...props
-}: CollapsibleProps): ReactElement {
-  return (
-    <CollapsibleBase
-      {...mergePartProps<Omit<CollapsibleProps, 'design' | 'fallbackDesign'>>(
-        {
-          className: 'frg-collapsible',
-          style: createDesignStyle(
-            'frg-collapsible',
-            collapsibleDesignDefinition,
-            design,
-            fallbackDesign,
-          ),
-          partsProps: { summary: { className: 'frg-collapsible-summary' } },
-        },
-        props,
-      )}
-    />
-  );
-}
+const Collapsible = createCollapsible(CollapsibleIndicator, 'Collapsible');
 
-// withDesign（react-contract）が、design を重ねるときに読む
-Collapsible.designDefinition = collapsibleDesignDefinition;
+export default Collapsible;

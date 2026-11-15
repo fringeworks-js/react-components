@@ -4,8 +4,13 @@
 // 変数の名前は design の値と同じ（--frg-button[-<部分>]-<プロパティ>[-<状態>]）
 
 :where(.frg-button) {
+  // 中のアイコンの大きさ（icon.scale。react-icon の --frg-icon-scale）。周りの文字と同じに見える大きさの何倍か。
+  // アイコンのセットの倍率（--frg-icon-glyphScale）は、アイコンの側で掛かる
+  --frg-icon-scale: var(--frg-button-icon-scale, 1.12);
   display: inline-flex;
-  align-items: center;
+  // 縦の位置は、文字のベースラインを基準にそろえる（アイコンは、ベースラインから見た文字の真ん中に来る。
+  // 行の箱の真ん中にそろえると、文字が行の箱のどこに描かれるかがフォントで違うので、フォントによってずれる）
+  align-items: baseline;
   justify-content: center;
   gap: var(--frg-button-gap, 6px);
   box-sizing: border-box;

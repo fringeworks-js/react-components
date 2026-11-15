@@ -4,10 +4,13 @@
 // 変数の名前は design の値と同じ（--frg-collapsible[-<部分>]-<プロパティ>[-<状態>]）。
 // 状態が重なったときは、後に書いたものが勝つ（focus → disabled の順）
 
+@use '../_internal/textBaseline';
+
 :where(.frg-collapsible-summary) {
   // ブラウザーごとに違う三角の印を消し、印の要素（frg-collapsible-indicator）で描く
   display: flex;
-  align-items: center;
+  // 縦の位置は、文字のベースラインを基準にそろえる（印は、ベースラインから見た文字の真ん中に来る）
+  align-items: baseline;
   gap: var(--frg-collapsible-summary-gap, 6px);
   list-style: none;
   opacity: var(--frg-collapsible-summary-opacity, 1);
@@ -21,22 +24,53 @@
   display: none;
 }
 
-// 印（›）。開くと下を向く
+// 開閉の印の土台（既定の印にも、withCollapsibleIndicator で差し替えた印にも付く。包む部品 _createIndicatorPart が付ける）。
+// 回す角度は indicator.rotate（開いたときは indicator.rotate.open）。差し替えた印の既定は回さない
+// （アイコンの向きはセットごとに違うため。1つのアイコンを回して開閉を表すときは、design で角度を決める）。
+// CSS の rotate プロパティは対応ブラウザーの範囲に入らないので、transform で回す
 :where(.frg-collapsible-indicator) {
   flex: none;
+  color: var(--frg-collapsible-indicator-color, currentColor);
+  transform: rotate(var(--frg-collapsible-indicator-rotate, 0deg));
+  transition: transform 0.15s;
+}
+
+:where(.frg-collapsible-indicator[data-open]) {
+  transform: rotate(var(--frg-collapsible-indicator-rotate-open, 0deg));
+}
+
+// 差し替えた印の大きさ
+:where(.frg-collapsible-indicator:not(.frg-collapsibleindicator)) {
+  // 大きさは、周りの文字と同じに見える大きさの何倍か（indicator.scale。react-icon の --frg-icon-scale）。
+  // indicator.size（長さ）を決めると、その大きさになる（react-icon の --frg-icon-size）。
+  // font-size は react-icon の .frg-icon と同じ式にして、CSS を読み込む順に依らないようにする（アイコンでない印にも効く）
+  --frg-icon-scale: var(--frg-collapsible-indicator-scale, 1.2);
+  --frg-icon-size: var(--frg-collapsible-indicator-size);
+  font-size: var(
+    --frg-icon-size,
+    calc(1em * var(--frg-icon-scale, 1) * var(--frg-icon-glyphScale, 1))
+  );
+}
+
+// 既定の印（›。種類のクラス frg-collapsibleindicator）。右を向き（-45deg）、開くと下を向く（45deg）
+:where(.frg-collapsibleindicator) {
+  // 大きさ（形の幅・余白は、この font-size に対する長さ）
+  font-size: var(--frg-collapsible-indicator-size, 1em);
+  display: inline-flex;
   box-sizing: border-box;
   width: 0.45em;
   height: 0.45em;
   margin-inline: 0.15em 0.1em;
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
-  color: var(--frg-collapsible-indicator-color, currentColor);
-  transform: rotate(-45deg);
-  transition: transform 0.15s;
+  transform: rotate(var(--frg-collapsible-indicator-rotate, -45deg));
+
+  // 回す前の箱の真ん中（回しても動かない）を、文字の真ん中に置く。下の枠（2px）の分、箱の真ん中は内容の箱の真ん中より 1px 下にある
+  @include textBaseline.align-to-text-baseline(1px);
 }
 
-:where(.frg-collapsible-indicator[data-open]) {
-  transform: rotate(45deg);
+:where(.frg-collapsibleindicator[data-open]) {
+  transform: rotate(var(--frg-collapsible-indicator-rotate-open, 45deg));
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -110,14 +110,14 @@ importers:
   .:
     dependencies:
       '@fringeworks/react-contract':
-        specifier: ^0.3.0
-        version: 0.3.0(react@19.3.1)
+        specifier: ^0.3.2
+        version: 0.3.2(react@19.3.1)
       '@fringeworks/react-parts-props':
         specifier: ^0.9.1
         version: 0.9.1(react@19.3.1)
       '@fringeworks/react-primitives':
-        specifier: ^0.2.2
-        version: 0.2.2(react@19.3.1)
+        specifier: ^0.2.3
+        version: 0.2.3(react@19.3.1)
       '@fringeworks/style-layouts':
         specifier: ^0.10.2
         version: 0.10.2
@@ -134,6 +134,9 @@ importers:
       '@fringeworks/dev':
         specifier: ^0.13.4
         version: 0.13.4(eslint@10.14.0(supports-color@7.2.0))(prettier@3.9.10)(rollup@4.60.3)(supports-color@7.2.0)(tsdown@0.23.7)(typescript@6.0.3)
+      '@fringeworks/react-icon-material-symbols':
+        specifier: ^0.3.0
+        version: 0.3.0(react@19.3.1)
       '@fringeworks/react-layouts':
         specifier: ^0.10.2
         version: 0.10.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -824,8 +827,18 @@ packages:
       typescript:
         optional: true
 
-  '@fringeworks/react-contract@0.3.0':
-    resolution: {integrity: sha512-aVL92HqpuHwsbSjKdUoRd5dRQBMkKjfmMUeNr7NiPF/7y4g47NRI5Tt5nhOikE5VxJFVxPbyP3/LQmEjFrtgvA==}
+  '@fringeworks/react-contract@0.3.2':
+    resolution: {integrity: sha512-wdxZUTTS43rXGbfZNQlboCgM+GzTJhjLUdVcUcjjeLzvUXmLlYNW8swKWLCj6Xfl/XWv6330VEH+Ul21aRqdcw==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+
+  '@fringeworks/react-icon-material-symbols@0.3.0':
+    resolution: {integrity: sha512-tebfBHvZVh483z6jJahejqdGukUurMaC1inwQpkr6vnqUNPJQP+Pz/7uFJqRA0TFguaxOnBJcQ/PN0T3XxbRzg==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+
+  '@fringeworks/react-icon@0.2.0':
+    resolution: {integrity: sha512-pA/vHK07QaXbQllAJniu8pwJIHBG4yqhezfRKf6cNltz+I4G4VKEz8p0XWlVAtXBrWYqoOl8DiHYag9+DBVnyg==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
 
@@ -846,13 +859,18 @@ packages:
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
 
+  '@fringeworks/react-merge@0.9.2':
+    resolution: {integrity: sha512-LZtSyBedfjV+uC93yzuR0YrLzBK3b15cFj5B945iuSvSWujRzt1eskQcjS4MPagcWyrzAvt4am84646ocYoMKw==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+
   '@fringeworks/react-parts-props@0.9.1':
     resolution: {integrity: sha512-KadAU/lsgYeNLQzPUrLcF04bKXGNI/JY42AN/iyp9rc7VltxKL0Uqc5cG6BBHVDnh6DqlNmmYI1vCognOwY9Eg==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
 
-  '@fringeworks/react-primitives@0.2.2':
-    resolution: {integrity: sha512-SkxH+pJH7INFSR0rOsNSMABGleBnygUdclaOUN4zLK6OBp4zkEQu5EuuChdUnrYrdeSZ2HC0bQ0NAde/++jAsw==}
+  '@fringeworks/react-primitives@0.2.3':
+    resolution: {integrity: sha512-AXoDlZ7vdDXHK57d2ecC7Q6/6dfjEM6A3C0oT/4SKnWnX/EUol2q1sHd4JpiduV3Vam4gu/bdMEXyrORlU/TQA==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
 
@@ -2746,6 +2764,9 @@ packages:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
 
+  material-symbols@0.49.0:
+    resolution: {integrity: sha512-3yFCfEA1+gZPsTJYXWbEmNgxvm0pFpXuVIyUMJzjajMGpZ5vOTPan4p8VO1x0pIAE2fPmf/N9ZZuGiFfTyLF3Q==}
+
   mdn-data@2.27.1:
     resolution: {integrity: sha512-9Yubnt3e8A0OKwxYSXyhLymGW4sCufcLG6VdiDdUGVkPhpqLxlvP5vl1983gQjJl3tqbrM731mjaZaP68AgosQ==}
 
@@ -4147,11 +4168,26 @@ snapshots:
       - supports-color
       - vue-tsc
 
-  '@fringeworks/react-contract@0.3.0(react@19.3.1)':
+  '@fringeworks/react-contract@0.3.2(react@19.3.1)':
     dependencies:
       '@fringeworks/design-utils': 0.4.0
       '@fringeworks/style-utils': 0.9.1
       '@fringeworks/types': 1.2.0
+      react: 19.3.1
+
+  '@fringeworks/react-icon-material-symbols@0.3.0(react@19.3.1)':
+    dependencies:
+      '@fringeworks/react-contract': 0.3.2(react@19.3.1)
+      '@fringeworks/react-icon': 0.2.0(react@19.3.1)
+      '@fringeworks/react-merge': 0.9.2(react@19.3.1)
+      material-symbols: 0.49.0
+      react: 19.3.1
+
+  '@fringeworks/react-icon@0.2.0(react@19.3.1)':
+    dependencies:
+      '@fringeworks/react-contract': 0.3.2(react@19.3.1)
+      '@fringeworks/react-merge': 0.9.2(react@19.3.1)
+      '@fringeworks/utils': 2.3.0
       react: 19.3.1
 
   '@fringeworks/react-layouts-adornment@0.3.2(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
@@ -4184,14 +4220,22 @@ snapshots:
       react: 19.3.1
       remeda: 2.50.0
 
+  '@fringeworks/react-merge@0.9.2(react@19.3.1)':
+    dependencies:
+      '@fringeworks/react-utils': 0.13.0(react@19.3.1)
+      '@fringeworks/utils': 2.3.0
+      clsx: 2.1.1
+      react: 19.3.1
+      remeda: 2.60.0
+
   '@fringeworks/react-parts-props@0.9.1(react@19.3.1)':
     dependencies:
       '@fringeworks/react-merge': 0.9.1(react@19.3.1)
       react: 19.3.1
 
-  '@fringeworks/react-primitives@0.2.2(react@19.3.1)':
+  '@fringeworks/react-primitives@0.2.3(react@19.3.1)':
     dependencies:
-      '@fringeworks/react-contract': 0.3.0(react@19.3.1)
+      '@fringeworks/react-contract': 0.3.2(react@19.3.1)
       '@fringeworks/react-parts-props': 0.9.1(react@19.3.1)
       '@fringeworks/react-utils': 0.13.0(react@19.3.1)
       '@fringeworks/utils': 2.3.0
@@ -5841,6 +5885,8 @@ snapshots:
   make-dir@4.0.0:
     dependencies:
       semver: 7.8.0
+
+  material-symbols@0.49.0: {}
 
   mdn-data@2.27.1: {}
 

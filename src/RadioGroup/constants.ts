@@ -23,6 +23,7 @@ export const radioDesignDefinition = {
   parts: {
     indicator: {
       size: [],
+      scale: [],
       borderColor: ['checked', 'invalid'],
       backgroundColor: ['checked'],
       color: ['checked'],

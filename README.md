@@ -144,18 +144,23 @@ The inputs (`Create<ComponentName>DesignOptions`, an alias of `CreateDesignOptio
 
 ## API
 
-| Component       | Description                                      |
-| --------------- | ------------------------------------------------ |
-| `Checkbox`      | A checkbox                                       |
-| `Switch`        | A switch                                         |
-| `CheckboxGroup` | A group of checkboxes laid out from options      |
-| `RadioGroup`    | A group of radio buttons laid out from options   |
-| `Button`        | A button                                         |
-| `ButtonGroup`   | A group of buttons laid out from options         |
-| `TextInput`     | A text input                                     |
-| `Collapsible`   | A collapsible component                          |
-| `Table`         | A table that takes an array of rows              |
-| `RecordFields`  | A component that lays out the fields of a record |
+| Component                               | Description                                                 |
+| --------------------------------------- | ----------------------------------------------------------- |
+| `Checkbox`                              | A checkbox                                                  |
+| `Switch`                                | A switch                                                    |
+| `CheckboxGroup`                         | A group of checkboxes laid out from options                 |
+| `RadioGroup`                            | A group of radio buttons laid out from options              |
+| `withCheckboxIndicator(Indicator)`      | Creates a checkbox with the indicator replaced              |
+| `withCheckboxGroupIndicator(Indicator)` | Creates a checkbox group with the indicator replaced        |
+| `withRadioGroupIndicator(Indicator)`    | Creates a radio group with the indicator replaced           |
+| `withCollapsibleIndicator(Indicator)`   | Creates a collapsible component with the indicator replaced |
+| `Button`                                | A button                                                    |
+| `withButtonIcon(Icon)`                  | Creates a button that can hold icons                        |
+| `ButtonGroup`                           | A group of buttons laid out from options                    |
+| `TextInput`                             | A text input                                                |
+| `Collapsible`                           | A collapsible component                                     |
+| `Table`                                 | A table that takes an array of rows                         |
+| `RecordFields`                          | A component that lays out the fields of a record            |
 
 ### `Checkbox`
 
@@ -167,9 +172,9 @@ The inputs (`Create<ComponentName>DesignOptions`, an alias of `CreateDesignOptio
 
 [`Checkbox` of react-primitives](https://github.com/fringeworks-js/react-primitives) with a look. It takes the same props as `Checkbox` of react-primitives (`value`, `defaultValue`, `onValueChange`, `disabled`, `readOnly`, `required`, `invalid`, `indeterminate`, `children`, and `partsProps`). It also takes design values with `design` (the table below).
 
-- Places an `<input type="checkbox" class="frg-checkbox-input">`, the indicator `<span class="frg-checkbox-indicator">`, and `children` inside a `<label class="frg-checkbox">`.
+- Places an `<input type="checkbox" class="frg-checkbox-input">`, the indicator `<span class="frg-checkboxindicator frg-checkbox-indicator">`, and `children` inside a `<label class="frg-checkbox">` (`frg-checkbox-indicator` is the base class every indicator gets, and `frg-checkboxindicator` is the class of the default indicator).
 - When `disabled` or `invalid`, it adds `data-disabled` or `data-invalid` to the `<label>`.
-- To remove the differences between browsers, the `<input>` is visually hidden and the indicator (`Indicator`) draws the checked state. Keyboard operation and focus are those of the standard `<input>` (the focus outline is drawn on the indicator). The indicator can be replaced with any component through `Indicator` of `withCheckbox` in react-primitives.
+- To remove the differences between browsers, the `<input>` is visually hidden and the indicator (`Indicator`) draws the checked state. Keyboard operation and focus are those of the standard `<input>` (the focus outline is drawn on the indicator). The indicator can be replaced with `withCheckboxIndicator` ("Replacing the indicator" below).
 
 The design values you can pass with `design` (the CSS variable is `--frg-checkbox-` followed by the key joined with `-`; for example, `indicator.outlineColor.focus` → `--frg-checkbox-indicator-outlineColor-focus`).
 
@@ -179,6 +184,7 @@ The design values you can pass with `design` (the CSS variable is `--frg-checkbo
 | `color`                        | `inherit` | The text color                                                                                           |
 | `opacity.disabled`             | `0.5`     | The opacity when `disabled`                                                                              |
 | `indicator.size`               | `1em`     | The size of the indicator                                                                                |
+| `indicator.scale`              | `1.2`     | The size factor of a replaced indicator (see "Replacing the indicator" below)                            |
 | `indicator.borderRadius`       | `0.25em`  | The corner radius of the indicator                                                                       |
 | `indicator.borderColor`        | `#8a8f98` | The border color of the indicator (`#2f6fde` for `checked` and `indeterminate`, `#d93025` for `invalid`) |
 | `indicator.backgroundColor`    | `#fff`    | The background color of the indicator (`#2f6fde` for `checked` and `indeterminate`)                      |
@@ -260,7 +266,7 @@ A group of checkboxes laid out from options. It is `withCheckboxGroup` of react-
 A group of radio buttons laid out from options. It is `withRadioGroup` of react-primitives with a styled radio button. It takes the props of the component created by `withRadioGroup` of react-primitives (`options`, `value`, `defaultValue`, `onValueChange`, `disabled`, `readOnly`, `required`, `invalid`, `unlistedPlacement`, and `keepUnlisted`) and the same `direction` and `gap` as `CheckboxGroup`.
 
 - `value` is the selected value, and `null` when nothing is selected. A selected value cannot be cleared (the same as HTML radio buttons).
-- Places `<label class="frg-radio">` elements inside a `<div role="radiogroup" class="frg-radiogroup">`. Each `<label>` holds a visually hidden `<input type="radio" class="frg-radio-input">`, the indicator `<span class="frg-radio-indicator">`, and the text. The Tab key enters the group and the arrow keys select (the browser's standard behavior).
+- Places `<label class="frg-radio">` elements inside a `<div role="radiogroup" class="frg-radiogroup">`. Each `<label>` holds a visually hidden `<input type="radio" class="frg-radio-input">`, the indicator `<span class="frg-radioindicator frg-radio-indicator">`, and the text. The indicator can be replaced with `withRadioGroupIndicator` ("Replacing the indicator" below). The Tab key enters the group and the arrow keys select (the browser's standard behavior).
 - While `disabled` or `invalid`, the `<label>` gets `data-disabled` or `data-invalid` (`aria-invalid` cannot be set on a radio button, so the invalid look uses the attribute on the `<label>`).
 - Other props are passed to the `<div>`.
 - For unlisted values, see `useRadioGroup` of react-primitives. To show the selected value with its label, pass the same `value`, `options`, and `unlistedPlacement` to `OptionLabel` of react-primitives.
@@ -273,10 +279,83 @@ Design values for the radio buttons inside can be passed with `partsProps.radio.
 | `color`                        | `inherit` | The text color                                                                       |
 | `opacity.disabled`             | `0.5`     | The opacity when `disabled`                                                          |
 | `indicator.size`               | `1em`     | The size of the indicator                                                            |
+| `indicator.scale`              | `1.2`     | The size factor of a replaced indicator (see "Replacing the indicator" below)        |
 | `indicator.borderColor`        | `#8a8f98` | The border color of the indicator (`#2f6fde` for `checked`, `#d93025` for `invalid`) |
 | `indicator.backgroundColor`    | `#fff`    | The background color of the indicator (`#2f6fde` for `checked`)                      |
 | `indicator.color`              | `#fff`    | The color of the dot when selected (`checked`)                                       |
 | `indicator.outlineColor.focus` | `#2f6fde` | The outline color on keyboard focus                                                  |
+
+### Replacing the indicator
+
+`withCheckboxIndicator`, `withCheckboxGroupIndicator`, `withRadioGroupIndicator`, and `withCollapsibleIndicator` create components whose checkbox, radio button, or collapsible indicator (`Indicator`) is replaced, for example with an icon font. Create them once in your app and place them as they are on screens. They take the same props as the original components (`Checkbox`, `CheckboxGroup`, `RadioGroup`, `Collapsible`).
+
+```tsx
+import {
+  type CheckboxIndicatorSlotProps,
+  withCheckboxGroupIndicator,
+  withCheckboxIndicator,
+} from '@fringeworks/react-components';
+import { MaterialSymbolOutlined } from '@fringeworks/react-icon-material-symbols';
+
+// An indicator that picks the icon name from the state. Pass the received className and data-* to the element as they are
+function CheckboxSymbol({
+  checked,
+  indeterminate,
+  disabled,
+  readOnly,
+  invalid,
+  ...props
+}: CheckboxIndicatorSlotProps) {
+  const value = indeterminate
+    ? 'indeterminate_check_box'
+    : checked
+      ? 'check_box'
+      : 'check_box_outline_blank';
+  return (
+    <MaterialSymbolOutlined
+      {...props}
+      value={value}
+      filled={checked || indeterminate}
+    />
+  );
+}
+
+export const AppCheckbox = withCheckboxIndicator(CheckboxSymbol);
+export const AppCheckboxGroup = withCheckboxGroupIndicator(CheckboxSymbol);
+```
+
+| HOC                                     | Creates                                                                                |
+| --------------------------------------- | -------------------------------------------------------------------------------------- |
+| `withCheckboxIndicator(Indicator)`      | A `Checkbox` with the indicator replaced                                               |
+| `withCheckboxGroupIndicator(Indicator)` | A `CheckboxGroup` whose option and "select all" checkboxes have the indicator replaced |
+| `withRadioGroupIndicator(Indicator)`    | A `RadioGroup` whose radio buttons have the indicator replaced                         |
+| `withCollapsibleIndicator(Indicator)`   | A `Collapsible` with the open/close indicator replaced                                 |
+
+- The indicator is a component that takes `CheckboxIndicatorSlotProps` or `RadioIndicatorSlotProps` of react-primitives (`checked`, `indeterminate`, `disabled`, `readOnly`, `invalid`, `aria-hidden`) and draws according to the state.
+- Besides the state, the indicator receives the base class (`frg-checkbox-indicator` or `frg-radio-indicator`) and the state attributes (`data-checked`, `data-indeterminate`, `data-disabled`, `data-readonly`, `data-invalid`). Pass what it receives to its element. The focus outline and the colors for each state are applied through this class and these attributes.
+- The indicator and the text are lined up on the baseline of the text (`align-items: baseline`). react-icon icons come to the middle of the text in any font (see "Size, position and color" in react-icon). When the text wraps, the indicator lines up with the first line. Icons in buttons work the same way.
+- A replaced indicator does not get the box of the default indicator (border, background, corner radius). Of `design`, the ones that apply to a replaced indicator are `indicator.color` (the icon color; by default `#8a8f98` when not selected and `#2f6fde` when checked or indeterminate), `indicator.scale` (the icon size: how many times the size that looks the same as the surrounding text, multiplied by the icon set's scale (react-icon's `--frg-icon-glyphScale`); `1.2` by default), `indicator.size` (sets the icon size as a length; when set, `indicator.scale` is not used), and `indicator.outlineColor.focus`. `indicator.borderColor`, `backgroundColor`, and `borderRadius` do not apply.
+- The indicator of a collapsible component takes `CollapsibleIndicatorSlotProps` (`open`, `disabled`, `aria-hidden`) and receives the base class `frg-collapsible-indicator` and the state attributes (`data-open`, `data-disabled`). `indicator.color`, `indicator.rotate`, `indicator.scale`, and `indicator.size` of `design` apply. To show open and closed with a single rotating icon like the default indicator, set the angle for the open state with `indicator.rotate` (a replaced indicator is not rotated by default, because the direction of icons differs by set). The indicator can also draw a different icon when open (switching between `keyboard_arrow_right` and `keyboard_arrow_down`, for example).
+
+  ```tsx
+  // Turn a right-pointing icon down when open
+  function ExpandSymbol({
+    open,
+    disabled,
+    ...props
+  }: CollapsibleIndicatorSlotProps) {
+    return <MaterialSymbolOutlined {...props} value="keyboard_arrow_right" />;
+  }
+
+  export const AppCollapsible = withDesign(
+    withCollapsibleIndicator(ExpandSymbol),
+    {
+      indicator: { rotate: { open: 90 } },
+    },
+  );
+  ```
+
+- They can be wrapped with `withDesign`.
 
 ### `Button`
 
@@ -294,17 +373,56 @@ Design values for the radio buttons inside can be passed with `partsProps.radio.
 
 The design values you can pass with `design` (the CSS variable is `--frg-button-` followed by the key joined with `-`; for example, `outlineColor.focus` → `--frg-button-outlineColor-focus`).
 
-| Key                  | Default   | Description                                                          |
-| -------------------- | --------- | -------------------------------------------------------------------- |
-| `gap`                | `6px`     | The space between the contents (an icon and text, for example)       |
-| `color`              | `inherit` | The text color                                                       |
-| `backgroundColor`    | `#fff`    | The background color (`#f1f3f5` for `hover`, `#e3e6ea` for `active`) |
-| `borderColor`        | `#8a8f98` | The border color                                                     |
-| `borderRadius`       | `0.375em` | The corner radius                                                    |
-| `paddingX`           | `0.875em` | The horizontal padding                                               |
-| `paddingY`           | `0.375em` | The vertical padding                                                 |
-| `opacity.disabled`   | `0.5`     | The opacity when `disabled`                                          |
-| `outlineColor.focus` | `#2f6fde` | The outline color on keyboard focus                                  |
+| Key                  | Default   | Description                                                                                                                                                                                                                       |
+| -------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `gap`                | `6px`     | The space between the contents (an icon and text, for example)                                                                                                                                                                    |
+| `color`              | `inherit` | The text color                                                                                                                                                                                                                    |
+| `backgroundColor`    | `#fff`    | The background color (`#f1f3f5` for `hover`, `#e3e6ea` for `active`)                                                                                                                                                              |
+| `borderColor`        | `#8a8f98` | The border color                                                                                                                                                                                                                  |
+| `borderRadius`       | `0.375em` | The corner radius                                                                                                                                                                                                                 |
+| `paddingX`           | `0.875em` | The horizontal padding                                                                                                                                                                                                            |
+| `paddingY`           | `0.375em` | The vertical padding                                                                                                                                                                                                              |
+| `opacity.disabled`   | `0.5`     | The opacity when `disabled`                                                                                                                                                                                                       |
+| `outlineColor.focus` | `#2f6fde` | The outline color on keyboard focus                                                                                                                                                                                               |
+| `icon.scale`         | `1.12`    | The size of the icons placed with `withButtonIcon`: how many times the size that looks the same as the surrounding text, multiplied by the icon set's scale (react-icon's `--frg-icon-glyphScale`; `1.4em` with Material Symbols) |
+
+### `withButtonIcon`
+
+```ts
+withButtonIcon<I extends IconComponent>(Icon: I): ButtonWithIconComponent<I>
+```
+
+Creates a button that can hold icons, with an icon component built in. Decide the icon set once in your app, and pass only names where it is used.
+
+```tsx
+import { withButtonIcon } from '@fringeworks/react-components';
+import { MaterialSymbolOutlined } from '@fringeworks/react-icon-material-symbols';
+
+// Create it once in your app
+export const IconButton = withButtonIcon(MaterialSymbolOutlined);
+
+// On screens, pass only names
+<IconButton icon="save" onMainAction={save}>
+  Save
+</IconButton>;
+```
+
+| Parameter | Type            | Description                                                                                                                                                                            |
+| --------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Icon`    | `IconComponent` | The icon component (a type from `@fringeworks/react-contract`). One that takes the icon name in `value`; every component of `@fringeworks/react-icon` and its adapters can be built in |
+
+The created button takes the same props as `Button` (including `design`), plus the following.
+
+| Property           | Type                                               | Description                                                                                                                         |
+| ------------------ | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `icon?`            | The type of `value` of `Icon`                      | The name of the icon placed before the content                                                                                      |
+| `endIcon?`         | The type of `value` of `Icon`                      | The name of the icon placed after the content                                                                                       |
+| `partsProps.icon?` | The props of `Icon` (except `value`) or a function | Props passed to the icons. A value applies to both icons; a function decides them per placement (`{ placement: 'start' \| 'end' }`) |
+
+- The space between the icon and the text is `gap` of `design`. The icon follows the button's text size (for react-icon components).
+- Only `value` is passed to the icon. Give an icon-only button an `aria-label`.
+- If you build in a component made by `createPrefixedIcon` (`@fringeworks/react-icon`), you can pick from several sets by name, such as `icon="ms:save"`.
+- It can be wrapped with `withDesign` (its `designDefinition` is the same as `Button`'s).
 
 ### `ButtonGroup`
 
@@ -364,17 +482,20 @@ The design values you can pass with `design` (the CSS variable is `--frg-textinp
 [`Collapsible` of react-primitives](https://github.com/fringeworks-js/react-primitives) with a look. It takes the same props as `Collapsible` of react-primitives (`open`, `defaultOpen`, `onOpenChange`, `disabled`, `summary`, `children`, `partsProps`, and the props of `<details>`). It also takes design values with `design` (the table below).
 
 - It opens and closes with HTML `<details>` and `<summary>`. When find-in-page finds text inside, the browser opens it (and `onOpenChange` is called).
-- It renders `<details class="frg-collapsible">` and `<summary class="frg-collapsible-summary">`. It removes the triangle marker that differs by browser, places the marker `<span class="frg-collapsible-indicator">` (›) before the summary text, and turns it down when open. It adds no border or background.
+- It renders `<details class="frg-collapsible">` and `<summary class="frg-collapsible-summary">`. It removes the triangle marker that differs by browser, places the marker `<span class="frg-collapsibleindicator frg-collapsible-indicator">` (›) before the summary text, and turns it down when open. The marker can be replaced with `withCollapsibleIndicator` ("Replacing the indicator" above). It adds no border or background.
 
 The design values you can pass with `design` (the CSS variable is `--frg-collapsible-` followed by the key joined with `-`; for example, `indicator.color` → `--frg-collapsible-indicator-color`).
 
-| Key                          | Default        | Description                                             |
-| ---------------------------- | -------------- | ------------------------------------------------------- |
-| `gap`                        | `8px`          | The space between the summary and the content when open |
-| `summary.gap`                | `6px`          | The space between the marker and the summary text       |
-| `summary.opacity.disabled`   | `0.5`          | The opacity of the summary when `disabled`              |
-| `summary.outlineColor.focus` | `#2f6fde`      | The outline color on keyboard focus                     |
-| `indicator.color`            | `currentColor` | The color of the marker (›)                             |
+| Key                          | Default                                    | Description                                                                                                                               |
+| ---------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `gap`                        | `8px`                                      | The space between the summary and the content when open                                                                                   |
+| `summary.gap`                | `6px`                                      | The space between the marker and the summary text                                                                                         |
+| `summary.opacity.disabled`   | `0.5`                                      | The opacity of the summary when `disabled`                                                                                                |
+| `summary.outlineColor.focus` | `#2f6fde`                                  | The outline color on keyboard focus                                                                                                       |
+| `indicator.color`            | `currentColor`                             | The color of the marker (›)                                                                                                               |
+| `indicator.rotate`           | `-45deg` (`0deg` for a replaced indicator) | The rotation angle of the marker (numbers are deg). `open` is the angle when open (`45deg` by default, `0deg` for a replaced indicator)   |
+| `indicator.size`             | `1em`                                      | The size of the marker. For a replaced indicator, setting it fixes the size                                                               |
+| `indicator.scale`            | `1.2`                                      | The size of a replaced indicator: how many times the size that looks the same as the surrounding text, multiplied by the icon set's scale |
 
 ### `Table`
 
@@ -450,58 +571,71 @@ The design values you can pass with `design` (the CSS variable is `--frg-recordf
 
 ### Types
 
-| Type                                 | Description                                                                                                                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `CheckboxGroupProps<V>`              | The props of `CheckboxGroup`                                                                                                   |
-| `RadioGroupProps<V>`                 | The props of `RadioGroup`                                                                                                      |
-| `ButtonGroupProps<V>`                | The props of `ButtonGroup`                                                                                                     |
-| `CheckboxProps`                      | The props of `Checkbox`                                                                                                        |
-| `SwitchProps`                        | The props of `Switch`                                                                                                          |
-| `ButtonProps<V>`                     | The props of `Button`                                                                                                          |
-| `TextInputProps`                     | The props of `TextInput`                                                                                                       |
-| `CollapsibleProps`                   | The props of `Collapsible`                                                                                                     |
-| `TableProps<R>`                      | The props of `Table`                                                                                                           |
-| `RecordFieldsProps<T>`               | The props of `RecordFields`                                                                                                    |
-| `RadioProps`                         | The props of the radio buttons inside `RadioGroup` (`partsProps.radio`)                                                        |
-| `CheckboxDesign`                     | The value of `design` of `Checkbox`                                                                                            |
-| `SwitchDesign`                       | The value of `design` of `Switch`                                                                                              |
-| `ButtonDesign`                       | The value of `design` of `Button`                                                                                              |
-| `TextInputDesign`                    | The value of `design` of `TextInput`                                                                                           |
-| `CollapsibleDesign`                  | The value of `design` of `Collapsible`                                                                                         |
-| `TableDesign`                        | The value of `design` of `Table`                                                                                               |
-| `RecordFieldsDesign`                 | The value of `design` of `RecordFields`                                                                                        |
-| `RadioDesign`                        | The value of `design` of the radio buttons inside `RadioGroup`                                                                 |
-| `Create<ComponentName>DesignOptions` | Options of `create<ComponentName>Design` (the same as `CreateDesignOptions` of react-contract)                                 |
-| `DesignDefinition`                   | The design definition of a component (the type of `<componentName>DesignDefinition`) (a type of `@fringeworks/react-contract`) |
-| `DesignPartDefinition`               | The properties the root or a part takes and the states that apply (a type of `@fringeworks/react-contract`)                    |
-| `DesignTemplate<D, O>`               | A design template (the type of `<componentName>DesignTemplate`) (a type of `@fringeworks/react-contract`)                      |
-| `DesignColorSpec<K>`                 | A spec that makes a color (data that can be JSON) (a type of `@fringeworks/react-contract`)                                    |
-| `DesignColorFunction<O>`             | A function that takes the inputs and returns a color (written in a template) (a type of `@fringeworks/react-contract`)         |
-| `DesignLengthSpec<K>`                | A spec that makes a length (data that can be JSON) (a type of `@fringeworks/react-contract`)                                   |
-| `DesignLengthFunction<O>`            | A function that takes the inputs and returns a length (written in a template) (a type of `@fringeworks/react-contract`)        |
-| `DesignValue<T, S>`                  | A design value (one value or an object per state) (a type of `@fringeworks/react-contract`)                                    |
-| `DesignState`                        | The states that design values are split by (a type of `@fringeworks/react-contract`)                                           |
-| `DesignPropertyValues`               | Design properties and the types of values they take (a type of `@fringeworks/react-contract`)                                  |
-| `Option<V>`                          | An option (`value`, `label?`, `disabled?`) (a type of `@fringeworks/react-contract`)                                           |
-| `DisplayOption<V>`                   | An option to show (the argument of the functions in `partsProps`) (a type of `@fringeworks/react-contract`)                    |
-| `UnlistedPlacement`                  | Where to show unlisted values (`'hidden'`, `'start'`, `'end'`) (a type of `@fringeworks/react-contract`)                       |
-| `TableColumn<R>`                     | A column of `Table` (a type of `@fringeworks/react-primitives`)                                                                |
-| `TableAlign`                         | The alignment of a column (a type of `@fringeworks/react-primitives`)                                                          |
-| `TableRowId`                         | The id of a row (a type of `@fringeworks/react-primitives`)                                                                    |
-| `TableRowContext<R>`                 | Information about a row that the functions in `partsProps` and `renderRow` receive (a type of `@fringeworks/react-primitives`) |
-| `TableCellContext<R, V>`             | Information about a cell that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)                |
-| `TableHeaderCellContext<R>`          | Information about a header cell that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)         |
-| `TableCellElementProps`              | Props passed to the cell elements of a column (a type of `@fringeworks/react-primitives`)                                      |
-| `TableHeaderCellProps`               | Props passed to the header cell element of a column (a type of `@fringeworks/react-primitives`)                                |
-| `TableRenderRowProps<P>`             | Props that `renderRow` receives (a type of `@fringeworks/react-primitives`)                                                    |
-| `TableValueChangeDetails`            | Details of `onValueChange` of `Table` (a type of `@fringeworks/react-primitives`)                                              |
-| `RecordField<T>`                     | A field of `RecordFields` (a type of `@fringeworks/react-primitives`)                                                          |
-| `RecordFieldContext<T>`              | Information about a field that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)               |
-| `FieldValueContext<T>`               | Information that the functions rendering the value of a field or column receive (a type of `@fringeworks/react-primitives`)    |
-| `FieldValueProps<V>`                 | Props that the component rendering the value of a field or column receives (a type of `@fringeworks/react-primitives`)         |
-| `RecordFieldsValueChangeDetails`     | Details of `onValueChange` of `RecordFields` (a type of `@fringeworks/react-primitives`)                                       |
-| `TextInputType`                      | The values of `type` of `TextInput` (a type of `@fringeworks/react-primitives`)                                                |
-| `ValueChangeTiming`                  | When `TextInput` commits the value (`'commit'`, `'input'`) (a type of `@fringeworks/react-primitives`)                         |
+| Type                                 | Description                                                                                                                     |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `CheckboxGroupProps<V, I>`           | The props of `CheckboxGroup` (`I` is the checkbox indicator)                                                                    |
+| `RadioGroupProps<V, I>`              | The props of `RadioGroup` (`I` is the radio button indicator)                                                                   |
+| `ButtonGroupProps<V>`                | The props of `ButtonGroup`                                                                                                      |
+| `CheckboxProps<I>`                   | The props of `Checkbox` (`I` is the indicator; the given one for checkboxes created by `withCheckboxIndicator`)                 |
+| `CheckboxComponent<I>`               | A checkbox with a look (`Checkbox`, or one created by `withCheckboxIndicator`)                                                  |
+| `CheckboxGroupComponent<I>`          | A checkbox group with a look (`CheckboxGroup`, or one created by `withCheckboxGroupIndicator`)                                  |
+| `RadioGroupComponent<I>`             | A radio group with a look (`RadioGroup`, or one created by `withRadioGroupIndicator`)                                           |
+| `CheckboxIndicatorComponent`         | A component that can be built in as the checkbox indicator (passed to `withCheckboxIndicator` and `withCheckboxGroupIndicator`) |
+| `RadioIndicatorComponent`            | A component that can be built in as the radio button indicator (passed to `withRadioGroupIndicator`)                            |
+| `CheckboxIndicatorSlotProps`         | The state the checkbox indicator receives (a type from `@fringeworks/react-primitives`)                                         |
+| `RadioIndicatorSlotProps`            | The state the radio button indicator receives (a type from `@fringeworks/react-primitives`)                                     |
+| `SwitchProps`                        | The props of `Switch`                                                                                                           |
+| `ButtonProps<V, P>`                  | The props of `Button` (`P` is the built-in parts; `{ Icon }` for buttons created by `withButtonIcon`)                           |
+| `ButtonWithIconComponent<I>`         | A button that can hold icons, created by `withButtonIcon`                                                                       |
+| `ButtonIconValue<P>`                 | The type of `icon` and `endIcon` of buttons created by `withButtonIcon` (a type from `@fringeworks/react-primitives`)           |
+| `IconComponent`                      | The icon component passed to `withButtonIcon` (a type from `@fringeworks/react-contract`)                                       |
+| `TextInputProps`                     | The props of `TextInput`                                                                                                        |
+| `CollapsibleProps<I>`                | The props of `Collapsible` (`I` is the open/close indicator)                                                                    |
+| `CollapsibleComponent<I>`            | A collapsible component with a look (`Collapsible`, or one created by `withCollapsibleIndicator`)                               |
+| `CollapsibleIndicatorComponent`      | A component that can be built in as the open/close indicator (passed to `withCollapsibleIndicator`)                             |
+| `CollapsibleIndicatorSlotProps`      | The state the open/close indicator receives (a type from `@fringeworks/react-primitives`)                                       |
+| `TableProps<R>`                      | The props of `Table`                                                                                                            |
+| `RecordFieldsProps<T>`               | The props of `RecordFields`                                                                                                     |
+| `RadioProps`                         | The props of the radio buttons inside `RadioGroup` (`partsProps.radio`)                                                         |
+| `CheckboxDesign`                     | The value of `design` of `Checkbox`                                                                                             |
+| `SwitchDesign`                       | The value of `design` of `Switch`                                                                                               |
+| `ButtonDesign`                       | The value of `design` of `Button`                                                                                               |
+| `TextInputDesign`                    | The value of `design` of `TextInput`                                                                                            |
+| `CollapsibleDesign`                  | The value of `design` of `Collapsible`                                                                                          |
+| `TableDesign`                        | The value of `design` of `Table`                                                                                                |
+| `RecordFieldsDesign`                 | The value of `design` of `RecordFields`                                                                                         |
+| `RadioDesign`                        | The value of `design` of the radio buttons inside `RadioGroup`                                                                  |
+| `Create<ComponentName>DesignOptions` | Options of `create<ComponentName>Design` (the same as `CreateDesignOptions` of react-contract)                                  |
+| `DesignDefinition`                   | The design definition of a component (the type of `<componentName>DesignDefinition`) (a type of `@fringeworks/react-contract`)  |
+| `DesignPartDefinition`               | The properties the root or a part takes and the states that apply (a type of `@fringeworks/react-contract`)                     |
+| `DesignTemplate<D, O>`               | A design template (the type of `<componentName>DesignTemplate`) (a type of `@fringeworks/react-contract`)                       |
+| `DesignColorSpec<K>`                 | A spec that makes a color (data that can be JSON) (a type of `@fringeworks/react-contract`)                                     |
+| `DesignColorFunction<O>`             | A function that takes the inputs and returns a color (written in a template) (a type of `@fringeworks/react-contract`)          |
+| `DesignLengthSpec<K>`                | A spec that makes a length (data that can be JSON) (a type of `@fringeworks/react-contract`)                                    |
+| `DesignLengthFunction<O>`            | A function that takes the inputs and returns a length (written in a template) (a type of `@fringeworks/react-contract`)         |
+| `DesignValue<T, S>`                  | A design value (one value or an object per state) (a type of `@fringeworks/react-contract`)                                     |
+| `DesignState`                        | The states that design values are split by (a type of `@fringeworks/react-contract`)                                            |
+| `DesignPropertyValues`               | Design properties and the types of values they take (a type of `@fringeworks/react-contract`)                                   |
+| `Option<V>`                          | An option (`value`, `label?`, `disabled?`) (a type of `@fringeworks/react-contract`)                                            |
+| `DisplayOption<V>`                   | An option to show (the argument of the functions in `partsProps`) (a type of `@fringeworks/react-contract`)                     |
+| `UnlistedPlacement`                  | Where to show unlisted values (`'hidden'`, `'start'`, `'end'`) (a type of `@fringeworks/react-contract`)                        |
+| `TableColumn<R>`                     | A column of `Table` (a type of `@fringeworks/react-primitives`)                                                                 |
+| `TableAlign`                         | The alignment of a column (a type of `@fringeworks/react-primitives`)                                                           |
+| `TableRowId`                         | The id of a row (a type of `@fringeworks/react-primitives`)                                                                     |
+| `TableRowContext<R>`                 | Information about a row that the functions in `partsProps` and `renderRow` receive (a type of `@fringeworks/react-primitives`)  |
+| `TableCellContext<R, V>`             | Information about a cell that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)                 |
+| `TableHeaderCellContext<R>`          | Information about a header cell that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)          |
+| `TableCellElementProps`              | Props passed to the cell elements of a column (a type of `@fringeworks/react-primitives`)                                       |
+| `TableHeaderCellProps`               | Props passed to the header cell element of a column (a type of `@fringeworks/react-primitives`)                                 |
+| `TableRenderRowProps<P>`             | Props that `renderRow` receives (a type of `@fringeworks/react-primitives`)                                                     |
+| `TableValueChangeDetails`            | Details of `onValueChange` of `Table` (a type of `@fringeworks/react-primitives`)                                               |
+| `RecordField<T>`                     | A field of `RecordFields` (a type of `@fringeworks/react-primitives`)                                                           |
+| `RecordFieldContext<T>`              | Information about a field that the functions in `partsProps` receive (a type of `@fringeworks/react-primitives`)                |
+| `FieldValueContext<T>`               | Information that the functions rendering the value of a field or column receive (a type of `@fringeworks/react-primitives`)     |
+| `FieldValueProps<V>`                 | Props that the component rendering the value of a field or column receives (a type of `@fringeworks/react-primitives`)          |
+| `RecordFieldsValueChangeDetails`     | Details of `onValueChange` of `RecordFields` (a type of `@fringeworks/react-primitives`)                                        |
+| `TextInputType`                      | The values of `type` of `TextInput` (a type of `@fringeworks/react-primitives`)                                                 |
+| `ValueChangeTiming`                  | When `TextInput` commits the value (`'commit'`, `'input'`) (a type of `@fringeworks/react-primitives`)                          |
 
 The design definitions (the keys each component accepts and their states) are exported as the constants `checkboxDesignDefinition`, `switchDesignDefinition`, `buttonDesignDefinition`, `textInputDesignDefinition`, `collapsibleDesignDefinition`, `tableDesignDefinition`, `recordFieldsDesignDefinition`, `radioDesignDefinition` (`DesignDefinition` of react-contract). The default templates used by `create<ComponentName>Design` are exported as the constants `checkboxDesignTemplate`, `switchDesignTemplate`, `buttonDesignTemplate`, `textInputDesignTemplate`, `collapsibleDesignTemplate`, `tableDesignTemplate`, `recordFieldsDesignTemplate`, `radioDesignTemplate` (`DesignTemplate` of react-contract).
 

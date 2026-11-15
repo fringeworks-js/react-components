@@ -32,7 +32,9 @@ describe('Collapsible', () => {
     render(<Collapsible summary="見出し">中身</Collapsible>);
     const summary = screen.getByText('見出し');
     const indicator = summary.firstElementChild!;
-    expect(indicator.className).toBe('frg-collapsible-indicator');
+    expect(indicator.className).toBe(
+      'frg-collapsibleindicator frg-collapsible-indicator',
+    );
     expect(indicator.hasAttribute('data-open')).toBe(false);
     fireEvent.click(summary);
     expect(
